@@ -493,7 +493,13 @@ function renderResult(){
 }
 
 function unlock(){
-  window.open('https://link.coupang.com/a/dFulHXYIbA','_blank');
+  const a=document.createElement('a');
+  a.href='https://link.coupang.com/a/dFulHXYIbA';
+  a.target='_blank';
+  a.rel='noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
   hide('paywall-area');show('unlocked-area');state.unlocked=true;
 }
 

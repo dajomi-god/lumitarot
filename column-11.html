@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>거울 뉴런 — 상대방 감정을 내가 느끼는 이유 | 루미타로</title>
+<meta name="description" content="상대가 기분 나쁘면 나도 기분이 나빠지는 이유. 거울 뉴런과 감정 전염의 뇌과학, 그리고 연애에서 이 현상이 만드는 패턴을 분석합니다.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{min-height:100vh;background:linear-gradient(160deg,#1a0020 0%,#2d0035 40%,#120018 100%);font-family:Georgia,serif;color:#f0e6ff;}
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .star{position:absolute;border-radius:50%;background:white;animation:tw 3s ease-in-out infinite;}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+  @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:48px 20px 80px;}
+  .site-header{text-align:center;margin-bottom:48px;}
+  .site-logo{font-size:13px;letter-spacing:3px;color:#a78bfa;text-decoration:none;}
+  .site-logo:hover{color:#f9a8d4;}
+  .article-tag{display:inline-block;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:20px;padding:4px 14px;font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:20px;}
+  h1{font-size:28px;font-weight:700;line-height:1.5;color:#f0e6ff;margin-bottom:16px;}
+  .subtitle{font-size:15px;color:#c4b5fd;line-height:1.8;margin-bottom:32px;}
+  .meta{display:flex;gap:16px;font-size:11px;color:#6d4c7e;padding-bottom:28px;border-bottom:1px solid rgba(236,72,153,.15);margin-bottom:40px;}
+  .article-body h2{font-size:18px;color:#f472b6;font-weight:700;margin:36px 0 14px;}
+  .article-body p{font-size:15px;line-height:2.0;color:#e2d4f8;margin-bottom:18px;}
+  .article-body strong{color:#f9a8d4;}
+  .highlight-box{background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .highlight-box .label{font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:10px;font-weight:600;}
+  .highlight-box p{font-size:14px;color:#e9d5ff;line-height:1.9;margin-bottom:0;}
+  .tarot-box{background:rgba(244,114,182,.07);border:1px solid rgba(244,114,182,.25);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .tarot-box .tarot-label{font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:12px;font-weight:600;}
+  .tarot-card-row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .tarot-chip{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:8px;padding:5px 12px;font-size:13px;color:#f9a8d4;}
+  .tarot-box p{font-size:14px;color:#fce7f3;line-height:1.9;margin-bottom:0;}
+  .neuro-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(6,182,212,.06));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .neuro-box .neuro-label{font-size:11px;color:#34d399;letter-spacing:1.5px;margin-bottom:8px;font-weight:600;}
+  .neuro-box .term{font-size:16px;color:#34d399;font-weight:700;margin-bottom:4px;}
+  .neuro-box .term-en{font-size:11px;color:rgba(52,211,153,.6);font-style:italic;margin-bottom:12px;}
+  .neuro-box p{font-size:14px;color:#d1fae5;line-height:1.9;margin-bottom:0;}
+  .cta-box{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(190,24,93,.15));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:28px;margin-top:48px;text-align:center;}
+  .cta-box p{font-size:14px;color:#d8b4fe;margin-bottom:6px;}
+  .cta-box h3{font-size:20px;color:#f0e6ff;font-weight:700;margin-bottom:16px;}
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:12px;padding:13px 32px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(190,24,93,.4);}
+  .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);}
+  .footer a{font-size:11px;color:rgba(167,139,250,.4);text-decoration:none;margin:0 10px;}
+  .footer p{font-size:11px;color:rgba(167,139,250,.3);margin-top:10px;}
+  .divider{border:none;border-top:1px solid rgba(236,72,153,.12);margin:32px 0;}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap" style="animation:fi .7s ease-out">
+  <div class="site-header"><a href="/" class="site-logo">🔮 LUMI TAROT</a></div>
+  <div class="article-tag">🧠 뇌과학 × 연애</div>
+  <h1>거울 뉴런<br>— 상대방 감정을 내가 느끼는 이유</h1>
+  <p class="subtitle">상대가 차갑게 굴면 나도 모르게 위축되고, 상대가 밝으면 나도 기분이 좋아져요. 이건 감정이 약한 게 아니라 뇌의 거울 시스템이 작동하는 거예요.</p>
+  <div class="meta"><span>✦ LUMI TAROT</span><span>뇌과학 × 연애 시리즈 #11</span></div>
+
+  <div class="article-body">
+    <p>상대방 기분이 나쁘면 이유도 모르면서 덩달아 불안해져요. 상대가 밝게 대화하면 나도 기분이 좋아지고요. 이게 상대에게 너무 의존하는 건지, 감정이 너무 예민한 건지 걱정될 수 있어요.</p>
+    <p>이건 예민함의 문제가 아니에요. <strong>거울 뉴런(Mirror Neuron)이라는 뇌 세포가 상대의 감정을 그대로 복사하는 것</strong>이에요.</p>
+
+    <div class="neuro-box">
+      <p class="neuro-label">🧠 뇌과학 용어</p>
+      <p class="term">거울 뉴런 시스템 (Mirror Neuron System)</p>
+      <p class="term-en">Giacomo Rizzolatti · 1990s · 파르마 대학</p>
+      <p>거울 뉴런은 타인의 행동과 감정을 관찰할 때 <strong>내가 직접 그 행동을 할 때와 동일하게 활성화</strong>되는 신경세포예요. 상대가 우는 걸 보면 내 뇌도 슬픔 회로가 켜지고, 상대가 웃으면 내 기쁨 회로도 반응해요. 공감의 신경과학적 기반이에요.</p>
+    </div>
+
+    <h2>연애에서 거울 뉴런이 만드는 현상들</h2>
+
+    <div class="highlight-box">
+      <p class="label">✦ 거울 뉴런이 연애에서 작동하는 방식</p>
+      <p><strong>감정 전염</strong><br>상대의 불안, 슬픔, 기쁨이 직접 전달돼요. 특히 친밀한 관계일수록 거울 뉴런이 더 강하게 반응해요.<br><br><strong>무의식적 동조</strong><br>오래 함께한 커플은 말투, 제스처, 심지어 표정까지 닮아가요. 거울 뉴런이 상대를 모방하며 동조하기 때문이에요.<br><br><strong>감정 증폭</strong><br>상대가 화가 나있을 때 나도 모르게 방어적이 되는 것도 거울 뉴런 때문이에요. 상대의 감정 상태가 나에게 그대로 전이돼요.</p>
+    </div>
+
+    <h2>이걸 알면 관계가 달라져요</h2>
+    <p>거울 뉴런을 이해하면 <strong>내가 먼저 감정의 온도를 설정하는 것</strong>이 얼마나 중요한지 알게 돼요. 내가 차분하고 따뜻하게 대화를 시작하면, 상대의 거울 뉴런도 그 감정을 복사해요. 싸울 것 같은 분위기를 내가 먼저 바꿀 수 있다는 거예요.</p>
+    <p>반대로, 상대가 지속적으로 부정적인 감정을 내뿜는 관계는 내 뇌가 계속 그 감정을 복사하게 돼요. <strong>함께 있을수록 지치는 관계</strong>가 이런 경우예요.</p>
+
+    <div class="tarot-box">
+      <p class="tarot-label">🃏 거울 뉴런과 관련된 카드들</p>
+      <div class="tarot-card-row">
+        <span class="tarot-chip">연인 (The Lovers)</span>
+        <span class="tarot-chip">절제 (Temperance)</span>
+        <span class="tarot-chip">컵 2</span>
+      </div>
+      <p><strong>연인 카드</strong>는 소통과 유대의 상징이에요. 두 사람의 거울 뉴런이 건강하게 연결된 상태예요. <strong>절제</strong>는 서로의 감정을 조율하며 균형을 맞추는 것 — 거울 뉴런의 긍정적 활용이에요. <strong>컵 2</strong>는 감정적 교류가 활발한 상태. 두 사람 사이에 감정적 공명이 잘 일어나고 있다는 신호예요.</p>
+    </div>
+
+    <div class="highlight-box">
+      <p class="label">✦ LUMI의 한마디</p>
+      <p>함께 있으면 에너지가 올라가는 사람이 있고, 함께 있으면 지치는 사람이 있어요. 그 차이는 거울 뉴런이 어떤 감정을 복사하느냐의 차이예요. 지금 카드를 뽑아보세요. 두 사람 사이의 감정 흐름이 어떤 방향인지 보여줄 거예요.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="cta-box">
+    <p>✨ 우리 사이의 감정 흐름, 타로로 확인해보세요</p>
+    <h3>루미타로 AI 리딩 무료로 해보기</h3>
+    <a href="/" class="cta-btn">🔮 카드 뽑으러 가기</a>
+  </div>
+  <div class="footer">
+    <div><a href="/privacy.html">개인정보처리방침</a><a href="/terms.html">이용약관</a><a href="/contact.html">문의하기</a><a href="/column-index.html">칼럼 보기</a></div>
+    <p>✦ LUMI TAROT · 본 콘텐츠는 심리적 참고 용도입니다 ✦</p>
+  </div>
+</div>
+<script>
+(function(){const s=document.getElementById('stars');for(let i=0;i<30;i++){const d=document.createElement('div');d.className='star';const sz=i%3===0?'2px':'1px';d.style.cssText=`width:${sz};height:${sz};left:${(i*3.3)%100}%;top:${(i*3.7)%100}%;opacity:${.1+(i%5)*.1};animation-delay:${(i*.25)%3}s;animation-duration:${2+(i%4)}s`;s.appendChild(d);}})();
+</script>
+</body>
+</html>

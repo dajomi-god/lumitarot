@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>손실 회피 편향 — 이별이 득보다 아픈 이유 | 루미타로</title>
+<meta name="description" content="왜 이별은 이렇게까지 아플까. 손실 회피 편향과 이별 후 뇌의 반응을 뇌과학으로 분석하고 타로와 연결합니다.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{min-height:100vh;background:linear-gradient(160deg,#1a0020 0%,#2d0035 40%,#120018 100%);font-family:Georgia,serif;color:#f0e6ff;}
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .star{position:absolute;border-radius:50%;background:white;animation:tw 3s ease-in-out infinite;}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+  @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:48px 20px 80px;}
+  .site-header{text-align:center;margin-bottom:48px;}
+  .site-logo{font-size:13px;letter-spacing:3px;color:#a78bfa;text-decoration:none;}
+  .site-logo:hover{color:#f9a8d4;}
+  .article-tag{display:inline-block;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:20px;padding:4px 14px;font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:20px;}
+  h1{font-size:28px;font-weight:700;line-height:1.5;color:#f0e6ff;margin-bottom:16px;}
+  .subtitle{font-size:15px;color:#c4b5fd;line-height:1.8;margin-bottom:32px;}
+  .meta{display:flex;gap:16px;font-size:11px;color:#6d4c7e;padding-bottom:28px;border-bottom:1px solid rgba(236,72,153,.15);margin-bottom:40px;}
+  .article-body h2{font-size:18px;color:#f472b6;font-weight:700;margin:36px 0 14px;}
+  .article-body p{font-size:15px;line-height:2.0;color:#e2d4f8;margin-bottom:18px;}
+  .article-body strong{color:#f9a8d4;}
+  .highlight-box{background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .highlight-box .label{font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:10px;font-weight:600;}
+  .highlight-box p{font-size:14px;color:#e9d5ff;line-height:1.9;margin-bottom:0;}
+  .tarot-box{background:rgba(244,114,182,.07);border:1px solid rgba(244,114,182,.25);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .tarot-box .tarot-label{font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:12px;font-weight:600;}
+  .tarot-card-row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .tarot-chip{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:8px;padding:5px 12px;font-size:13px;color:#f9a8d4;}
+  .tarot-box p{font-size:14px;color:#fce7f3;line-height:1.9;margin-bottom:0;}
+  .neuro-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(6,182,212,.06));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .neuro-box .neuro-label{font-size:11px;color:#34d399;letter-spacing:1.5px;margin-bottom:8px;font-weight:600;}
+  .neuro-box .term{font-size:16px;color:#34d399;font-weight:700;margin-bottom:4px;}
+  .neuro-box .term-en{font-size:11px;color:rgba(52,211,153,.6);font-style:italic;margin-bottom:12px;}
+  .neuro-box p{font-size:14px;color:#d1fae5;line-height:1.9;margin-bottom:0;}
+  .cta-box{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(190,24,93,.15));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:28px;margin-top:48px;text-align:center;}
+  .cta-box p{font-size:14px;color:#d8b4fe;margin-bottom:6px;}
+  .cta-box h3{font-size:20px;color:#f0e6ff;font-weight:700;margin-bottom:16px;}
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:12px;padding:13px 32px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(190,24,93,.4);}
+  .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);}
+  .footer a{font-size:11px;color:rgba(167,139,250,.4);text-decoration:none;margin:0 10px;}
+  .footer p{font-size:11px;color:rgba(167,139,250,.3);margin-top:10px;}
+  .divider{border:none;border-top:1px solid rgba(236,72,153,.12);margin:32px 0;}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap" style="animation:fi .7s ease-out">
+  <div class="site-header"><a href="/" class="site-logo">🔮 LUMI TAROT</a></div>
+
+  <div class="article-tag">🧠 뇌과학 × 연애</div>
+  <h1>손실 회피 편향<br>— 이별이 득보다 아픈 이유</h1>
+  <p class="subtitle">새로운 좋은 사람을 만나도 떠난 사람이 더 크게 느껴지는 이유. 뇌가 손실을 이득보다 2.5배 강하게 느끼도록 설계되어 있어요.</p>
+  <div class="meta"><span>✦ LUMI TAROT</span><span>뇌과학 × 연애 시리즈 #9</span></div>
+
+  <div class="article-body">
+    <p>주변에서 더 좋은 사람 만나면 된다고 해요. 근데 머리로는 알아도 가슴이 안 따라와요. 새로운 만남이 생겨도 떠난 사람이 더 크게 느껴져요. 내가 미련이 많은 건지, 아니면 원래 이런 건지.</p>
+    <p>원래 이런 거예요. <strong>뇌는 손실을 이득보다 훨씬 강하게 처리하도록 진화</strong>했거든요.</p>
+
+    <div class="neuro-box">
+      <p class="neuro-label">🧠 뇌과학 용어</p>
+      <p class="term">손실 회피 편향 (Loss Aversion)</p>
+      <p class="term-en">Kahneman & Tversky · 1979 · 행동경제학</p>
+      <p>노벨 경제학상을 받은 카너먼과 트버스키의 연구에 따르면, 인간의 뇌는 <strong>같은 크기의 이득보다 손실을 약 2.5배 더 강하게 느껴요</strong>. 10만 원을 얻는 기쁨보다 10만 원을 잃는 고통이 2.5배 크다는 뜻이에요. 이별도 마찬가지예요. 새로운 사람을 만나는 기쁨보다 잃은 관계의 고통이 더 크게 느껴지는 건 당연한 뇌의 반응이에요.</p>
+    </div>
+
+    <h2>이별 후 손실 회피가 만드는 함정</h2>
+
+    <div class="highlight-box">
+      <p class="label">✦ 손실 회피가 만드는 연애의 함정들</p>
+      <p><strong>미화 현상</strong><br>잃고 나면 그 관계의 좋았던 점만 더 크게 기억해요. 나빴던 것들은 희미해지고, 실제보다 훨씬 좋은 관계였던 것처럼 느껴져요.<br><br><strong>비교 왜곡</strong><br>새로운 사람을 만나면 전 사람의 좋은 점과 새 사람의 아직 모르는 단점을 비교해요. 새 사람이 불리할 수밖에 없어요.<br><br><strong>매달림</strong><br>잃지 않으려는 본능이 작동해서, 이미 끝난 관계를 붙잡으려는 충동이 강해져요.</p>
+    </div>
+
+    <h2>상대방의 뇌에서도 똑같이 작동해요</h2>
+    <p>역설적이지만, <strong>손실 회피는 재회의 심리적 근거</strong>이기도 해요. 상대방도 이별 후 당신을 잃었다는 손실감을 느껴요. 특히 당신이 잘 지내는 모습을 보여줄수록, 상대 뇌에서 "내가 좋은 것을 잃었다"는 신호가 강해져요.</p>
+    <p>이게 바로 <strong>이별 후 자기 관리가 가장 강력한 재회 전략</strong>인 이유예요. 초라해 보이는 것은 손실감을 줄이고, 빛나 보이는 것은 손실감을 극대화해요.</p>
+
+    <div class="tarot-box">
+      <p class="tarot-label">🃏 손실 회피와 관련된 카드들</p>
+      <div class="tarot-card-row">
+        <span class="tarot-chip">소드 3</span>
+        <span class="tarot-chip">소드 10</span>
+        <span class="tarot-chip">별 (The Star)</span>
+        <span class="tarot-chip">세계 (The World)</span>
+      </div>
+      <p><strong>소드 3</strong>은 마음의 상처 — 손실의 고통이 가장 선명하게 드러나는 카드예요. <strong>소드 10</strong>은 절망의 끝인 동시에 회복의 시작. 바닥을 쳤다는 건 이제 올라갈 일만 남았다는 뜻이에요. <strong>별</strong>은 손실 이후의 희망 — 상처 입었지만 다시 빛날 수 있는 가능성이에요. <strong>세계</strong>는 완전한 자립 — 잃은 것 없이도 충분한 나로 서는 단계예요.</p>
+    </div>
+
+    <div class="highlight-box">
+      <p class="label">✦ LUMI의 한마디</p>
+      <p>이별이 이렇게 아픈 건 당신이 약해서가 아니에요. 뇌가 손실에 강하게 반응하도록 설계된 거예요. 지금 카드를 뽑아보세요. 이 손실이 어디로 이어지는지 — 카드가 말해줄 거예요.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="cta-box">
+    <p>✨ 이 이별, 어디로 이어질까요?</p>
+    <h3>루미타로 AI 리딩 무료로 해보기</h3>
+    <a href="/" class="cta-btn">🔮 카드 뽑으러 가기</a>
+  </div>
+  <div class="footer">
+    <div><a href="/privacy.html">개인정보처리방침</a><a href="/terms.html">이용약관</a><a href="/contact.html">문의하기</a><a href="/column-index.html">칼럼 보기</a></div>
+    <p>✦ LUMI TAROT · 본 콘텐츠는 심리적 참고 용도입니다 ✦</p>
+  </div>
+</div>
+<script>
+(function(){const s=document.getElementById('stars');for(let i=0;i<30;i++){const d=document.createElement('div');d.className='star';const sz=i%3===0?'2px':'1px';d.style.cssText=`width:${sz};height:${sz};left:${(i*3.3)%100}%;top:${(i*3.7)%100}%;opacity:${.1+(i%5)*.1};animation-delay:${(i*.25)%3}s;animation-duration:${2+(i%4)}s`;s.appendChild(d);}})();
+</script>
+</body>
+</html>

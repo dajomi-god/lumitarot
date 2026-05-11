@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>애착 유형별 연애 패턴 — 나는 어떤 유형일까 | 루미타로</title>
+<meta name="description" content="불안형, 회피형, 안정형. 내 애착 유형이 연애에 어떤 영향을 미치는지 뇌과학과 타로로 분석합니다.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{min-height:100vh;background:linear-gradient(160deg,#1a0020 0%,#2d0035 40%,#120018 100%);font-family:Georgia,serif;color:#f0e6ff;}
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .star{position:absolute;border-radius:50%;background:white;animation:tw 3s ease-in-out infinite;}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+  @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:48px 20px 80px;}
+  .site-header{text-align:center;margin-bottom:48px;}
+  .site-logo{font-size:13px;letter-spacing:3px;color:#a78bfa;text-decoration:none;}
+  .site-logo:hover{color:#f9a8d4;}
+  .article-tag{display:inline-block;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:20px;padding:4px 14px;font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:20px;}
+  h1{font-size:28px;font-weight:700;line-height:1.5;color:#f0e6ff;margin-bottom:16px;}
+  .subtitle{font-size:15px;color:#c4b5fd;line-height:1.8;margin-bottom:32px;}
+  .meta{display:flex;gap:16px;font-size:11px;color:#6d4c7e;padding-bottom:28px;border-bottom:1px solid rgba(236,72,153,.15);margin-bottom:40px;}
+  .article-body h2{font-size:18px;color:#f472b6;font-weight:700;margin:36px 0 14px;}
+  .article-body p{font-size:15px;line-height:2.0;color:#e2d4f8;margin-bottom:18px;}
+  .article-body strong{color:#f9a8d4;}
+  .highlight-box{background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .highlight-box .label{font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:10px;font-weight:600;}
+  .highlight-box p{font-size:14px;color:#e9d5ff;line-height:1.9;margin-bottom:0;}
+  .tarot-box{background:rgba(244,114,182,.07);border:1px solid rgba(244,114,182,.25);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .tarot-box .tarot-label{font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:12px;font-weight:600;}
+  .tarot-card-row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .tarot-chip{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:8px;padding:5px 12px;font-size:13px;color:#f9a8d4;}
+  .tarot-box p{font-size:14px;color:#fce7f3;line-height:1.9;margin-bottom:0;}
+  .neuro-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(6,182,212,.06));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:22px 24px;margin:28px 0;}
+  .neuro-box .neuro-label{font-size:11px;color:#34d399;letter-spacing:1.5px;margin-bottom:8px;font-weight:600;}
+  .neuro-box .term{font-size:16px;color:#34d399;font-weight:700;margin-bottom:4px;}
+  .neuro-box .term-en{font-size:11px;color:rgba(52,211,153,.6);font-style:italic;margin-bottom:12px;}
+  .neuro-box p{font-size:14px;color:#d1fae5;line-height:1.9;margin-bottom:0;}
+  .type-grid{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+  .type-card{border-radius:14px;padding:18px 20px;}
+  .type-card.anxious{background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.25);}
+  .type-card.avoidant{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.25);}
+  .type-card.secure{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);}
+  .type-card .type-name{font-size:13px;font-weight:700;margin-bottom:8px;}
+  .type-card.anxious .type-name{color:#f9a8d4;}
+  .type-card.avoidant .type-name{color:#a78bfa;}
+  .type-card.secure .type-name{color:#34d399;}
+  .type-card p{font-size:13px;color:#d4c5f0;line-height:1.8;margin:0;}
+  .cta-box{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(190,24,93,.15));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:28px;margin-top:48px;text-align:center;}
+  .cta-box p{font-size:14px;color:#d8b4fe;margin-bottom:6px;}
+  .cta-box h3{font-size:20px;color:#f0e6ff;font-weight:700;margin-bottom:16px;}
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:12px;padding:13px 32px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(190,24,93,.4);}
+  .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);}
+  .footer a{font-size:11px;color:rgba(167,139,250,.4);text-decoration:none;margin:0 10px;}
+  .footer p{font-size:11px;color:rgba(167,139,250,.3);margin-top:10px;}
+  .divider{border:none;border-top:1px solid rgba(236,72,153,.12);margin:32px 0;}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap" style="animation:fi .7s ease-out">
+  <div class="site-header"><a href="/" class="site-logo">🔮 LUMI TAROT</a></div>
+
+  <div class="article-tag">🧠 뇌과학 × 연애</div>
+  <h1>애착 유형별 연애 패턴<br>— 나는 어떤 유형일까</h1>
+  <p class="subtitle">불안형, 회피형, 안정형. 내가 연애에서 반복하는 패턴은 어린 시절부터 뇌에 새겨진 애착 회로예요.</p>
+  <div class="meta"><span>✦ LUMI TAROT</span><span>뇌과학 × 연애 시리즈 #6</span></div>
+
+  <div class="article-body">
+    <p>왜 항상 비슷한 패턴으로 연애가 끝날까요. 다짐을 해도 같은 실수를 반복하고, 비슷한 유형의 사람에게 끌려요. 이건 운이 나빠서가 아니에요. <strong>뇌에 새겨진 애착 회로가 자동으로 작동하는 것</strong>이에요.</p>
+
+    <div class="neuro-box">
+      <p class="neuro-label">🧠 뇌과학 용어</p>
+      <p class="term">애착 이론 (Attachment Theory)</p>
+      <p class="term-en">John Bowlby & Mary Ainsworth</p>
+      <p>생후 초기 양육자와의 관계 경험이 뇌의 신경 회로로 굳어져요. 이 회로는 성인 연애에서도 그대로 활성화되며, <strong>무의식적으로 관계 패턴을 결정</strong>해요. 의식적으로 바꾸려 해도 자동 반응이 먼저 나오는 이유가 이것이에요.</p>
+    </div>
+
+    <h2>세 가지 애착 유형</h2>
+
+    <div class="type-grid">
+      <div class="type-card anxious">
+        <p class="type-name">😰 불안형 (Anxious Attachment)</p>
+        <p>상대방이 나를 떠날까봐 항상 불안해요. 답장이 늦으면 최악의 상황을 상상하고, 확인을 반복해요. 상대에게 과하게 맞춰주거나 감정을 강하게 표현해 오히려 상대를 지치게 만들기도 해요. 타로에서는 <strong>달 카드, 컵 2 역방향</strong>이 자주 등장해요.</p>
+      </div>
+      <div class="type-card avoidant">
+        <p class="type-name">🧊 회피형 (Avoidant Attachment)</p>
+        <p>친밀해질수록 본능적으로 거리를 둬요. 혼자 있는 게 편하고, 감정 표현이 어색해요. 상대가 다가오면 이유 없이 답답함을 느끼고 물러서요. 나쁜 의도가 아니에요. 뇌가 친밀함을 위협으로 인식하는 거예요. 타로에서는 <strong>은둔자, 소드 4</strong>가 자주 나와요.</p>
+      </div>
+      <div class="type-card secure">
+        <p class="type-name">☀️ 안정형 (Secure Attachment)</p>
+        <p>혼자서도 괜찮고, 함께여도 괜찮아요. 상대를 믿고, 갈등이 생겨도 대화로 풀어가요. 연애에서 편안함을 느끼고 상대에게 안정감을 줘요. 타로에서는 <strong>황제, 절제, 별</strong>이 자주 등장해요.</p>
+      </div>
+    </div>
+
+    <h2>내 유형이 만들어낸 관계 패턴</h2>
+    <p>가장 흔한 조합은 <strong>불안형 + 회피형</strong>이에요. 불안형이 다가올수록 회피형은 도망가고, 회피형이 멀어질수록 불안형은 더 매달려요. 서로 상처받으면서도 이 패턴에서 벗어나지 못하는 이유는 각자의 뇌 회로가 서로를 강하게 자극하기 때문이에요.</p>
+
+    <div class="tarot-box">
+      <p class="tarot-label">🃏 애착 유형별 시그니처 카드</p>
+      <div class="tarot-card-row">
+        <span class="tarot-chip">달 — 불안형</span>
+        <span class="tarot-chip">은둔자 — 회피형</span>
+        <span class="tarot-chip">절제 — 안정형</span>
+      </div>
+      <p>리딩에서 <strong>달</strong>이 자신 자리에 나오면 불안 애착 패턴이 작동 중일 수 있어요. <strong>은둔자</strong>가 상대 자리에 나오면 상대는 회피형일 가능성이 높아요. <strong>절제</strong>는 관계에서 균형과 안정을 찾아가는 과정을 상징해요. 두 사람 모두 조율할 의지가 있다는 신호예요.</p>
+    </div>
+
+    <h2>애착 유형은 바꿀 수 있을까요</h2>
+    <p>다행히도 <strong>뇌는 변해요</strong>. 신경 가소성(Neuroplasticity) 덕분에 새로운 경험이 반복되면 회로가 바뀌어요. 안정형 파트너와의 관계, 상담, 자기 인식이 깊어지는 것만으로도 애착 패턴이 서서히 안정형으로 이동할 수 있어요.</p>
+
+    <div class="highlight-box">
+      <p class="label">✦ LUMI의 한마디</p>
+      <p>연애 패턴이 반복된다면, 상대 탓이 아닐 수 있어요. 지금 카드를 뽑아보세요. 내 자리에 나온 카드가 내 애착 회로를 보여줄 거예요. 아는 것만으로도 패턴이 달라지기 시작해요.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="cta-box">
+    <p>✨ 내 애착 유형, 타로로 확인해보세요</p>
+    <h3>루미타로 AI 리딩 무료로 해보기</h3>
+    <a href="/" class="cta-btn">🔮 카드 뽑으러 가기</a>
+  </div>
+  <div class="footer">
+    <div><a href="/privacy.html">개인정보처리방침</a><a href="/terms.html">이용약관</a><a href="/contact.html">문의하기</a><a href="/column-index.html">칼럼 보기</a></div>
+    <p>✦ LUMI TAROT · 본 콘텐츠는 심리적 참고 용도입니다 ✦</p>
+  </div>
+</div>
+<script>
+(function(){const s=document.getElementById('stars');for(let i=0;i<30;i++){const d=document.createElement('div');d.className='star';const sz=i%3===0?'2px':'1px';d.style.cssText=`width:${sz};height:${sz};left:${(i*3.3)%100}%;top:${(i*3.7)%100}%;opacity:${.1+(i%5)*.1};animation-delay:${(i*.25)%3}s;animation-duration:${2+(i%4)}s`;s.appendChild(d);}})();
+</script>
+</body>
+</html>

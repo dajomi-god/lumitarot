@@ -292,20 +292,29 @@ const KEYWORDS={fool:["새 시작","자유","예측불가"],magician:["자신감
 const QUESTION_TYPES=[{id:"couple",label:"💑 커플",desc:"사귀는 사이, 속마음과 관계운"},{id:"ex",label:"💔 재회",desc:"헤어진 상대, 재회 가능성은?"},{id:"some",label:"💭 썸",desc:"썸 타는 사이, 관계가 발전할까?"},{id:"solo",label:"🌸 솔로",desc:"향후 3개월, 새 인연이 올까?"}];
 
 const NEURO={
-  inner:[
-    {term:"자이가르닉 효과",termEn:"Zeigarnik Effect · Bluma Zeigarnik, 1927",mechanism:"인간의 뇌는 완결되지 않은 일을 계속 처리하려 합니다. 제대로 끝나지 않은 관계는 상대의 전두엽에서 자동 재생 루프가 걸려요. 지금 이 침묵이 오히려 당신의 존재감을 증폭시키고 있어요."},
-    {term:"간헐적 강화",termEn:"Intermittent Reinforcement · B.F. Skinner",mechanism:"지금 먼저 연락하면 상대의 뇌는 당신을 언제든 연락할 수 있는 사람으로 분류합니다. 예측 불가능한 존재일수록 도파민 회로를 더 강하게 자극해요. SNS로 존재감을 보이되 직접 연락은 자제하세요."},
-    {term:"심리적 반발 이론",termEn:"Reactance Theory · Jack Brehm, 1966",mechanism:"지금 진심을 쏟아낼수록 상대의 뇌는 선택의 자유가 침해된다고 느끼고 반사적으로 밀어냅니다. 상대가 스스로 다가오고 싶다는 욕구를 갖게 만드는 것이 핵심이에요."},
+  // 재회 전략 (연락 상태별 3가지)
+  ex:[
+    {title:"🧠 뇌과학 전략",term:"자이가르닉 효과",termEn:"Zeigarnik Effect · Bluma Zeigarnik, 1927",mechanism:"인간의 뇌는 완결되지 않은 일을 계속 처리하려 합니다. 제대로 끝나지 않은 관계는 상대의 전두엽에서 자동 재생 루프가 걸려요. 지금 이 침묵이 오히려 당신의 존재감을 증폭시키고 있어요."},
+    {title:"🧠 뇌과학 전략",term:"간헐적 강화",termEn:"Intermittent Reinforcement · B.F. Skinner",mechanism:"지금 먼저 연락하면 상대의 뇌는 당신을 언제든 연락할 수 있는 사람으로 분류합니다. 예측 불가능한 존재일수록 도파민 회로를 더 강하게 자극해요. SNS로 존재감을 보이되 직접 연락은 자제하세요."},
+    {title:"🧠 뇌과학 전략",term:"심리적 반발 이론",termEn:"Reactance Theory · Jack Brehm, 1966",mechanism:"지금 진심을 쏟아낼수록 상대의 뇌는 선택의 자유가 침해된다고 느끼고 반사적으로 밀어냅니다. 상대가 스스로 다가오고 싶다는 욕구를 갖게 만드는 것이 핵심이에요."},
   ],
-  relation:[
-    {term:"손실 회피 편향",termEn:"Loss Aversion · Kahneman & Tversky, 1979",mechanism:"인간의 뇌는 같은 크기의 이득보다 손실을 2.5배 더 강하게 느낍니다. 당신이 잘 지내는 모습은 상대 뇌에서 내가 잃은 것을 실감하게 만들어요. 지금은 자신에게 투자할 시기예요."},
-    {term:"감각 적응",termEn:"Sensory Adaptation · Hedonic Adaptation",mechanism:"뇌는 익숙한 자극에는 반응을 줄입니다. 예전의 당신은 이미 낮은 자극으로 분류돼 있어요. 달라진 모습만이 상대의 뇌를 다시 활성화할 수 있어요."},
-    {term:"자이가르닉 효과",termEn:"Zeigarnik Effect · 미완결 과제의 지속적 처리",mechanism:"제대로 끝나지 않은 관계는 상대의 뇌에서 처리 중인 작업으로 남아 반복 재생됩니다. 억지로 관계를 끌어당기려 하지 마세요. 여백이 상대를 생각하게 만드는 공간이에요."},
+  // 커플 관계 인사이트 (연락 상태 없으므로 1개만 사용)
+  couple:[
+    {title:"💡 관계 인사이트",term:"옥시토신 동기화",termEn:"Oxytocin Synchrony · 정서적 유대의 신경과학",mechanism:"장기 연애에서 열정적인 도파민 불꽃은 자연스럽게 줄어들고, 옥시토신과 바조프레신 중심의 깊은 애착이 자리를 잡습니다. 지금 뽑힌 카드는 두 사람의 감정 회로가 어떤 상태인지 보여줘요. 취약한 부분을 공유하고 함께 새로운 경험을 쌓는 것이 서로의 뇌에서 파트너 만족도를 높이는 가장 빠른 방법이에요."},
+    {title:"💡 관계 인사이트",term:"미러 뉴런 활성화",termEn:"Mirror Neuron System · 공감과 정서적 공명",mechanism:"상대의 감정을 읽으려 할 때 우리 뇌의 미러 뉴런이 활성화됩니다. 이 카드가 보여주는 패턴처럼, 지금 관계에서 내 취약성을 먼저 드러내는 것이 상대의 공감 회로를 열어요. 말로 설명하기보다 함께하는 행동이 더 강한 정서적 공명을 만들어냅니다."},
+    {title:"💡 관계 인사이트",term:"오귀속 효과",termEn:"Misattribution of Arousal · Dutton & Aron, 1974",mechanism:"함께 새로운 활동을 할 때 분비되는 도파민이 파트너에 대한 설렘으로 전이됩니다. 뇌는 흥분의 원인을 정확히 구분하지 못해요. 루틴을 깨는 데이트 하나가 두 사람 사이의 온도를 다시 올릴 수 있어요."},
   ],
-  contact:[
-    {term:"희소성 원칙",termEn:"Scarcity Principle · Robert Cialdini, 1984",mechanism:"뇌는 희귀하고 구하기 어려운 것에 더 높은 가치를 부여합니다. 당신이 바빠 보일수록 상대의 뇌에서 당신의 가치가 올라가요. 잘 지내는 모습을 보여주는 것만으로 충분해요."},
-    {term:"맥락 의존 기억",termEn:"Context-Dependent Memory · Godden & Baddeley, 1975",mechanism:"특정 장소, 냄새, 계절은 연결된 기억을 강제로 불러옵니다. 함께했던 장소나 날짜가 트리거가 되어 당신에 대한 기억이 자동 재생돼요. 그 타이밍을 노리세요."},
-    {term:"인지 부하 감소",termEn:"Cognitive Load Reduction · 전전두엽 방어 기제 완화",mechanism:"감정적으로 무거운 메시지는 상대의 전전두엽이 즉각 방어 반응을 일으킵니다. 보고 싶다보다 이거 보니까 생각났어 같은 부담 없는 연결이 답장 확률을 높여요."},
+  // 썸 전략 (연락 상태별)
+  some:[
+    {title:"🧠 뇌과학 Insight: 보상 시스템",term:"도파민 회로와 예측 불가능성",termEn:"Dopamine & Reward Prediction · 보상 예측 오류 활용",mechanism:"지금 당신의 뇌는 상대의 작은 반응 하나에 도파민을 과하게 분비하고 있어요. 이 카드가 보여주듯, 지금은 전전두엽을 활성화해 냉정함을 회복할 때입니다. 예측 불가능하고 여유 있는 모습이 오히려 상대의 보상 회로를 더 강하게 자극해요."},
+    {title:"🧠 뇌과학 Insight: 보상 시스템",term:"간헐적 강화와 기대감",termEn:"Intermittent Reinforcement · 썸 단계의 도파민 관리",mechanism:"상대가 연락에 일정하지 않게 반응할수록 당신의 뇌는 더 강한 기대감을 형성합니다. 이 카드는 지금 먼저 다가가기보다 존재감을 자연스럽게 드러내는 타이밍임을 시사해요. 상대의 뇌가 당신을 예측하기 어려운 흥미로운 자극으로 인식하게 만드세요."},
+    {title:"🧠 뇌과학 Insight: 보상 시스템",term:"심리적 반발과 접근 거리",termEn:"Reactance Theory · 썸 단계의 자율성 보존",mechanism:"지금 너무 적극적으로 다가가면 상대의 뇌는 선택의 자유가 침해된다고 느끼고 본능적으로 거리를 둡니다. 이 카드가 말하는 것처럼, 여백을 주면서 상대가 스스로 당신에게 끌리게 만드는 것이 핵심이에요."},
+  ],
+  // 솔로 인지적 유연성 인사이트
+  solo:[
+    {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"고착화된 뇌 회로 깨기",termEn:"Cognitive Flexibility · 전전두엽의 사고 유연성",mechanism:"지금 당신의 뇌는 기존의 익숙한 연애 패턴만 반복하는 고착화된 회로를 돌리고 있을 수 있어요. 이 카드가 보여주는 상징을 통해 무의식 속 패턴을 객관적으로 바라보세요. 새로운 인연은 뇌가 새로운 연결을 허용할 때 자연스럽게 들어옵니다."},
+    {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"확증 편향 방지",termEn:"Confirmation Bias · 안와전두엽의 선택 혼란 해소",mechanism:"뇌는 보고 싶은 것만 보려는 본능이 있어요. 지금 이 카드는 당신이 연애에서 반복해온 패턴을 다른 시각으로 바라보라는 신호일 수 있습니다. 익숙한 유형이 아닌 다른 관점의 인연에 뇌가 열려 있는지 점검해보세요."},
+    {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"세로토닌과 자기 확신",termEn:"Serotonin & Self-worth · 내면 안정감의 신경과학",mechanism:"새로운 인연을 끌어당기는 가장 강력한 신호는 세로토닌이 안정된 상태에서 나오는 자기 확신이에요. 이 카드가 보여주듯, 지금은 외부에서 답을 찾기보다 내면을 안정시키는 것이 새로운 연결의 문을 여는 열쇠입니다."},
   ],
 };
 
@@ -417,8 +426,8 @@ function revealCard(i){
 
 async function doReading(){
   showOnly('screen-loading');
-  const tips=NEURO[state.qType]||NEURO.inner;
-  const tipIdx=state.contactStatus==="연락 중"?1:state.contactStatus==="차단/단절"?2:0;
+  const tips=NEURO[state.qType]||NEURO.ex;
+  const tipIdx=state.qType==="couple"?Math.floor(Math.random()*tips.length):state.contactStatus==="연락 중"?1:state.contactStatus==="차단/단절"?2:0;
   const tip=tips[Math.min(tipIdx,tips.length-1)];
   const cardCtx=state.cards.map((c,i)=>["과거","현재","미래"][i]+": "+CARD_DISPLAY[c]).join(", ");
 
@@ -466,7 +475,8 @@ function renderResult(){
   if(r.summary){document.getElementById('text-summary').textContent=r.summary;document.getElementById('summary-box').classList.remove('hidden');}
 
   if(r.tip){
-    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-header"><div class="neuro-icon">🧠</div><span class="neuro-title">뇌과학 전략</span></div><div class="neuro-term-box"><p class="neuro-term">📌 ${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p></div><div class="neuro-mech-box"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
+    const neuroIcon=state.qType==="couple"?"💡":"🧠";
+    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${r.tip.title||"뇌과학 전략"}</span></div><div class="neuro-term-box"><p class="neuro-term">📌 ${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p></div><div class="neuro-mech-box"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
   }
 
   state.unlocked=false;show('paywall-area');hide('unlocked-area');

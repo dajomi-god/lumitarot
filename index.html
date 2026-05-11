@@ -128,7 +128,7 @@
         </div>
       </div>
       <label class="field-label">✦ 상대방 이름 (또는 닉네임)</label>
-      <input type="text" id="partner" placeholder="예: 우석, J씨...">
+      <input type="text" id="partner" placeholder="예: 준혁, J씨...">
       <label class="field-label">✦ 현재 연락 상태</label>
       <div class="contact-btns">
         <button class="contact-btn" onclick="selectContact('연락 중')">연락 중</button>
@@ -384,11 +384,11 @@ async function doReading(){
     "\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 절대 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 상대방 심리를 대화체로 구체적으로\n- 각 섹션 5~7문장으로 충분히 작성\n- 주차별 흐름(1주차, 2주차, 3주차)으로 구체적으로\n\n정확히 아래 형식으로만 답변:\n\n[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(한 문장. 예시: 해당 카드를 보아하니, 회피 성향을 가지고 있습니다. / 불안 애착형으로 보여져요.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름과 주차별 예측)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리)\n\n[요약]\n(10자 이내의 핵심 한 줄)";
 
   try{
-    const GEMINI_KEY = "AIzaSyAi_8scw062eWzgxKMHvY_76WsNyYsDSTg";
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_KEY}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:2000,temperature:0.7}})});
+    const OPENAI_KEY = "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";
+    const res=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+OPENAI_KEY},body:JSON.stringify({model:"gpt-4o-mini",max_tokens:2000,temperature:0.7,messages:[{role:"user",content:prompt}]})});
     const data=await res.json();
-    if(data.error)throw new Error(data.error.message||"Gemini error");
-    const raw=(data.candidates?.[0]?.content?.parts?.[0]?.text||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");
+    if(data.error)throw new Error(data.error.message||"OpenAI error");
+    const raw=(data.choices?.[0]?.message?.content||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");
     const ex=(text,s,e)=>{const si=text.indexOf("["+s+"]");if(si===-1)return"";const after=text.slice(si+s.length+2);const ei=e?after.indexOf("["+e+"]"):-1;return(ei===-1?after:after.slice(0,ei)).trim();};
     state.result={past:ex(raw,"과거","성향분석"),personality:ex(raw,"성향분석","현재"),present:ex(raw,"현재","미래"),future:ex(raw,"미래","조합"),combo:ex(raw,"조합","요약"),summary:ex(raw,"요약",null),tip,cards:state.cards};
   }catch(err){

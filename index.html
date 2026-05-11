@@ -214,10 +214,10 @@
             <p class="section-text" id="text-future-blur"></p>
           </div>
           <div class="paywall-overlay">
-            <div class="lock">🔒</div>
+            <div class="lock">🔮</div>
             <h3>현재 · 미래 리딩</h3>
             <p>상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
-            <button class="btn-pay" onclick="unlock()">500원으로 전체 보기 ✨</button>
+            <button class="btn-pay" onclick="unlock()">전체 리딩 보기 ✨</button>
             <span class="paywall-note">카드 조합 해석 · 뇌과학 전략 포함</span>
           </div>
         </div>
@@ -262,6 +262,7 @@
 
     <div class="disclaimer">
       <p>본 리딩은 심리적 참고 용도이며, 최종 결정의 책임은 본인에게 있습니다.</p>
+      <p style="font-size:9px;color:rgba(109,76,126,.5);margin-top:8px;line-height:1.6;">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
       <small>✦ LUMI TAROT ✦</small>
       <div style="margin-top:10px;display:flex;justify-content:center;gap:16px;">
         <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
@@ -491,7 +492,10 @@ function renderResult(){
   state.unlocked=false;show('paywall-area');hide('unlocked-area');
 }
 
-function unlock(){hide('paywall-area');show('unlocked-area');state.unlocked=true;}
+function unlock(){
+  window.open('https://link.coupang.com/a/dFulHXYIbA','_blank');
+  hide('paywall-area');show('unlocked-area');state.unlocked=true;
+}
 
 function resetAll(){
   state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
@@ -507,5 +511,6 @@ function resetAll(){
   showOnly('screen-intro');
 }
 </script>
+
 </body>
 </html>

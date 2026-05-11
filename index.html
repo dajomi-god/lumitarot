@@ -385,7 +385,7 @@ async function doReading(){
 
   try{
     const GEMINI_KEY = "AIzaSyCCQUut0zC5eTzkY3OytORrZV1I1sRkMpY";
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:2000,temperature:0.7}})});
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_KEY}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:2000,temperature:0.7}})});
     const data=await res.json();
     if(data.error)throw new Error(data.error.message||"Gemini error");
     const raw=(data.candidates?.[0]?.content?.parts?.[0]?.text||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");

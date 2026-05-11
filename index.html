@@ -383,7 +383,6 @@ function selectType(id){
   }
 }
 
-function selectType(id){state.qType=id;document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';document.getElementById('type-'+id).classList.add('active');}
 function selectGender(g){state.gender=g;document.querySelectorAll('.gender-btn').forEach(b=>b.classList.toggle('active',b.textContent===g));}
 function selectContact(s){state.contactStatus=s;document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent===s));}
 function show(id){document.getElementById(id).classList.remove('hidden');}
@@ -425,11 +424,11 @@ async function doReading(){
 
   const prompt=LUMI+"\n\n---\n상담 유형: "+(QUESTION_TYPES.find(t=>t.id===state.qType)?.label||"")+
     "\n내담자: "+state.age+"세 "+state.gender+
-    "\n상대방: "+(state.partner||"상대방")+
-    "\n현재 연락 상태: "+state.contactStatus+
+    "\n" + (state.qType==="solo" ? "상황: 솔로 (새 인연 탐색 중)" : "상대방: "+(state.partner||"상대방"))+
+    "\n현재 연락 상태: "+(state.qType==="solo"?"해당없음":state.contactStatus)+
     "\n상황: "+state.situation+
     "\n뽑힌 카드: "+cardCtx+
-    "\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 절대 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 상대방 심리를 대화체로 구체적으로\n- 각 섹션 5~7문장으로 충분히 작성\n- 주차별 흐름(1주차, 2주차, 3주차)으로 구체적으로\n\n정확히 아래 형식으로만 답변:\n\n[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(한 문장. 예시: 해당 카드를 보아하니, 회피 성향을 가지고 있습니다. / 불안 애착형으로 보여져요.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름과 주차별 예측)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리)\n\n[요약]\n(10자 이내의 핵심 한 줄)";
+    "\n\n[관계 유형별 리딩 지침]\n" +(state.qType==="couple" ? "- 현재 사귀는 커플 관계임. 재회나 이별 관점 절대 금지. 사귀는 사이에서의 속마음과 관계 발전에 집중\n- 상대방이 나를 어떻게 생각하는지, 앞으로 관계가 어떻게 발전할지 중심으로 리딩" :state.qType==="ex" ? "- 헤어진 상대와의 재회 가능성 리딩. 재회 가능성, 상대방의 현재 감정 중심으로 리딩" :state.qType==="some" ? "- 썸 타는 사이. 아직 연애 시작 전임. 상대방이 나를 어떻게 보는지, 관계가 발전할지 중심으로 리딩" :state.qType==="solo" ? "- 솔로 상태. 특정 상대방 없음. 향후 3개월 새로운 인연이 들어올 가능성 중심으로 리딩. 1개월차/2개월차/3개월차로 나눠서" :"- 상황에 맞게 리딩") +"\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 절대 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 상대방 심리를 대화체로 구체적으로\n- 각 섹션 5~7문장으로 충분히 작성\n- 주차별 흐름으로 구체적으로\n- 카드가 부정적이면 솔직하게. 무조건 희망적으로 마무리 금지\n\n정확히 아래 형식으로만 답변:\n\n[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(한 문장. 예시: 해당 카드를 보아하니, 회피 성향을 가지고 있습니다. / 불안 애착형으로 보여져요.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름과 주차별 예측)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리)\n\n[요약]\n(10자 이내의 핵심 한 줄)";
 
   try{
     const res=await fetch("/api/reading",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt})});

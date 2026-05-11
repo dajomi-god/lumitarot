@@ -140,7 +140,7 @@
       </div>
       </div>
       <label class="field-label">✦ 현재 상황을 자세히 알려주세요</label>
-      <textarea id="situation" rows="4" placeholder="예: 결혼까지 생각했는데, 3개월 전 헤어졌어요. 먼저 연락하면 답은 오는데 먼저 연락은 안 와요..."></textarea>
+      <textarea id="situation" rows="4" placeholder="예: 3개월 전 다투고 헤어졌어요. 상대방이 매달렸는데 제가 안 받아줬어요..."></textarea>
       <button class="btn-main" onclick="startReading()">카드 뽑기 🃏</button>
     </div>
     <p class="hint">✦ 타로는 참고용입니다 ✦</p>
@@ -251,6 +251,14 @@
     </div>
 
     <button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
+    <!-- 쿠팡 파트너스 배너 -->
+    <div style="text-align:center;margin-top:14px;border-radius:12px;overflow:hidden;">
+      <script src="https://ads-partners.coupang.com/g.js"></script>
+      <script>
+        new PartnersCoupang.G({"id":988099,"trackingCode":"AF4838558","subId":null,"template":"carousel","width":"320","height":"100"});
+      </script>
+    </div>
+
     <!-- PDF 리딩 배너 -->
     <div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
       <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ AI 리딩이 마음에 드셨나요?</p>
@@ -493,13 +501,6 @@ function renderResult(){
 }
 
 function unlock(){
-  const a=document.createElement('a');
-  a.href='https://link.coupang.com/a/dFulHXYIbA';
-  a.target='_blank';
-  a.rel='noopener';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
   hide('paywall-area');show('unlocked-area');state.unlocked=true;
 }
 

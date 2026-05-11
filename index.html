@@ -118,27 +118,7 @@
   <div id="screen-intro">
     <div class="card-box">
       <label class="field-label">✦ 무엇이 궁금하세요?</label>
-      <div style="display:flex;gap:10px;margin-bottom:14px;">
-        <button id="cat-love" data-cat="love" class="cat-btn-main" style="flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(236,72,153,.25);border-radius:11px;padding:14px;color:#c4b5fd;cursor:pointer;font-family:Georgia,serif;font-size:13px;text-align:center;transition:all .2s;">
-          <span style="display:block;font-size:20px;margin-bottom:4px;">💕</span>
-          연애 관련
-        </button>
-        <button id="cat-fortune" class="cat-btn-main" style="flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(167,139,250,.2);border-radius:11px;padding:14px;color:#6d4c7e;cursor:pointer;font-family:Georgia,serif;font-size:13px;text-align:center;">
-          <span style="display:block;font-size:20px;margin-bottom:4px;">🌟</span>
-          운세 관련
-          <span style="display:block;font-size:10px;margin-top:3px;">준비 중</span>
-        </button>
-      </div>
-      <div id="coming-soon-msg" style="display:none;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:16px;text-align:center;margin-bottom:14px;">
-        <p style="font-size:14px;color:#a78bfa;margin-bottom:4px;">🔮 곧 오픈 예정이에요!</p>
-        <p style="font-size:12px;color:#6d4c7e;">직장운·합격운·이직운 등 준비 중이에요 ✨</p>
-      </div>
-      <div id="love-type-btns" style="display:none;flex-direction:column;gap:8px;margin-bottom:4px;">
-        <button class="type-btn" data-type="couple"><strong>💑 커플</strong><small>사귀는 사이, 속마음과 관계운</small></button>
-        <button class="type-btn" data-type="ex"><strong>💔 재회</strong><small>헤어진 상대, 재회 가능성은?</small></button>
-        <button class="type-btn" data-type="some"><strong>💭 썸</strong><small>썸 타는 사이, 관계가 발전할까?</small></button>
-        <button class="type-btn" data-type="solo"><strong>🌸 솔로</strong><small>향후 3개월, 새 인연이 올까?</small></button>
-      </div>
+      <div class="type-btns" id="type-btns"></div>
       <label class="field-label">✦ 내 정보</label>
       <div class="row2">
         <input type="number" id="age" placeholder="나이 (예: 28)">
@@ -309,12 +289,7 @@ const TAROT_CARDS=Object.keys(CARD_DISPLAY);
 
 const KEYWORDS={fool:["새 시작","자유","예측불가"],magician:["자신감","창조력","양면성"],high_priestess:["직관","내면 정리","기다림"],empress:["풍요","감성","모성"],emperor:["책임감","자존심","안정"],hierophant:["신뢰","중재","전통"],lovers:["소통","투명함","유대"],chariot:["추진력","타이밍","균형"],strength:["내면의 힘","인내","절제"],hermit:["은둔","성찰","고독"],wheel_of_fortune:["전환점","순환","기회"],justice:["균형","기브앤테이크","냉철함"],hanged_man:["의도된 정체","내면 성장","인내"],death:["변환","새 챕터","정리"],temperance:["조율","균형","과정"],devil:["집착","속박","재결합"],tower:["급변","충격","재구성"],star:["희망","치유","이상향"],moon:["불확실","예민함","불안"],sun:["드러남","자신감","성공"],judgement:["소식","각성","결정"],world:["완성","자립","자기세계"]};
 
-const QUESTION_TYPES=[
-  {id:"couple",label:"💑 커플",desc:"사귀는 사이, 속마음과 관계운"},
-  {id:"ex",label:"💔 재회",desc:"헤어진 상대, 재회 가능성은?"},
-  {id:"some",label:"💭 썸",desc:"썸 타는 사이, 관계가 발전할까?"},
-  {id:"solo",label:"🌸 솔로",desc:"향후 3개월, 새 인연이 올까?"},
-];
+const QUESTION_TYPES=[{id:"couple",label:"💑 커플",desc:"사귀는 사이, 속마음과 관계운"},{id:"ex",label:"💔 재회",desc:"헤어진 상대, 재회 가능성은?"},{id:"some",label:"💭 썸",desc:"썸 타는 사이, 관계가 발전할까?"},{id:"solo",label:"🌸 솔로",desc:"향후 3개월, 새 인연이 올까?"}];
 
 const NEURO={
   inner:[
@@ -378,54 +353,37 @@ function makeBackSVG(){
 
 let state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
 
-// 카테고리 버튼 이벤트
-document.getElementById('cat-love').addEventListener('click', function(){
-  this.style.borderColor = '#ec4899';
-  this.style.background = 'rgba(236,72,153,.18)';
-  this.style.color = '#f9a8d4';
-  document.getElementById('coming-soon-msg').style.display = 'none';
-  document.getElementById('love-type-btns').style.display = 'flex';
-});
-
-document.getElementById('cat-fortune').addEventListener('click', function(){
-  document.getElementById('coming-soon-msg').style.display = 'block';
-  document.getElementById('love-type-btns').style.display = 'none';
-  document.getElementById('cat-love').style.borderColor = 'rgba(236,72,153,.25)';
-  document.getElementById('cat-love').style.background = 'rgba(255,255,255,.03)';
-  document.getElementById('cat-love').style.color = '#c4b5fd';
-  state.qType = null;
-});
-
-// 유형 버튼 이벤트
-document.querySelectorAll('[data-type]').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    var id = this.getAttribute('data-type');
-    selectType(id);
-  });
-});
+function initTypeBtns(){
+  document.getElementById('type-btns').innerHTML=QUESTION_TYPES.map(t=>`<button class="type-btn" onclick="selectType('${t.id}')" id="type-${t.id}"><strong>${t.label}</strong><small>${t.desc}</small></button>`).join("");
+}
+initTypeBtns();
 
 function selectType(id){
   state.qType=id;
-  document.querySelectorAll('[data-type]').forEach(b=>b.classList.remove('active'));
-  document.querySelector('[data-type="'+id+'"]').classList.add('active');
-  const partnerWrap = document.getElementById('partner-wrap');
-  const contactWrap = document.getElementById('contact-wrap');
+  document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('type-'+id).classList.add('active');
+  var pw=document.getElementById('partner-wrap');
+  var cw=document.getElementById('contact-wrap');
   if(id==='solo'){
-    partnerWrap.style.display='none';
-    contactWrap.style.display='none';
+    pw.style.display='none';
+    cw.style.display='none';
     state.partner='(솔로)';
     state.contactStatus='해당없음';
   } else if(id==='couple'){
-    partnerWrap.style.display='block';
-    contactWrap.style.display='none';
+    pw.style.display='block';
+    cw.style.display='none';
     state.contactStatus='연애 중';
   } else {
-    partnerWrap.style.display='block';
-    contactWrap.style.display='block';
-    if(state.contactStatus==='해당없음'||state.contactStatus==='연애 중') state.contactStatus='연락 끊김';
-    document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==='연락 끊김'));
+    pw.style.display='block';
+    cw.style.display='block';
+    if(state.contactStatus==='해당없음'||state.contactStatus==='연애 중'){
+      state.contactStatus='연락 끊김';
+      document.querySelectorAll('.contact-btn').forEach(function(b){b.classList.toggle('active',b.textContent==='연락 끊김');});
+    }
   }
 }
+
+function selectType(id){state.qType=id;document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';document.getElementById('type-'+id).classList.add('active');}
 function selectGender(g){state.gender=g;document.querySelectorAll('.gender-btn').forEach(b=>b.classList.toggle('active',b.textContent===g));}
 function selectContact(s){state.contactStatus=s;document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent===s));}
 function show(id){document.getElementById(id).classList.remove('hidden');}
@@ -436,7 +394,7 @@ function startReading(){
   state.age=document.getElementById('age').value;
   state.partner=document.getElementById('partner').value;
   state.situation=document.getElementById('situation').value;
-  if(!state.qType||!state.situation.trim()||!state.age.trim()||!state.gender)return;
+  if(!state.qType||!state.situation.trim()||!state.age.trim()||!state.gender||!state.contactStatus)return;
   state.cards=[...TAROT_CARDS].sort(()=>Math.random()-.5).slice(0,3);
   state.revealed=[];state.result=null;state.unlocked=false;
   renderCards();showOnly('screen-cards');
@@ -460,8 +418,7 @@ function revealCard(i){
 
 async function doReading(){
   showOnly('screen-loading');
-  const qMap={dating:'inner',solo:'inner',crush:'inner'};
-const tips=NEURO[qMap[state.qType]||state.qType]||NEURO.inner;
+  const tips=NEURO[state.qType]||NEURO.inner;
   const tipIdx=state.contactStatus==="연락 중"?1:state.contactStatus==="차단/단절"?2:0;
   const tip=tips[Math.min(tipIdx,tips.length-1)];
   const cardCtx=state.cards.map((c,i)=>["과거","현재","미래"][i]+": "+CARD_DISPLAY[c]).join(", ");
@@ -472,8 +429,7 @@ const tips=NEURO[qMap[state.qType]||state.qType]||NEURO.inner;
     "\n현재 연락 상태: "+state.contactStatus+
     "\n상황: "+state.situation+
     "\n뽑힌 카드: "+cardCtx+
-    "\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 절대 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 상대방 심리를 대화체로 구체적으로\n- 각 섹션 5~7문장으로 충분히 작성\n- 주차별 흐름(1주차, 2주차, 3주차)으로 구체적으로\n- 카드가 부정적이면 솔직하게 말할 것. 무조건 희망적으로 마무리 금지\n- 근거 없는 낙관적 예측 금지 (예: 한달 안에 연락이 올 것 같다)\n- 연애중 질문이면 헤어진 것처럼 해석하지 말 것\n- 솔로 질문이면 재회가 아닌 새로운 인연 관점으로 해석
-- 솔로 질문이면 향후 3개월 기준으로 인연의 흐름을 봐줄 것 (1개월차, 2개월차, 3개월차로 나눠서)\n\n정확히 아래 형식으로만 답변:\n\n[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(한 문장. 예시: 해당 카드를 보아하니, 회피 성향을 가지고 있습니다. / 불안 애착형으로 보여져요.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름과 주차별 예측)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리)\n\n[요약]\n(10자 이내의 핵심 한 줄)";
+    "\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 절대 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 상대방 심리를 대화체로 구체적으로\n- 각 섹션 5~7문장으로 충분히 작성\n- 주차별 흐름(1주차, 2주차, 3주차)으로 구체적으로\n\n정확히 아래 형식으로만 답변:\n\n[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(한 문장. 예시: 해당 카드를 보아하니, 회피 성향을 가지고 있습니다. / 불안 애착형으로 보여져요.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름과 주차별 예측)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리)\n\n[요약]\n(10자 이내의 핵심 한 줄)";
 
   try{
     const res=await fetch("/api/reading",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt})});
@@ -524,7 +480,7 @@ function resetAll(){
   document.getElementById('age').value="";
   document.getElementById('partner').value="";
   document.getElementById('situation').value="";
-  document.getElementById('cat-love').style.borderColor='rgba(236,72,153,.25)';document.getElementById('cat-love').style.background='rgba(255,255,255,.03)';document.getElementById('cat-love').style.color='#c4b5fd';document.getElementById('love-type-btns').style.display='none';document.getElementById('coming-soon-msg').style.display='none';document.querySelectorAll('[data-type]').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';
   document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==="연락 끊김"));
   document.getElementById('personality-box').style.display='none';

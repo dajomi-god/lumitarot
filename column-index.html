@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9151905973095283"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>루미타로 칼럼 — 뇌과학 × 연애 시리즈</title>
+<meta name="description" content="타로와 뇌과학으로 읽는 연애 심리. 왜 이별 후 자꾸 생각날까, 회피형은 왜 밀어낼까, 간헐적 강화란 무엇인가. 루미타로의 무료 칼럼 시리즈.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{min-height:100vh;background:linear-gradient(160deg,#1a0020 0%,#2d0035 40%,#120018 100%);font-family:Georgia,serif;color:#f0e6ff;}
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .star{position:absolute;border-radius:50%;background:white;animation:tw 3s ease-in-out infinite;}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+  @keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+  .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:48px 20px 80px;animation:fi .7s ease-out;}
+
+  .site-header{text-align:center;margin-bottom:48px;}
+  .site-logo{font-size:13px;letter-spacing:3px;color:#a78bfa;text-decoration:none;display:inline-block;margin-bottom:24px;}
+  .site-logo:hover{color:#f9a8d4;}
+  .page-tag{display:inline-block;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:20px;padding:4px 14px;font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:16px;}
+  h1{font-size:30px;font-weight:700;color:#f0e6ff;margin-bottom:12px;line-height:1.4;}
+  .page-desc{font-size:15px;color:#c4b5fd;line-height:1.8;max-width:500px;margin:0 auto;}
+
+  /* 칼럼 그리드 */
+  .columns-grid{display:flex;flex-direction:column;gap:16px;margin-top:44px;}
+
+  .column-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(192,132,252,.2);border-radius:18px;padding:22px 24px;text-decoration:none;display:block;transition:all .25s ease;position:relative;overflow:hidden;}
+  .column-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(236,72,153,.06),rgba(124,58,237,.04));opacity:0;transition:opacity .25s;}
+  .column-card:hover{border-color:rgba(236,72,153,.4);transform:translateY(-2px);box-shadow:0 8px 32px rgba(190,24,93,.15);}
+  .column-card:hover::before{opacity:1;}
+
+  .card-inner{position:relative;z-index:1;display:flex;align-items:flex-start;gap:16px;}
+  .card-num{font-size:11px;color:#6d4c7e;letter-spacing:1px;min-width:24px;margin-top:3px;}
+  .card-content{flex:1;}
+  .card-tag{display:inline-block;background:rgba(236,72,153,.12);border-radius:6px;padding:3px 10px;font-size:10px;color:#f9a8d4;letter-spacing:1px;margin-bottom:8px;}
+  .card-title{font-size:17px;font-weight:700;color:#f0e6ff;line-height:1.5;margin-bottom:6px;}
+  .card-desc{font-size:13px;color:#9d7cb8;line-height:1.7;}
+  .card-arrow{font-size:16px;color:#6d4c7e;margin-top:2px;transition:transform .2s;}
+  .column-card:hover .card-arrow{transform:translateX(4px);color:#f9a8d4;}
+
+  /* 준비중 카드 */
+  .column-card.coming{opacity:.45;pointer-events:none;}
+  .coming-badge{display:inline-block;background:rgba(109,76,126,.3);border-radius:6px;padding:3px 10px;font-size:10px;color:#9d7cb8;letter-spacing:1px;margin-bottom:8px;}
+
+  /* CTA */
+  .cta-box{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(190,24,93,.15));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:28px;margin-top:48px;text-align:center;}
+  .cta-box p{font-size:14px;color:#d8b4fe;margin-bottom:6px;}
+  .cta-box h3{font-size:20px;color:#f0e6ff;font-weight:700;margin-bottom:16px;}
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:12px;padding:13px 32px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(190,24,93,.4);}
+
+  .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);}
+  .footer a{font-size:11px;color:rgba(167,139,250,.4);text-decoration:none;margin:0 10px;}
+  .footer a:hover{color:#a78bfa;}
+  .footer p{font-size:11px;color:rgba(167,139,250,.3);margin-top:10px;}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap">
+
+  <div class="site-header">
+    <a href="/" class="site-logo">🔮 LUMI TAROT</a><br>
+    <div class="page-tag">🧠 뇌과학 × 연애</div>
+    <h1>루미타로 칼럼</h1>
+    <p class="page-desc">타로 카드와 뇌과학으로 읽는 연애 심리학.<br>왜 우리는 이렇게 사랑하고, 이렇게 아파할까요.</p>
+  </div>
+
+  <div class="columns-grid">
+
+    <a href="/column-1.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#1</span>
+        <div class="card-content">
+          <span class="card-tag">자이가르닉 효과</span>
+          <p class="card-title">이별 후 왜 자꾸 생각날까</p>
+          <p class="card-desc">끝난 관계인데 머릿속을 떠나지 않는 사람. 의지가 약해서가 아니에요. 뇌가 미완결된 일을 처리하려는 본능 때문이에요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-2.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#2</span>
+        <div class="card-content">
+          <span class="card-tag">도파민 보상 시스템</span>
+          <p class="card-title">도파민 중독과 썸의 심리학 — 컵 7이 말하는 것</p>
+          <p class="card-desc">썸이 실제 연애보다 더 설레는 이유. 뇌가 불확실성을 먹고 자라는 도파민 괴물이기 때문이에요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-3.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#3</span>
+        <div class="card-content">
+          <span class="card-tag">회피형 애착</span>
+          <p class="card-title">회피형 연애, 뇌과학으로 이해하기 — 은둔자 카드</p>
+          <p class="card-desc">좋아하면서 밀어내는 사람. 나쁜 사람이 아니에요. 뇌가 친밀함을 위협으로 인식하도록 학습된 거예요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-4.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#4</span>
+        <div class="card-content">
+          <span class="card-tag">사회적 배제 · 통증 회로</span>
+          <p class="card-title">연락이 끊겼을 때 뇌에서 일어나는 일</p>
+          <p class="card-desc">잠수, 읽씹, 갑자기 차가워진 온도. 연락이 끊기는 순간 뇌는 실제 신체 통증과 동일한 반응을 보내요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-5.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#5</span>
+        <div class="card-content">
+          <span class="card-tag">간헐적 강화</span>
+          <p class="card-title">왜 나쁜 사람한테 더 끌릴까</p>
+          <p class="card-desc">항상 잘해주는 사람보다 잘해주다 차갑게 구는 사람한테 더 끌리는 이유. 당신 취향이 이상한 게 아니에요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-6.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#6</span>
+        <div class="card-content">
+          <span class="card-tag">애착 이론</span>
+          <p class="card-title">애착 유형별 연애 패턴 — 나는 어떤 유형일까</p>
+          <p class="card-desc">불안형, 회피형, 안정형. 내가 연애에서 반복하는 패턴은 어린 시절부터 뇌에 새겨진 애착 회로예요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-7.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#7</span>
+        <div class="card-content">
+          <span class="card-tag">편도체 방어 기제</span>
+          <p class="card-title">재회를 방해하는 뇌의 방어 기제</p>
+          <p class="card-desc">진심으로 변했는데 상대는 왜 믿지 않을까. 이별 후 뇌에 자동으로 생성되는 방어 회로를 분석해요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-8.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#8</span>
+        <div class="card-content">
+          <span class="card-tag">옥시토신 · 도파민</span>
+          <p class="card-title">옥시토신과 장기연애 — 설렘이 사라진 이유</p>
+          <p class="card-desc">사귄 지 1~2년이 지나면 왜 설렘이 줄어들까. 감정이 식은 게 아니라 뇌의 신경전달물질이 바뀐 거예요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-9.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#9</span>
+        <div class="card-content">
+          <span class="card-tag">손실 회피 편향</span>
+          <p class="card-title">손실 회피 편향 — 이별이 득보다 아픈 이유</p>
+          <p class="card-desc">새로운 좋은 사람을 만나도 떠난 사람이 더 크게 느껴지는 이유. 뇌는 손실을 이득보다 2.5배 강하게 느껴요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-10.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#10</span>
+        <div class="card-content">
+          <span class="card-tag">불안 애착 · 달 카드</span>
+          <p class="card-title">달 카드와 불안 애착 — 의심이 많은 사람의 뇌</p>
+          <p class="card-desc">연애만 하면 유독 불안하고 확인하고 싶어지는 이유. 달 카드가 상징하는 불안 애착을 뇌과학으로 읽어요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-11.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#11</span>
+        <div class="card-content">
+          <span class="card-tag">거울 뉴런</span>
+          <p class="card-title">거울 뉴런 — 상대방 감정을 내가 느끼는 이유</p>
+          <p class="card-desc">상대가 차갑게 굴면 나도 위축되는 이유. 거울 뉴런이 감정을 그대로 복사하는 메커니즘을 분석해요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-12.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#12</span>
+        <div class="card-content">
+          <span class="card-tag">집착 · 악마 카드</span>
+          <p class="card-title">악마 카드와 집착의 심리학</p>
+          <p class="card-desc">끊고 싶은데 끊지 못하는 관계. 뇌의 보상 회로가 어떻게 집착을 만드는지 분석해요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-13.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#13</span>
+        <div class="card-content">
+          <span class="card-tag">세로토닌 자립 · 세계 카드</span>
+          <p class="card-title">솔로가 편한 사람의 뇌 — 세계 카드와 자립심</p>
+          <p class="card-desc">혼자가 더 편하고 연애가 귀찮은 이유. 자립형 뇌의 특징과 나에게 맞는 인연이 오는 방식.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-14.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#14</span>
+        <div class="card-content">
+          <span class="card-tag">전전두엽 과부하 · 소드</span>
+          <p class="card-title">소드 카드가 자꾸 나오는 사람의 심리</p>
+          <p class="card-desc">타로를 볼 때마다 소드가 나오는 이유. 생각 과부하 상태의 뇌와 벗어나는 방법.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-15.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#15</span>
+        <div class="card-content">
+          <span class="card-tag">신경 회로 패턴</span>
+          <p class="card-title">타로가 말하는 나의 연애 패턴</p>
+          <p class="card-desc">왜 매번 비슷한 연애를 반복할까. 타로 카드는 내 뇌의 연애 회로를 거울처럼 보여주는 도구예요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="cta-box">
+    <p>✨ 칼럼 읽고 내 상황이 궁금해졌다면</p>
+    <h3>루미타로 AI 리딩 무료로 해보기</h3>
+    <a href="/" class="cta-btn">🔮 카드 뽑으러 가기</a>
+  </div>
+
+  <div class="footer">
+    <div>
+      <a href="/privacy.html">개인정보처리방침</a>
+      <a href="/terms.html">이용약관</a>
+      <a href="/contact.html">문의하기</a>
+    </div>
+    <p>✦ LUMI TAROT · 본 콘텐츠는 심리적 참고 용도입니다 ✦</p>
+  </div>
+
+</div>
+<script>
+(function(){
+  const s=document.getElementById('stars');
+  for(let i=0;i<30;i++){
+    const d=document.createElement('div');d.className='star';
+    const sz=i%3===0?'2px':'1px';
+    d.style.cssText=`width:${sz};height:${sz};left:${(i*3.3)%100}%;top:${(i*3.7)%100}%;opacity:${.1+(i%5)*.1};animation-delay:${(i*.25)%3}s;animation-duration:${2+(i%4)}s`;
+    s.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>

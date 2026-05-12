@@ -253,14 +253,14 @@
     </div>
 
     <button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
-    <!-- 카카오톡 공유 버튼 -->
+    <!-- 공유 버튼 -->
     <div style="text-align:center;margin-top:14px;margin-bottom:4px;">
-      <button onclick="shareKakao()"
+      <button onclick="copyLink()" id="copy-btn"
         style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
-        <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" style="width:20px;height:20px;">
-        카카오톡으로 공유하기
+        🔗 친구에게 공유하기
       </button>
-      <p style="font-size:10px;color:#6d4c7e;margin-top:8px;">친구에게 공유하면 함께 타로 볼 수 있어요 🔮</p>
+      <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
+      <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
     </div>
 
     <!-- PDF 리딩 배너 -->
@@ -523,32 +523,34 @@ function resetAll(){
 </script>
 
 <script>
-function shareKakao(){
-  try{
-    if(!window.Kakao) return alert('카카오 SDK 로딩 중이에요. 잠시 후 다시 눌러주세요.');
-    if(!Kakao.isInitialized()) Kakao.init('f9fde500a8bbccb1e36312e75cb037ad');
-    const cards=state.cards.map(c=>c.name).join(' · ');
-    const summary=state.result&&state.result.summary?state.result.summary:'지금 내 상황을 타로로 확인해봤어요!';
-    Kakao.Share.sendDefault({
-      objectType:'feed',
-      content:{
-        title:'🔮 루미타로 타로 리딩 결과',
-        description:cards+'
+function copyLink(){
+  const url='https://lumitarot.net';
+  const cards=state.cards&&state.cards.length?state.cards.map(c=>c.name).join(' · '):'';
+  const text='🔮 루미타로 타로 리딩
+'+cards+'
 
-"'+summary+'"
-
-나도 무료로 타로 봐봐!',
-        imageUrl:'https://lumitarot.net/og-image.png',
-        link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'},
-      },
-      buttons:[{title:'나도 타로 보기 🔮',link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'}}],
+나도 무료로 타로 봐봐!
+'+url;
+  if(navigator.share){
+    navigator.share({title:'🔮 루미타로 타로 리딩',text:text,url:url}).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>{
+      const msg=document.getElementById('copy-msg');
+      msg.style.display='block';
+      setTimeout(()=>{msg.style.display='none';},3000);
     });
-  }catch(e){
-    alert('공유 중 오류가 났어요. 잠시 후 다시 시도해주세요.');
-    console.error(e);
+  } else {
+    const el=document.createElement('textarea');
+    el.value=url;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    const msg=document.getElementById('copy-msg');
+    msg.style.display='block';
+    setTimeout(()=>{msg.style.display='none';},3000);
   }
 }
 </script>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
 </body>
 </html>

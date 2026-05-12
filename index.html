@@ -534,7 +534,7 @@ function resetAll(){
 function copyLink(){
   const url='https://lumitarot.net';
   const cards=state.cards&&state.cards.length?state.cards.map(c=>CARD_DISPLAY[c]||c).join(' · '):'';
-  const text='🔮 루미타로 타로 리딩\n'+cards+'\n\n나도 무료로 타로 봐봐!\n'+url;
+  const text='🔮 루미타로 타로 리딩\n'+cards+'\n\n너도 무료로 타로 봐봐!\n'+url;
   if(navigator.share){
     navigator.share({title:'🔮 루미타로 타로 리딩',text:text,url:url}).catch(()=>{});
   } else if(navigator.clipboard){

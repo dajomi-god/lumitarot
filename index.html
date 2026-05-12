@@ -107,7 +107,7 @@
   .hidden { display:none; }
   .mb18 { margin-bottom:18px; }
 </style>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js" integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/8" crossorigin="anonymous"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
 </head>
 <body>
 <div id="stars"></div>
@@ -143,7 +143,7 @@
       </div>
       </div>
       <label class="field-label">✦ 현재 상황을 자세히 알려주세요(필수)</label>
-      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요. / 최근 들어 대화가 줄어들고 소원해진 느낌이에요. "></textarea>
+      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요. (또는) 최근 대화가 줄고 관계가 소원해요 등..."></textarea>
       <button class="btn-main" onclick="startReading()">카드 뽑기 🃏</button>
     </div>
     <p class="hint">✦ 타로는 참고용입니다 ✦</p>
@@ -255,8 +255,8 @@
 
     <button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
     <!-- 카카오톡 공유 버튼 -->
-    <div id="kakao-share-wrap" style="text-align:center;margin-top:14px;margin-bottom:4px;">
-      <button id="kakao-share-btn" onclick="shareKakao()"
+    <div style="text-align:center;margin-top:14px;margin-bottom:4px;">
+      <button onclick="shareKakao()"
         style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);letter-spacing:.3px;">
         <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" style="width:20px;height:20px;">
         카카오톡으로 공유하기

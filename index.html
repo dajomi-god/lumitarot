@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9151905973095283"
@@ -18,95 +19,96 @@
   @keyframes sh { 0%{background-position:-200% center} 100%{background-position:200% center} }
   @keyframes bi { from{filter:blur(8px);opacity:0} to{filter:blur(0);opacity:1} }
 
-  #app { position:relative; z-index:1; max-width:500px; margin:0 auto; padding:36px 18px; animation:fi .7s ease-out; }
-  .header { text-align:center; margin-bottom:28px; }
-  .header-icon { font-size:44px; margin-bottom:10px; filter:drop-shadow(0 0 14px rgba(236,72,153,.7)); display:block; }
-  .header h1 { font-size:28px; font-weight:700; letter-spacing:4px; background:linear-gradient(135deg,#f472b6,#e879f9,#c084fc); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:sh 3s linear infinite; margin-bottom:6px; }
-  .header p { color:#d8b4fe; font-size:12px; letter-spacing:1.5px; }
-  .card-box { background:rgba(236,72,153,.07); border:1px solid rgba(236,72,153,.25); border-radius:20px; padding:24px; backdrop-filter:blur(12px); margin-bottom:12px; }
-  label.field-label { font-size:11px; color:#f9a8d4; letter-spacing:1px; display:block; margin-bottom:10px; }
-  .type-btns { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
-  .gender-btns, .contact-btns { display:flex; gap:6px; margin-bottom:18px; }
-  .type-btn { background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:11px; padding:11px 14px; color:#c4b5fd; cursor:pointer; text-align:left; transition:all .2s; font-size:14px; font-family:Georgia,serif; }
-  .type-btn.active, .type-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.18); color:#f9a8d4; }
-  .type-btn strong { display:block; font-weight:600; }
-  .type-btn small { display:block; font-size:11px; color:#a78bfa; margin-top:2px; }
-  .gender-btn, .contact-btn { flex:1; background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:10px; padding:11px 6px; color:#c4b5fd; cursor:pointer; font-size:12px; transition:all .2s; font-family:Georgia,serif; text-align:center; }
-  .gender-btn.active, .gender-btn:hover, .contact-btn.active, .contact-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.2); color:#f9a8d4; }
-  input, textarea { width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(236,72,153,.35); border-radius:10px; padding:11px 14px; color:#f0e6ff; font-size:14px; font-family:Georgia,serif; transition:all .2s; margin-bottom:14px; }
-  input:focus, textarea:focus { outline:none; border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,.18); }
-  textarea { resize:none; line-height:1.7; margin-bottom:22px; }
-  input[type=number]::-webkit-inner-spin-button { opacity:.3; }
-  .row2 { display:flex; gap:10px; margin-bottom:14px; }
-  .row2 input { margin-bottom:0; width:38%; }
-  .btn-main { width:100%; border:none; border-radius:13px; padding:15px; background:linear-gradient(135deg,#be185d,#7c3aed); color:white; font-size:16px; font-weight:700; letter-spacing:1px; cursor:pointer; transition:all .3s; box-shadow:0 4px 20px rgba(190,24,93,.4); font-family:Georgia,serif; }
-  .btn-main:hover { filter:brightness(1.1); transform:translateY(-2px); }
-  .hint { text-align:center; font-size:11px; color:#6d4c7e; }
-  .cards-wrap { text-align:center; }
-  .cards-title { color:#f472b6; font-size:16px; font-weight:600; margin-bottom:22px; }
-  .cards-count { color:#a78bfa; font-size:12px; margin-bottom:22px; }
-  .cards-row { display:flex; justify-content:center; gap:14px; }
-  .card-slot { display:flex; flex-direction:column; align-items:center; gap:8px; }
-  .card-img-wrap { width:100px; height:140px; border-radius:10px; overflow:hidden; border:1px solid rgba(236,72,153,.35); box-shadow:0 4px 14px rgba(236,72,153,.15); cursor:pointer; transition:all .3s; }
-  .card-img-wrap.revealed { border:2px solid #f472b6; box-shadow:0 0 22px rgba(244,114,182,.5); cursor:default; animation:cr .5s ease-out; }
-  .card-img-wrap:not(.revealed):hover { transform:translateY(-11px) scale(1.05); box-shadow:0 16px 30px rgba(236,72,153,.5); }
-  .card-label { font-size:10px; color:#6d4c7e; }
-  .card-label.on { color:#f9a8d4; }
-  .card-name { font-size:9px; color:#c4b5fd; margin-top:2px; }
-  .kw-wrap { display:flex; flex-wrap:wrap; gap:2px; justify-content:center; margin-top:3px; }
-  .kw { font-size:8px; color:#f9a8d4; background:rgba(244,114,182,.12); border:1px solid rgba(244,114,182,.22); border-radius:10px; padding:1px 5px; }
-  .reading-msg { color:#d8b4fe; font-size:13px; margin-top:22px; }
-  .loading-wrap { text-align:center; padding:60px 20px; }
-  .loading-icon { font-size:46px; animation:sp 2s linear infinite; display:inline-block; margin-bottom:20px; }
-  .result-cards { display:flex; justify-content:center; gap:10px; }
-  .result-card { flex:1; max-width:140px; display:flex; flex-direction:column; align-items:center; gap:6px; }
-  .result-card-img { width:100%; aspect-ratio:5/7; border-radius:8px; overflow:hidden; border:2px solid rgba(244,114,182,.45); box-shadow:0 4px 14px rgba(244,114,182,.3); }
-  .result-card-pos { font-size:10px; color:#f472b6; font-weight:600; }
-  .result-card-name { font-size:9px; color:#c4b5fd; }
-  .section-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
-  .section-icon { width:28px; height:28px; border-radius:50%; background:rgba(244,114,182,.15); border:1px solid #f472b6; display:flex; align-items:center; justify-content:center; font-size:11px; color:#f472b6; flex-shrink:0; }
-  .section-title { color:#f472b6; font-size:13px; font-weight:600; letter-spacing:1px; }
-  .section-text { font-size:14px; line-height:2.0; color:#f3e8ff; white-space:pre-line; }
-  .divider { border-top:1px solid rgba(236,72,153,.18); margin:18px 0; }
+#app { position:relative; z-index:1; max-width:500px; margin:0 auto; padding:36px 18px; animation:fi .7s ease-out; }
+.header { text-align:center; margin-bottom:28px; }
+.header-icon { font-size:44px; margin-bottom:10px; filter:drop-shadow(0 0 14px rgba(236,72,153,.7)); display:block; }
+.header h1 { font-size:28px; font-weight:700; letter-spacing:4px; background:linear-gradient(135deg,#f472b6,#e879f9,#c084fc); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:sh 3s linear infinite; margin-bottom:6px; }
+.header p { color:#d8b4fe; font-size:12px; letter-spacing:1.5px; }
+.card-box { background:rgba(236,72,153,.07); border:1px solid rgba(236,72,153,.25); border-radius:20px; padding:24px; backdrop-filter:blur(12px); margin-bottom:12px; }
+label.field-label { font-size:11px; color:#f9a8d4; letter-spacing:1px; display:block; margin-bottom:10px; }
+.type-btns { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+.gender-btns, .contact-btns { display:flex; gap:6px; margin-bottom:18px; }
+.type-btn { background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:11px; padding:11px 14px; color:#c4b5fd; cursor:pointer; text-align:left; transition:all .2s; font-size:14px; font-family:Georgia,serif; }
+.type-btn.active, .type-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.18); color:#f9a8d4; }
+.type-btn strong { display:block; font-weight:600; }
+.type-btn small { display:block; font-size:11px; color:#a78bfa; margin-top:2px; }
+.gender-btn, .contact-btn { flex:1; background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:10px; padding:11px 6px; color:#c4b5fd; cursor:pointer; font-size:12px; transition:all .2s; font-family:Georgia,serif; text-align:center; }
+.gender-btn.active, .gender-btn:hover, .contact-btn.active, .contact-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.2); color:#f9a8d4; }
+input, textarea { width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(236,72,153,.35); border-radius:10px; padding:11px 14px; color:#f0e6ff; font-size:14px; font-family:Georgia,serif; transition:all .2s; margin-bottom:14px; }
+input:focus, textarea:focus { outline:none; border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,.18); }
+textarea { resize:none; line-height:1.7; margin-bottom:22px; }
+input[type=number]::-webkit-inner-spin-button { opacity:.3; }
+.row2 { display:flex; gap:10px; margin-bottom:14px; }
+.row2 input { margin-bottom:0; width:38%; }
+.btn-main { width:100%; border:none; border-radius:13px; padding:15px; background:linear-gradient(135deg,#be185d,#7c3aed); color:white; font-size:16px; font-weight:700; letter-spacing:1px; cursor:pointer; transition:all .3s; box-shadow:0 4px 20px rgba(190,24,93,.4); font-family:Georgia,serif; }
+.btn-main:hover { filter:brightness(1.1); transform:translateY(-2px); }
+.hint { text-align:center; font-size:11px; color:#6d4c7e; }
+.cards-wrap { text-align:center; }
+.cards-title { color:#f472b6; font-size:16px; font-weight:600; margin-bottom:22px; }
+.cards-count { color:#a78bfa; font-size:12px; margin-bottom:22px; }
+.cards-row { display:flex; justify-content:center; gap:14px; }
+.card-slot { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.card-img-wrap { width:100px; height:140px; border-radius:10px; overflow:hidden; border:1px solid rgba(236,72,153,.35); box-shadow:0 4px 14px rgba(236,72,153,.15); cursor:pointer; transition:all .3s; }
+.card-img-wrap.revealed { border:2px solid #f472b6; box-shadow:0 0 22px rgba(244,114,182,.5); cursor:default; animation:cr .5s ease-out; }
+.card-img-wrap:not(.revealed):hover { transform:translateY(-11px) scale(1.05); box-shadow:0 16px 30px rgba(236,72,153,.5); }
+.card-label { font-size:10px; color:#6d4c7e; }
+.card-label.on { color:#f9a8d4; }
+.card-name { font-size:9px; color:#c4b5fd; margin-top:2px; }
+.kw-wrap { display:flex; flex-wrap:wrap; gap:2px; justify-content:center; margin-top:3px; }
+.kw { font-size:8px; color:#f9a8d4; background:rgba(244,114,182,.12); border:1px solid rgba(244,114,182,.22); border-radius:10px; padding:1px 5px; }
+.reading-msg { color:#d8b4fe; font-size:13px; margin-top:22px; }
+.loading-wrap { text-align:center; padding:60px 20px; }
+.loading-icon { font-size:46px; animation:sp 2s linear infinite; display:inline-block; margin-bottom:20px; }
+.result-cards { display:flex; justify-content:center; gap:10px; }
+.result-card { flex:1; max-width:140px; display:flex; flex-direction:column; align-items:center; gap:6px; }
+.result-card-img { width:100%; aspect-ratio:5/7; border-radius:8px; overflow:hidden; border:2px solid rgba(244,114,182,.45); box-shadow:0 4px 14px rgba(244,114,182,.3); }
+.result-card-pos { font-size:10px; color:#f472b6; font-weight:600; }
+.result-card-name { font-size:9px; color:#c4b5fd; }
+.section-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.section-icon { width:28px; height:28px; border-radius:50%; background:rgba(244,114,182,.15); border:1px solid #f472b6; display:flex; align-items:center; justify-content:center; font-size:11px; color:#f472b6; flex-shrink:0; }
+.section-title { color:#f472b6; font-size:13px; font-weight:600; letter-spacing:1px; }
+.section-text { font-size:14px; line-height:2.0; color:#f3e8ff; white-space:pre-line; }
+.divider { border-top:1px solid rgba(236,72,153,.18); margin:18px 0; }
 
-  /* 성향 분석 박스 */
-  .personality-box { background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08)); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:14px 16px; margin-top:14px; }
-  .personality-label { font-size:11px; color:rgba(216,180,254,.7); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
-  .personality-text { font-size:14px; color:#e9d5ff; font-weight:600; line-height:1.6; }
+/* 성향 분석 박스 */
+.personality-box { background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08)); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:14px 16px; margin-top:14px; }
+.personality-label { font-size:11px; color:rgba(216,180,254,.7); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
+.personality-text { font-size:14px; color:#e9d5ff; font-weight:600; line-height:1.6; }
 
-  /* 카드 조합 박스 */
-  .combo-box { background:rgba(244,114,182,.06); border:1px solid rgba(244,114,182,.2); border-radius:12px; padding:14px 16px; margin-top:18px; }
-  .combo-label { font-size:11px; color:rgba(249,168,212,.6); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
-  .combo-text { font-size:13px; color:#fce7f3; line-height:1.85; white-space:pre-line; }
+/* 카드 조합 박스 */
+.combo-box { background:rgba(244,114,182,.06); border:1px solid rgba(244,114,182,.2); border-radius:12px; padding:14px 16px; margin-top:18px; }
+.combo-label { font-size:11px; color:rgba(249,168,212,.6); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
+.combo-text { font-size:13px; color:#fce7f3; line-height:1.85; white-space:pre-line; }
 
-  .paywall-wrap { position:relative; }
-  .paywall-blur { filter:blur(5px); user-select:none; pointer-events:none; }
-  .paywall-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(18,0,24,.62); border-radius:12px; backdrop-filter:blur(2px); }
-  .paywall-overlay .lock { font-size:28px; margin-bottom:10px; }
-  .paywall-overlay h3 { color:#f9a8d4; font-size:14px; font-weight:600; margin-bottom:4px; }
-  .paywall-overlay p { color:#a78bfa; font-size:12px; margin-bottom:16px; text-align:center; line-height:1.7; }
-  .btn-pay { background:linear-gradient(135deg,#be185d,#7c3aed); border:none; border-radius:12px; padding:12px 28px; color:white; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 16px rgba(190,24,93,.4); letter-spacing:.5px; font-family:Georgia,serif; margin-bottom:8px; }
-  .paywall-note { color:#6d4c7e; font-size:10px; }
+.paywall-wrap { position:relative; }
+.paywall-blur { filter:blur(5px); user-select:none; pointer-events:none; }
+.paywall-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(18,0,24,.62); border-radius:12px; backdrop-filter:blur(2px); }
+.paywall-overlay .lock { font-size:28px; margin-bottom:10px; }
+.paywall-overlay h3 { color:#f9a8d4; font-size:14px; font-weight:600; margin-bottom:4px; }
+.paywall-overlay p { color:#a78bfa; font-size:12px; margin-bottom:16px; text-align:center; line-height:1.7; }
+.btn-pay { background:linear-gradient(135deg,#be185d,#7c3aed); border:none; border-radius:12px; padding:12px 28px; color:white; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 16px rgba(190,24,93,.4); letter-spacing:.5px; font-family:Georgia,serif; margin-bottom:8px; }
+.paywall-note { color:#6d4c7e; font-size:10px; }
 
-  .neuro-wrap { margin-top:18px; }
-  .neuro-header { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
-  .neuro-icon { width:28px; height:28px; border-radius:50%; background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); display:flex; align-items:center; justify-content:center; font-size:13px; }
-  .neuro-title { color:#86efac; font-size:12px; font-weight:700; letter-spacing:1.5px; }
-  .neuro-term-box { background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(6,182,212,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-  .neuro-term { font-size:13px; color:#34d399; font-weight:700; margin-bottom:3px; }
-  .neuro-term-en { font-size:10px; color:rgba(52,211,153,.6); font-style:italic; }
-  .neuro-mech-box { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; border-left:3px solid rgba(16,185,129,.4); }
-  .neuro-mech-label { font-size:11px; color:rgba(209,250,229,.6); margin-bottom:4px; font-weight:600; }
-  .neuro-mech-text { font-size:13px; line-height:1.8; color:#d1fae5; }
+.neuro-wrap { margin-top:18px; }
+.neuro-header { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.neuro-icon { width:28px; height:28px; border-radius:50%; background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); display:flex; align-items:center; justify-content:center; font-size:13px; }
+.neuro-title { color:#86efac; font-size:12px; font-weight:700; letter-spacing:1.5px; }
+.neuro-term-box { background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(6,182,212,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+.neuro-term { font-size:13px; color:#34d399; font-weight:700; margin-bottom:3px; }
+.neuro-term-en { font-size:10px; color:rgba(52,211,153,.6); font-style:italic; }
+.neuro-mech-box { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; border-left:3px solid rgba(16,185,129,.4); }
+.neuro-mech-label { font-size:11px; color:rgba(209,250,229,.6); margin-bottom:4px; font-weight:600; }
+.neuro-mech-text { font-size:13px; line-height:1.8; color:#d1fae5; }
 
-  .summary-box { background:rgba(244,114,182,.1); border-radius:10px; padding:12px 16px; margin-top:18px; border-left:3px solid #f472b6; }
-  .summary-text { font-size:14px; color:#f9a8d4; font-weight:600; }
-  .disclaimer { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:12px 16px; margin-top:14px; text-align:center; }
-  .disclaimer p { font-size:10px; color:rgba(167,139,250,.5); line-height:1.7; }
-  .disclaimer small { font-size:10px; color:rgba(167,139,250,.35); margin-top:4px; display:block; }
-  .hidden { display:none; }
-  .mb18 { margin-bottom:18px; }
+.summary-box { background:rgba(244,114,182,.1); border-radius:10px; padding:12px 16px; margin-top:18px; border-left:3px solid #f472b6; }
+.summary-text { font-size:14px; color:#f9a8d4; font-weight:600; }
+.disclaimer { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:12px 16px; margin-top:14px; text-align:center; }
+.disclaimer p { font-size:10px; color:rgba(167,139,250,.5); line-height:1.7; }
+.disclaimer small { font-size:10px; color:rgba(167,139,250,.35); margin-top:4px; display:block; }
+.hidden { display:none; }
+.mb18 { margin-bottom:18px; }
 </style>
+
 </head>
 <body>
 <div id="stars"></div>
@@ -147,18 +149,21 @@
     </div>
     <p class="hint">✦ 타로는 참고용입니다 ✦</p>
 
-    <a href="/column-index.html" style="display:block;margin:20px 0 8px;background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:18px 20px;text-decoration:none;text-align:left;">
-      <p style="font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:6px;font-weight:600;">🧠 뇌과학 × 연애 칼럼</p>
-      <p style="font-size:15px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">왜 이별 후 자꾸 생각날까? 회피형은 왜 밀어낼까?</p>
-      <p style="font-size:13px;color:#9d7cb8;margin-bottom:10px;">타로와 뇌과학으로 읽는 연애 심리 15편</p>
-      <span style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:8px;padding:6px 16px;color:white;font-size:12px;font-weight:700;">칼럼 전체 보기 →</span>
-    </a>
+```
+<a href="/column-index.html" style="display:block;margin:20px 0 8px;background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:18px 20px;text-decoration:none;text-align:left;">
+  <p style="font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:6px;font-weight:600;">🧠 뇌과학 × 연애 칼럼</p>
+  <p style="font-size:15px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">왜 이별 후 자꾸 생각날까? 회피형은 왜 밀어낼까?</p>
+  <p style="font-size:13px;color:#9d7cb8;margin-bottom:10px;">타로와 뇌과학으로 읽는 연애 심리 15편</p>
+  <span style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:8px;padding:6px 16px;color:white;font-size:12px;font-weight:700;">칼럼 전체 보기 →</span>
+</a>
 
-    <div style="text-align:center;margin-top:16px;display:flex;justify-content:center;gap:16px;">
-      <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
-      <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
-      <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
-    </div>
+<div style="text-align:center;margin-top:16px;display:flex;justify-content:center;gap:16px;">
+  <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
+  <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
+  <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
+</div>
+```
+
   </div>
 
   <div id="screen-cards" class="hidden">
@@ -184,104 +189,107 @@
       <div class="result-cards" id="result-cards"></div>
     </div>
 
-    <div class="card-box">
-      <!-- 과거 + 성향분석: 항상 공개 -->
-      <div class="section-header">
-        <div class="section-icon">過</div>
-        <span class="section-title">과거</span>
-      </div>
-      <p class="section-text mb18" id="text-past"></p>
+```
+<div class="card-box">
+  <!-- 과거 + 성향분석: 항상 공개 -->
+  <div class="section-header">
+    <div class="section-icon">過</div>
+    <span class="section-title">과거</span>
+  </div>
+  <p class="section-text mb18" id="text-past"></p>
 
-      <div class="personality-box" id="personality-box" style="display:none">
-        <p class="personality-label">🔍 상대방 성향 분석</p>
-        <p class="personality-text" id="text-personality"></p>
-      </div>
+  <div class="personality-box" id="personality-box" style="display:none">
+    <p class="personality-label">🔍 상대방 성향 분석</p>
+    <p class="personality-text" id="text-personality"></p>
+  </div>
 
-      <div class="divider"></div>
+  <div class="divider"></div>
 
-      <!-- 페이월 -->
-      <div id="paywall-area">
-        <div class="paywall-wrap">
-          <div class="paywall-blur">
-            <div class="section-header">
-              <div class="section-icon">現</div>
-              <span class="section-title">현재</span>
-            </div>
-            <p class="section-text mb18" id="text-present-blur"></p>
-            <div class="divider"></div>
-            <div class="section-header">
-              <div class="section-icon">未</div>
-              <span class="section-title">미래</span>
-            </div>
-            <p class="section-text" id="text-future-blur"></p>
-          </div>
-          <div class="paywall-overlay">
-            <div class="lock">🔮</div>
-            <h3>현재 · 미래 리딩</h3>
-            <p>상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
-            <button class="btn-pay" onclick="unlock()">전체 리딩 보기 ✨</button>
-            <span class="paywall-note">카드 조합 해석 · 뇌과학 전략 포함</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 잠금 해제 후 -->
-      <div id="unlocked-area" class="hidden">
+  <!-- 페이월 -->
+  <div id="paywall-area">
+    <div class="paywall-wrap">
+      <div class="paywall-blur">
         <div class="section-header">
           <div class="section-icon">現</div>
           <span class="section-title">현재</span>
         </div>
-        <p class="section-text mb18" id="text-present"></p>
+        <p class="section-text mb18" id="text-present-blur"></p>
         <div class="divider"></div>
         <div class="section-header">
           <div class="section-icon">未</div>
           <span class="section-title">미래</span>
         </div>
-        <p class="section-text mb18" id="text-future"></p>
-
-        <div class="combo-box" id="combo-box" style="display:none">
-          <p class="combo-label">🃏 카드 조합이 말하는 것</p>
-          <p class="combo-text" id="text-combo"></p>
-        </div>
-
-        <div class="summary-box hidden" id="summary-box">
-          <p class="summary-text" id="text-summary"></p>
-        </div>
-
-        <div class="neuro-wrap" id="neuro-wrap"></div>
+        <p class="section-text" id="text-future-blur"></p>
+      </div>
+      <div class="paywall-overlay">
+        <div class="lock">🔮</div>
+        <h3>현재 · 미래 리딩</h3>
+        <p>상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
+        <button class="btn-pay" onclick="unlock()">전체 리딩 보기 ✨</button>
+        <span class="paywall-note">카드 조합 해석 · 뇌과학 전략 포함</span>
       </div>
     </div>
+  </div>
 
-    <button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
-    <!-- 공유 버튼 -->
-    <div style="text-align:center;margin-top:14px;margin-bottom:4px;">
-      <button onclick="copyLink()" id="copy-btn"
-        style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
-        🔗 친구에게 공유하기
-      </button>
-      <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
-      <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
+  <!-- 잠금 해제 후 -->
+  <div id="unlocked-area" class="hidden">
+    <div class="section-header">
+      <div class="section-icon">現</div>
+      <span class="section-title">현재</span>
+    </div>
+    <p class="section-text mb18" id="text-present"></p>
+    <div class="divider"></div>
+    <div class="section-header">
+      <div class="section-icon">未</div>
+      <span class="section-title">미래</span>
+    </div>
+    <p class="section-text mb18" id="text-future"></p>
+
+    <div class="combo-box" id="combo-box" style="display:none">
+      <p class="combo-label">🃏 카드 조합이 말하는 것</p>
+      <p class="combo-text" id="text-combo"></p>
     </div>
 
-    <!-- PDF 리딩 배너 -->
-    <div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
-      <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ AI 리딩이 마음에 드셨나요?</p>
-      <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
-      <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;line-height:1.7;">카드 한 장 한 장을 루미타로가 직접 해석해드려요.<br>AI가 담지 못한 깊은 이야기를 전해드립니다.</p>
-      <a href="https://naver.me/GvWXOYp3" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:12px;padding:13px 28px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(124,58,237,.4);">📖 PDF 리딩 신청하기</a>
-      <p style="font-size:10px;color:#6d4c7e;margin-top:12px;">* 네이버 폼으로 연결됩니다</p>
+    <div class="summary-box hidden" id="summary-box">
+      <p class="summary-text" id="text-summary"></p>
     </div>
 
-    <div class="disclaimer">
-      <p>본 리딩은 심리적 참고 용도이며, 최종 결정의 책임은 본인에게 있습니다.</p>
-      <small>✦ LUMI TAROT ✦</small>
-      <div style="margin-top:10px;display:flex;justify-content:center;gap:16px;">
-        <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
-        <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
-        <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
-        <a href="/column-index.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">칼럼 보기</a>
-      </div>
-    </div>
+    <div class="neuro-wrap" id="neuro-wrap"></div>
+  </div>
+</div>
+
+<button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
+<!-- 공유 버튼 -->
+<div style="text-align:center;margin-top:14px;margin-bottom:4px;">
+  <button onclick="copyLink()" id="copy-btn"
+    style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
+    🔗 친구에게 공유하기
+  </button>
+  <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
+  <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
+</div>
+
+<!-- PDF 리딩 배너 -->
+<div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
+  <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ AI 리딩이 마음에 드셨나요?</p>
+  <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
+  <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;line-height:1.7;">카드 한 장 한 장을 루미타로가 직접 해석해드려요.<br>AI가 담지 못한 깊은 이야기를 전해드립니다.</p>
+  <a href="https://naver.me/GvWXOYp3" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:12px;padding:13px 28px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(124,58,237,.4);">📖 PDF 리딩 신청하기</a>
+  <p style="font-size:10px;color:#6d4c7e;margin-top:12px;">* 네이버 폼으로 연결됩니다</p>
+</div>
+
+<div class="disclaimer">
+  <p>본 리딩은 심리적 참고 용도이며, 최종 결정의 책임은 본인에게 있습니다.</p>
+  <small>✦ LUMI TAROT ✦</small>
+  <div style="margin-top:10px;display:flex;justify-content:center;gap:16px;">
+    <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
+    <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
+    <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
+    <a href="/column-index.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">칼럼 보기</a>
+  </div>
+</div>
+```
+
   </div>
 </div>
 
@@ -525,8 +533,8 @@ function resetAll(){
 <script>
 function copyLink(){
   const url='https://lumitarot.net';
-  const cards=state.cards&&state.cards.length?state.cards.map(c=>c.name).join(' · '):'';
-  const text='🔮 루미타로 타로 리딩\n'+cards+'\n\n너도 무료로 타로 봐봐!\n'+url;
+  const cards=state.cards&&state.cards.length?state.cards.map(c=>CARD_DISPLAY[c]||c).join(' · '):'';
+  const text='🔮 루미타로 타로 리딩\n'+cards+'\n\n나도 무료로 타로 봐봐!\n'+url;
   if(navigator.share){
     navigator.share({title:'🔮 루미타로 타로 리딩',text:text,url:url}).catch(()=>{});
   } else if(navigator.clipboard){
@@ -548,5 +556,6 @@ function copyLink(){
   }
 }
 </script>
+
 </body>
 </html>

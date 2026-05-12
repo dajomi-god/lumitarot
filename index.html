@@ -536,27 +536,39 @@ function resetAll(){
 
 <script>
 function copyLink(){
-  const url='https://lumitarot.net';
-  const cards=state.cards&&state.cards.length?state.cards.map(c=>CARD_DISPLAY[c]||c).join(' · '):'';
-  const text='🔮 루미타로 타로 리딩\n'+cards+'\n\n너도 무료로 타로 봐봐!'+url;
+  const url = 'https://lumitarot.net';
+  const cards = state.cards && state.cards.length ? state.cards.map(c => CARD_DISPLAY[c] || c).join(' · ') : '';
+  
+  // 1. text에서 url 부분을 완전히 삭제합니다.
+  const text = '🔮 루미타로 타로 리딩\n' + cards + '\n\n너도 무료로 타로 봐봐!';
+
   if(navigator.share){
-    navigator.share({title:'🔮 루미타로 타로 리딩',text:text,url:url}).catch(()=>{});
+    // 2. navigator.share는 text와 url을 별도 인자로 받으므로 여기서 url을 전달합니다.
+    navigator.share({
+      title: '🔮 루미타로 타로 리딩',
+      text: text,
+      url: url
+    }).catch(()=>{});
   } else if(navigator.clipboard){
-    navigator.clipboard.writeText(url).then(()=>{
-      const msg=document.getElementById('copy-msg');
-      msg.style.display='block';
-      setTimeout(()=>{msg.style.display='none';},3000);
+    // 클립보드 복사 시에는 텍스트와 URL을 합쳐서 복사해주는 것이 사용자 입장에서 편합니다.
+    const fullText = text + '\n' + url;
+    navigator.clipboard.writeText(fullText).then(()=>{
+      const msg = document.getElementById('copy-msg');
+      msg.style.display = 'block';
+      setTimeout(()=>{msg.style.display = 'none';}, 3000);
     });
   } else {
-    const el=document.createElement('textarea');
-    el.value=url;
+    // 하위 호환성용 textarea 복사 로직
+    const fullText = text + '\n' + url;
+    const el = document.createElement('textarea');
+    el.value = fullText;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    const msg=document.getElementById('copy-msg');
-    msg.style.display='block';
-    setTimeout(()=>{msg.style.display='none';},3000);
+    const msg = document.getElementById('copy-msg');
+    msg.style.display = 'block';
+    setTimeout(()=>{msg.style.display = 'none';}, 3000);
   }
 }
 </script>

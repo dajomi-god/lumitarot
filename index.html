@@ -540,7 +540,7 @@ function copyLink(){
   const cards = state.cards && state.cards.length ? state.cards.map(c => CARD_DISPLAY[c] || c).join(' · ') : '';
   
   // 1. text에서 url 부분을 완전히 삭제합니다.
-  const text = '🔮 루미타로 타로 리딩\n' + cards + '\n\n너도 무료로 타로 봐봐!';
+  const text = '🔮 이번에 뽑은 카드\n' + cards + '\n\n해석은 링크에서 확인해 보세요!';
 
   if(navigator.share){
     // 2. navigator.share는 text와 url을 별도 인자로 받으므로 여기서 url을 전달합니다.

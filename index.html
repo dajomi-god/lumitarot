@@ -143,7 +143,7 @@
       </div>
       </div>
       <label class="field-label">✦ 현재 상황을 자세히 알려주세요(필수)</label>
-      <textarea id="situation" rows="4" placeholder="3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요."></textarea>
+      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요. / 최근 들어 대화가 줄어들고 소원해진 느낌이에요. "></textarea>
       <button class="btn-main" onclick="startReading()">카드 뽑기 🃏</button>
     </div>
     <p class="hint">✦ 타로는 참고용입니다 ✦</p>
@@ -505,34 +505,31 @@ function renderResult(){
 }
 
 function shareKakao(){
-  if(!window.Kakao||!Kakao.isInitialized()){
-    Kakao.init('f9fde500a8bbccb1e36312e75cb037ad');
+  try{
+    if(!Kakao.isInitialized()) Kakao.init('f9fde500a8bbccb1e36312e75cb037ad');
+    const cards=state.cards.map(c=>c.name).join(' · ');
+    const summary=state.result&&state.result.summary?state.result.summary:'지금 내 상황을 타로로 확인해봤어요!';
+    Kakao.Share.sendDefault({
+      objectType:'feed',
+      content:{
+        title:'🔮 루미타로 타로 리딩 결과',
+        description:cards+'
+
+"'+summary+'"
+
+나도 무료로 타로 봐봐!',
+        imageUrl:'https://lumitarot.net/og-image.png',
+        link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'},
+      },
+      buttons:[{
+        title:'나도 타로 보기 🔮',
+        link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'},
+      }],
+    });
+  }catch(e){
+    alert('카카오 공유를 불러오는 중 오류가 났어요. 잠시 후 다시 시도해주세요.');
+    console.error(e);
   }
-  const cards=state.cards.map(c=>c.name).join(' · ');
-  const summary=state.result&&state.result.summary?state.result.summary:'지금 내 상황을 타로로 확인해봤어요!';
-  Kakao.Share.sendDefault({
-    objectType:'feed',
-    content:{
-      title:`🔮 루미타로 타로 리딩 결과`,
-      description:`${cards}
-
-"${summary}"
-
-나도 무료로 타로 봐봐!`,
-      imageUrl:'https://lumitarot.net/og-image.png',
-      link:{
-        mobileWebUrl:'https://lumitarot.net',
-        webUrl:'https://lumitarot.net',
-      },
-    },
-    buttons:[{
-      title:'나도 타로 보기 🔮',
-      link:{
-        mobileWebUrl:'https://lumitarot.net',
-        webUrl:'https://lumitarot.net',
-      },
-    }],
-  });
 }
 
 function unlock(){

@@ -107,7 +107,6 @@
   .hidden { display:none; }
   .mb18 { margin-bottom:18px; }
 </style>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
 </head>
 <body>
 <div id="stars"></div>
@@ -143,7 +142,7 @@
       </div>
       </div>
       <label class="field-label">✦ 현재 상황을 자세히 알려주세요(필수)</label>
-      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요. (또는) 최근 대화가 줄고 관계가 소원해요 등..."></textarea>
+      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요 / 1년 정도 만났는데 최근 들어 대화가 줄어들고 소원해진 느낌이에요."></textarea>
       <button class="btn-main" onclick="startReading()">카드 뽑기 🃏</button>
     </div>
     <p class="hint">✦ 타로는 참고용입니다 ✦</p>
@@ -257,7 +256,7 @@
     <!-- 카카오톡 공유 버튼 -->
     <div style="text-align:center;margin-top:14px;margin-bottom:4px;">
       <button onclick="shareKakao()"
-        style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);letter-spacing:.3px;">
+        style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
         <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" style="width:20px;height:20px;">
         카카오톡으로 공유하기
       </button>
@@ -504,34 +503,6 @@ function renderResult(){
   state.unlocked=false;show('paywall-area');hide('unlocked-area');
 }
 
-function shareKakao(){
-  try{
-    if(!Kakao.isInitialized()) Kakao.init('f9fde500a8bbccb1e36312e75cb037ad');
-    const cards=state.cards.map(c=>c.name).join(' · ');
-    const summary=state.result&&state.result.summary?state.result.summary:'지금 내 상황을 타로로 확인해봤어요!';
-    Kakao.Share.sendDefault({
-      objectType:'feed',
-      content:{
-        title:'🔮 루미타로 타로 리딩 결과',
-        description:cards+'
-
-"'+summary+'"
-
-나도 무료로 타로 봐봐!',
-        imageUrl:'https://lumitarot.net/og-image.png',
-        link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'},
-      },
-      buttons:[{
-        title:'나도 타로 보기 🔮',
-        link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'},
-      }],
-    });
-  }catch(e){
-    alert('카카오 공유를 불러오는 중 오류가 났어요. 잠시 후 다시 시도해주세요.');
-    console.error(e);
-  }
-}
-
 function unlock(){
   hide('paywall-area');show('unlocked-area');state.unlocked=true;
 }
@@ -551,5 +522,33 @@ function resetAll(){
 }
 </script>
 
+<script>
+function shareKakao(){
+  try{
+    if(!window.Kakao) return alert('카카오 SDK 로딩 중이에요. 잠시 후 다시 눌러주세요.');
+    if(!Kakao.isInitialized()) Kakao.init('f9fde500a8bbccb1e36312e75cb037ad');
+    const cards=state.cards.map(c=>c.name).join(' · ');
+    const summary=state.result&&state.result.summary?state.result.summary:'지금 내 상황을 타로로 확인해봤어요!';
+    Kakao.Share.sendDefault({
+      objectType:'feed',
+      content:{
+        title:'🔮 루미타로 타로 리딩 결과',
+        description:cards+'
+
+"'+summary+'"
+
+나도 무료로 타로 봐봐!',
+        imageUrl:'https://lumitarot.net/og-image.png',
+        link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'},
+      },
+      buttons:[{title:'나도 타로 보기 🔮',link:{mobileWebUrl:'https://lumitarot.net',webUrl:'https://lumitarot.net'}}],
+    });
+  }catch(e){
+    alert('공유 중 오류가 났어요. 잠시 후 다시 시도해주세요.');
+    console.error(e);
+  }
+}
+</script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
 </body>
 </html>

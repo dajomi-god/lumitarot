@@ -166,7 +166,18 @@ module.exports = async function handler(req, res) {
     if (data.error) throw new Error(data.error.message);
     const text = data.choices?.[0]?.message?.content || '';
 
-    res.status(200).json({ text, tip });
+    // KV에 결과 저장
+    const id = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    await fetch(`${process.env.KV_REST_API_URL}/set/${id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ value: JSON.stringify({ text, tip, cards: cardCtx }), ex: 3600 }),
+    });
+
+    res.status(200).json({ id });
 
   } catch (err) {
     res.status(500).json({ error: err.message });

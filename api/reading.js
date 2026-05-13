@@ -1,555 +1,174 @@
-<!DOCTYPE html>
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).end();
 
-<html lang="ko">
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9151905973095283"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>루미타로 — 무료 타로 리딩</title>
-<meta name="description" content="그 사람 속마음이 궁금하다면. 뇌과학 기반 무료 타로 리딩 — 루미타로">
-<meta property="og:title" content="무료 타로 리딩 🔮 — 루미타로">
-<meta property="og:description" content="그 사람 속마음이 궁금하다면. 카드가 말해줄게요.">
-<meta property="og:image" content="https://lumitarot.net/og-image.png">
-<meta property="og:url" content="https://lumitarot.net">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lumitarot.net/og-image.png">
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { min-height:100vh; background:linear-gradient(160deg,#1a0020 0%,#2d0035 40%,#120018 100%); font-family:Georgia,serif; color:#f0e6ff; }
-  #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
-  .star { position:absolute; border-radius:50%; background:white; animation:tw 3s ease-in-out infinite; }
-  @keyframes tw { 0%,100%{opacity:.15} 50%{opacity:.9} }
-  @keyframes fi { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes cr { from{transform:rotateY(90deg) scale(.85);opacity:0} to{transform:rotateY(0) scale(1);opacity:1} }
-  @keyframes sp { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-  @keyframes sh { 0%{background-position:-200% center} 100%{background-position:200% center} }
-  @keyframes bi { from{filter:blur(8px);opacity:0} to{filter:blur(0);opacity:1} }
+  try {
+    const { qType, age, gender, partner, contactStatus, situation, cardCtx } = req.body;
 
-#app { position:relative; z-index:1; max-width:500px; margin:0 auto; padding:36px 18px; animation:fi .7s ease-out; }
-.header { text-align:center; margin-bottom:28px; }
-.header-icon { font-size:44px; margin-bottom:10px; filter:drop-shadow(0 0 14px rgba(236,72,153,.7)); display:block; }
-.header h1 { font-size:28px; font-weight:700; letter-spacing:4px; background:linear-gradient(135deg,#f472b6,#e879f9,#c084fc); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:sh 3s linear infinite; margin-bottom:6px; }
-.header p { color:#d8b4fe; font-size:12px; letter-spacing:1.5px; }
-.card-box { background:rgba(236,72,153,.07); border:1px solid rgba(236,72,153,.25); border-radius:20px; padding:24px; backdrop-filter:blur(12px); margin-bottom:12px; }
-label.field-label { font-size:11px; color:#f9a8d4; letter-spacing:1px; display:block; margin-bottom:10px; }
-.type-btns { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
-.gender-btns, .contact-btns { display:flex; gap:6px; margin-bottom:18px; }
-.type-btn { background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:11px; padding:11px 14px; color:#c4b5fd; cursor:pointer; text-align:left; transition:all .2s; font-size:14px; font-family:Georgia,serif; }
-.type-btn.active, .type-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.18); color:#f9a8d4; }
-.type-btn strong { display:block; font-weight:600; }
-.type-btn small { display:block; font-size:11px; color:#a78bfa; margin-top:2px; }
-.gender-btn, .contact-btn { flex:1; background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:10px; padding:11px 6px; color:#c4b5fd; cursor:pointer; font-size:12px; transition:all .2s; font-family:Georgia,serif; text-align:center; }
-.gender-btn.active, .gender-btn:hover, .contact-btn.active, .contact-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.2); color:#f9a8d4; }
-input, textarea { width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(236,72,153,.35); border-radius:10px; padding:11px 14px; color:#f0e6ff; font-size:14px; font-family:Georgia,serif; transition:all .2s; margin-bottom:14px; }
-input:focus, textarea:focus { outline:none; border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,.18); }
-textarea { resize:none; line-height:1.7; margin-bottom:22px; }
-input[type=number]::-webkit-inner-spin-button { opacity:.3; }
-.row2 { display:flex; gap:10px; margin-bottom:14px; }
-.row2 input { margin-bottom:0; width:38%; }
-.btn-main { width:100%; border:none; border-radius:13px; padding:15px; background:linear-gradient(135deg,#be185d,#7c3aed); color:white; font-size:16px; font-weight:700; letter-spacing:1px; cursor:pointer; transition:all .3s; box-shadow:0 4px 20px rgba(190,24,93,.4); font-family:Georgia,serif; }
-.btn-main:hover { filter:brightness(1.1); transform:translateY(-2px); }
-.hint { text-align:center; font-size:11px; color:#6d4c7e; }
-.cards-wrap { text-align:center; }
-.cards-title { color:#f472b6; font-size:16px; font-weight:600; margin-bottom:22px; }
-.cards-count { color:#a78bfa; font-size:12px; margin-bottom:22px; }
-.cards-row { display:flex; justify-content:center; gap:14px; }
-.card-slot { display:flex; flex-direction:column; align-items:center; gap:8px; }
-.card-img-wrap { width:100px; height:140px; border-radius:10px; overflow:hidden; border:1px solid rgba(236,72,153,.35); box-shadow:0 4px 14px rgba(236,72,153,.15); cursor:pointer; transition:all .3s; }
-.card-img-wrap.revealed { border:2px solid #f472b6; box-shadow:0 0 22px rgba(244,114,182,.5); cursor:default; animation:cr .5s ease-out; }
-.card-img-wrap:not(.revealed):hover { transform:translateY(-11px) scale(1.05); box-shadow:0 16px 30px rgba(236,72,153,.5); }
-.card-label { font-size:10px; color:#6d4c7e; }
-.card-label.on { color:#f9a8d4; }
-.card-name { font-size:9px; color:#c4b5fd; margin-top:2px; }
-.kw-wrap { display:flex; flex-wrap:wrap; gap:2px; justify-content:center; margin-top:3px; }
-.kw { font-size:8px; color:#f9a8d4; background:rgba(244,114,182,.12); border:1px solid rgba(244,114,182,.22); border-radius:10px; padding:1px 5px; }
-.reading-msg { color:#d8b4fe; font-size:13px; margin-top:22px; }
-.loading-wrap { text-align:center; padding:60px 20px; }
-.loading-icon { font-size:46px; animation:sp 2s linear infinite; display:inline-block; margin-bottom:20px; }
-.result-cards { display:flex; justify-content:center; gap:10px; }
-.result-card { flex:1; max-width:140px; display:flex; flex-direction:column; align-items:center; gap:6px; }
-.result-card-img { width:100%; aspect-ratio:5/7; border-radius:8px; overflow:hidden; border:2px solid rgba(244,114,182,.45); box-shadow:0 4px 14px rgba(244,114,182,.3); }
-.result-card-pos { font-size:10px; color:#f472b6; font-weight:600; }
-.result-card-name { font-size:9px; color:#c4b5fd; }
-.section-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
-.section-icon { width:28px; height:28px; border-radius:50%; background:rgba(244,114,182,.15); border:1px solid #f472b6; display:flex; align-items:center; justify-content:center; font-size:11px; color:#f472b6; flex-shrink:0; }
-.section-title { color:#f472b6; font-size:13px; font-weight:600; letter-spacing:1px; }
-.section-text { font-size:14px; line-height:2.0; color:#f3e8ff; white-space:pre-line; }
-.divider { border-top:1px solid rgba(236,72,153,.18); margin:18px 0; }
+    // ===== LUMI 블랙박스 (서버에서만 보임) =====
+    const LUMI = `[LUMI Tarot 독점 리딩 철학]
 
-/* 성향 분석 박스 */
-.personality-box { background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08)); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:14px 16px; margin-top:14px; }
-.personality-label { font-size:11px; color:rgba(216,180,254,.7); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
-.personality-text { font-size:14px; color:#e9d5ff; font-weight:600; line-height:1.6; }
+핵심 원칙:
+- 단순 해석 금지. 반드시 내담자 질문에 맞춘 서사를 제공
+- 카드를 사람에 대입하여 의인화: 이분은 황제 같은 성격이라 딱딱해요 식으로
+- 단호하되 친절하게. 맥락에 따라 유연하게 해석
+- 타로는 정답없음. 키워드를 상황에 맞게 조합하는 스토리텔링이 본질
+- 부정카드(타워/악마 등)도 재건/강한인연 관점으로 입체적 해석. 단 억지 긍정 금지
 
-/* 카드 조합 박스 */
-.combo-box { background:rgba(244,114,182,.06); border:1px solid rgba(244,114,182,.2); border-radius:12px; padding:14px 16px; margin-top:18px; }
-.combo-label { font-size:11px; color:rgba(249,168,212,.6); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
-.combo-text { font-size:13px; color:#fce7f3; line-height:1.85; white-space:pre-line; }
+메이저 아르카나 핵심:
+- 바보: 자유/새시작. 책임감 필요한 상황에선 주의
+- 마법사: 자신감/창조성/양면성. 겉과 속 다를 수 있음
+- 여사제: 직관/기다림. 혼자 정리중. 압박하면 더 닫힘 → 회피형 신호
+- 여황제: 풍요/감성/사랑. 베푸는 감정 있음
+- 황제: 자수성가/책임감. 체면때문에 먼저 연락 어렵지만 가볍게 접근하면 반응
+- 교황: 중재/신뢰. 격식 있는 방식으로 접근
+- 연인: 소통/유대. 편안하게 접근. 거울뉴런이 활발한 상태
+- 전차: 준비된 추진력. 기다리면 먼저 나옴
+- 힘: 내면통제. 인내와 꾸준함. 세로토닌 안정형
+- 은둔자: 소통단절. 압박하면 더 들어감. 여백이 전략 → 회피형 애착 대표 카드
+- 운명의수레바퀴: 환경변화/터닝포인트. 순환 구조로 설명
+- 정의: 기브앤테이크. 현실적 가치 보여주기
+- 매달린사람: 의도된정체. 장기전. 지금은 결론 낼 시기 아님
+- 죽음: 무엇이 죽는가에 따라 긍정/부정. 챕터의 끝
+- 절제: 중용/인내. 과정을 견디는 힘. 옥시토신형 안정 관계
+- 악마: 욕망/중독. 재결합 가능성 높음. 간헐적 강화로 연결된 강한 인연
+- 탑: 돌발적붕괴. 모아니면도. 관계 구조 자체의 문제
+- 별: 희망/치유. 비현실성 주의. 실행력이 답
+- 달: 불확실/직관. 불확실할땐 멈추는것이 용기 → 불안 애착 신호
+- 태양: 긍정/드러남. 숨겨야할것 드러날 위험 경고
+- 심판: 소식/재회. 오는 소식이 무조건 긍정 아닐 수 있음
+- 세계: 완성/자립. 억지로 끌어당기면 더 멀어짐 → 세로토닌 자립형
 
-.paywall-wrap { position:relative; }
-.paywall-blur { filter:blur(5px); user-select:none; pointer-events:none; }
-.paywall-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(18,0,24,.62); border-radius:12px; backdrop-filter:blur(2px); }
-.paywall-overlay .lock { font-size:28px; margin-bottom:10px; }
-.paywall-overlay h3 { color:#f9a8d4; font-size:14px; font-weight:600; margin-bottom:4px; }
-.paywall-overlay p { color:#a78bfa; font-size:12px; margin-bottom:16px; text-align:center; line-height:1.7; }
-.btn-pay { background:linear-gradient(135deg,#be185d,#7c3aed); border:none; border-radius:12px; padding:12px 28px; color:white; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 16px rgba(190,24,93,.4); letter-spacing:.5px; font-family:Georgia,serif; margin-bottom:8px; }
-.paywall-note { color:#6d4c7e; font-size:10px; }
+마이너 원소:
+- 완드(불): 행동먼저. 추진력. 감정보다 행동이 앞서는 타입
+- 컵(물): 감정공감. 관계지향. 감정이 풍부하고 공감 능력 높음
+- 소드(공기): 이성결단. 생각이 많고 전전두엽 과부하 상태일 때 자주 등장
+- 펜타클(흙): 현실축적. 돈뿐 아니라 시간/스킨십 등 실체있는 것으로도 읽는다
 
-.neuro-wrap { margin-top:18px; }
-.neuro-header { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
-.neuro-icon { width:28px; height:28px; border-radius:50%; background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); display:flex; align-items:center; justify-content:center; font-size:13px; }
-.neuro-title { color:#86efac; font-size:12px; font-weight:700; letter-spacing:1.5px; }
-.neuro-term-box { background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(6,182,212,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-.neuro-term { font-size:13px; color:#34d399; font-weight:700; margin-bottom:3px; }
-.neuro-term-en { font-size:10px; color:rgba(52,211,153,.6); font-style:italic; }
-.neuro-mech-box { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; border-left:3px solid rgba(16,185,129,.4); }
-.neuro-mech-label { font-size:11px; color:rgba(209,250,229,.6); margin-bottom:4px; font-weight:600; }
-.neuro-mech-text { font-size:13px; line-height:1.8; color:#d1fae5; }
+숫자 해석:
+- 1(에이스): 새로운 시작, 확실한 기반
+- 2: 균형/유보. 결정을 못 내리고 있는 상태
+- 3: 협력/성장. 아직 완성 전이나 방향은 있음
+- 4: 안정/정지. 움켜쥐고 있거나 강제 휴식
+- 5: 갈등/결핍. 고통스럽지만 통과 중인 구간
+- 6: 교환/이동. 더 나은 곳으로 이동 중
+- 7: 전략/고민. 눈치와 요령이 필요한 시기
+- 8: 몰입/끈기. 한 사람에게만 집중하는 에너지 또는 생각의 감옥
+- 9: 성취/고독. 물질적 독립 또는 불면/불안
+- 10: 완성/순환. 끝이자 새로운 시작
 
-.summary-box { background:rgba(244,114,182,.1); border-radius:10px; padding:12px 16px; margin-top:18px; border-left:3px solid #f472b6; }
-.summary-text { font-size:14px; color:#f9a8d4; font-weight:600; }
-.disclaimer { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:12px 16px; margin-top:14px; text-align:center; }
-.disclaimer p { font-size:10px; color:rgba(167,139,250,.5); line-height:1.7; }
-.disclaimer small { font-size:10px; color:rgba(167,139,250,.35); margin-top:4px; display:block; }
-.hidden { display:none; }
-.mb18 { margin-bottom:18px; }
-</style>
+코트 카드:
+- 페이지: 미성숙/배움. 각 원소의 초보자 에너지. 감정/행동이 아직 정제되지 않음
+- 기사: 추진/실행. 20대 청년 에너지. 완드/소드는 빠르고 펜타클은 느림
+- 여왕: 숙련/수용. 원소를 능숙하게 다룸. 감정적 영향력이 강함
+- 킹: 통달/권위. 해당 원소의 정점. 쉽게 흔들리지 않음
 
-</head>
-<body>
-<div id="stars"></div>
-<div id="app">
-  <div class="header">
-    <span class="header-icon">🔮</span>
-    <h1>루미타로</h1>
-    <p>✦ 카드가 마음을 읽어드려요 ✦</p>
-  </div>
+애착 유형 판별 기준:
+- 불안형: 달/소드9/소드8/컵5 → 답장 지연에 과민, 최악 시나리오 반복, 확인 강박
+- 회피형: 은둔자/소드4/여사제/세계 → 친밀해질수록 거리두기, 감정 표현 어색, 잠수
+- 안정형: 절제/황제/교황/별 → 갈등도 대화로 해결, 혼자서도 괜찮고 함께여도 괜찮음
+- 집착/중독형: 악마/컵7/운명의수레바퀴 → 끊고 싶어도 못 끊음, 강렬한 도파민 연결
 
-  <div id="screen-intro">
-    <div class="card-box">
-      <label class="field-label">✦ 무엇이 궁금하세요?</label>
-      <div class="type-btns" id="type-btns"></div>
-      <label class="field-label">✦ 내 정보</label>
-      <div class="row2">
-        <input type="number" id="age" placeholder="나이 (예: 28)">
-        <div class="gender-btns">
-          <button class="gender-btn" onclick="selectGender('여성')">여성</button>
-          <button class="gender-btn" onclick="selectGender('남성')">남성</button>
-        </div>
-      </div>
-      <div id="partner-wrap">
-      <label class="field-label">✦ 상대방 이름 (또는 닉네임)</label>
-      <input type="text" id="partner" placeholder="예: 그사람...">
-      </div>
-      <div id="contact-wrap">
-      <label class="field-label">✦ 현재 연락 상태</label>
-      <div class="contact-btns">
-        <button class="contact-btn" onclick="selectContact('연락 중')">연락 중</button>
-        <button class="contact-btn active" onclick="selectContact('연락 끊김')">연락 끊김</button>
-        <button class="contact-btn" onclick="selectContact('차단/단절')">차단/단절</button>
-      </div>
-      </div>
-      <label class="field-label">✦ 현재 상황을 자세히 알려주세요(필수)</label>
-      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요 / 1년 정도 만났는데 최근 들어 대화가 줄어들고 소원해진 느낌이에요."></textarea>
-      <button class="btn-main" onclick="startReading()">카드 뽑기 🃏</button>
-    </div>
-    <p class="hint">✦ 타로는 참고용입니다 ✦</p>
+연애 단계별 카드 패턴:
+- 썸/시작: 바보/페이지컵/연인/전차 → 편견없는 시작, 감정 호기심, 추진
+- 안정/유지: 황제/교황/절제/펜타클8 → 책임감, 신뢰, 조율, 한 사람 집중
+- 갈등/위기: 탑/달/소드3/악마 → 충격, 불안, 상처, 집착
+- 재회/결론: 심판/운명의수레바퀴/별/세계 → 소식, 순환, 희망, 각자의 완성
 
-<a href="/column-index.html" style="display:block;margin:20px 0 8px;background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:18px 20px;text-decoration:none;text-align:left;">
-  <p style="font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:6px;font-weight:600;">🧠 뇌과학 × 연애 칼럼</p>
-  <p style="font-size:15px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">왜 이별 후 자꾸 생각날까? 회피형은 왜 밀어낼까?</p>
-  <p style="font-size:13px;color:#9d7cb8;margin-bottom:10px;">타로와 뇌과학으로 읽는 연애 심리 15편</p>
-  <span style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:8px;padding:6px 16px;color:white;font-size:12px;font-weight:700;">칼럼 전체 보기 →</span>
-</a>
+재회 핵심:
+- 킹완즈 4주차: 먼저 연락 가능
+- 은둔자: 혼자 정리중. 압박 금지
+- 악마: 재결합 가능성 높음. 강한 인연
+- 심판: 재회 소식 신호
+- 운명의수레바퀴: 돌고 도는 인연
 
-<div style="text-align:center;margin-top:16px;display:flex;justify-content:center;gap:16px;">
-  <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
-  <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
-  <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
-</div>
+심리학적 방어기제 (상황에 맞게 자연스럽게 활용):
+- 부정(Denial): 이별/거절 현실을 인정하지 않으려는 상태. 탑/달 카드와 연결
+- 투사(Projection): 자신의 감정을 상대방 탓으로 돌림. 소드 계열 많을 때
+- 합리화(Rationalization): "어차피 안 맞았어"로 자신의 선택을 정당화. 세계/죽음 카드와 연결
+- 억압(Repression): 감정을 억누르고 있는 상태. 은둔자/매달린사람 카드
+- 내담자가 방어기제 사용 중일 때: 편도체 과활성화로 전두엽의 객관적 판단이 차단된 상태임을 부드럽게 설명
 
-  </div>
+신경가소성 (리딩 마무리에 활용):
+- 뇌는 고정되어 있지 않다. 새로운 행동과 습관이 반복되면 신경망이 재설계됨
+- 내담자의 작은 행동 변화(연락 자제, 자기관리, 새로운 경험)가 뇌 회로를 바꾸고 결국 관계의 흐름도 바꿈
+- 지금 이 선택이 당신의 뇌를 바꾸고 있어요 식의 마무리로 희망적이면서 과학적 근거 제시`;
 
-  <div id="screen-cards" class="hidden">
-    <div class="card-box cards-wrap">
-      <p style="color:#d8b4fe;font-size:14px;margin-bottom:6px">마음을 고요히 하고</p>
-      <p class="cards-title">카드를 하나씩 열어보세요 ✨</p>
-      <p class="cards-count" id="reveal-count">0/3 오픈됨</p>
-      <div class="cards-row" id="cards-row"></div>
-      <p class="reading-msg hidden" id="reading-msg">카드를 읽고 있어요... ✨</p>
-    </div>
-  </div>
+    // ===== NEURO 블랙박스 (서버에서만 보임) =====
+    const NEURO = {
+      ex: [
+        {title:"🧠 뇌과학 전략",term:"자이가르닉 효과",termEn:"Zeigarnik Effect · Bluma Zeigarnik, 1927",mechanism:"인간의 뇌는 끝나지 않은 일을 계속 떠올리려 해요. 제대로 마무리되지 않은 관계는 상대 머릿속에서 계속 당신을 재생시키고 있어요. 지금 이 침묵이 오히려 당신의 존재감을 키우고 있어요."},
+        {title:"🧠 뇌과학 전략",term:"간헐적 강화",termEn:"Intermittent Reinforcement · B.F. Skinner",mechanism:"지금 먼저 연락하면 상대는 당신을 언제든 연락할 수 있는 사람으로 생각해요. 예측하기 어려운 사람일수록 상대가 더 강하게 끌리게 돼요. SNS로 잘 지내는 모습을 보여주되 직접 연락은 자제하세요."},
+        {title:"🧠 뇌과학 전략",term:"심리적 반발 이론",termEn:"Reactance Theory · Jack Brehm, 1966",mechanism:"지금 진심을 쏟아낼수록 상대의 뇌는 선택의 자유가 침해된다고 느끼고 반사적으로 밀어냅니다. 상대가 스스로 다가오고 싶다는 욕구를 갖게 만드는 것이 핵심이에요."},
+      ],
+      couple: [
+        {title:"💡 관계 인사이트",term:"옥시토신 동기화",termEn:"Oxytocin Synchrony · 정서적 유대의 신경과학",mechanism:"처음의 설렘이 줄어드는 건 감정이 식은 게 아니에요. 뇌가 더 깊고 안정적인 사랑으로 넘어가고 있는 거예요. 솔직한 모습을 먼저 보여주고 함께 새로운 경험을 쌓는 것이 서로 더 가까워지는 가장 빠른 방법이에요."},
+        {title:"💡 관계 인사이트",term:"미러 뉴런 활성화",termEn:"Mirror Neuron System · 공감과 정서적 공명",mechanism:"상대가 웃으면 나도 모르게 기분이 좋아지고, 상대가 차갑게 굴면 나도 위축되는 건 뇌의 거울 반응 때문이에요. 지금 이 관계에서 내가 먼저 따뜻하게 다가가면 상대도 자연스럽게 마음을 열 가능성이 높아요. 함께 있을 때 에너지가 올라가는지, 지치는지 느껴보세요."},
+        {title:"💡 관계 인사이트",term:"오귀속 효과",termEn:"Misattribution of Arousal · Dutton & Aron, 1974",mechanism:"함께 새로운 활동을 할 때 분비되는 도파민이 파트너에 대한 설렘으로 전이됩니다. 뇌는 흥분의 원인을 정확히 구분하지 못해요. 루틴을 깨는 데이트 하나가 두 사람 사이의 온도를 다시 올릴 수 있어요."},
+      ],
+      some: [
+        {title:"🧠 뇌과학 Insight: 보상 시스템",term:"도파민 회로와 예측 불가능성",termEn:"Dopamine & Reward Prediction · 보상 예측 오류 활용",mechanism:"지금 당신의 뇌는 상대의 작은 반응 하나에 너무 크게 반응하고 있어요. 이 카드가 말하는 건, 지금은 한 발 물러서서 여유를 찾을 때라는 거예요. 여유 있고 예측하기 어려운 모습이 오히려 상대가 당신을 더 매력적으로 느끼게 만들어요."},
+        {title:"🧠 뇌과학 Insight: 보상 시스템",term:"간헐적 강화와 기대감",termEn:"Intermittent Reinforcement · 썸 단계의 도파민 관리",mechanism:"상대가 들쑥날쑥하게 반응할수록 당신은 더 강하게 기대하게 돼요. 지금은 먼저 다가가기보다 자연스럽게 존재감을 드러내는 타이밍이에요. 상대가 당신을 예측하기 어려운 사람으로 느낄수록 더 끌리게 되거든요."},
+        {title:"🧠 뇌과학 Insight: 보상 시스템",term:"심리적 반발과 접근 거리",termEn:"Reactance Theory · 썸 단계의 자율성 보존",mechanism:"지금 너무 적극적으로 다가가면 상대의 뇌는 선택의 자유가 침해된다고 느끼고 본능적으로 거리를 둡니다. 여백을 주면서 상대가 스스로 당신에게 끌리게 만드는 것이 핵심이에요."},
+      ],
+      solo: [
+        {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"고착화된 뇌 회로 깨기",termEn:"Cognitive Flexibility · 전전두엽의 사고 유연성",mechanism:"지금 당신의 뇌는 기존의 익숙한 연애 패턴만 반복하는 고착화된 회로를 돌리고 있을 수 있어요. 이 카드가 보여주는 상징을 통해 무의식 속 패턴을 객관적으로 바라보세요. 새로운 인연은 뇌가 새로운 연결을 허용할 때 자연스럽게 들어옵니다."},
+        {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"확증 편향 방지",termEn:"Confirmation Bias · 안와전두엽의 선택 혼란 해소",mechanism:"뇌는 보고 싶은 것만 보려는 본능이 있어요. 지금 이 카드는 당신이 연애에서 반복해온 패턴을 다른 시각으로 바라보라는 신호일 수 있습니다. 익숙한 유형이 아닌 다른 관점의 인연에 뇌가 열려 있는지 점검해보세요."},
+        {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"세로토닌과 자기 확신",termEn:"Serotonin & Self-worth · 내면 안정감의 신경과학",mechanism:"새로운 인연을 끌어당기는 가장 강력한 신호는 세로토닌이 안정된 상태에서 나오는 자기 확신이에요. 지금은 외부에서 답을 찾기보다 내면을 안정시키는 것이 새로운 연결의 문을 여는 열쇠입니다."},
+      ],
+    };
 
-  <div id="screen-loading" class="hidden">
-    <div class="loading-wrap">
-      <div class="loading-icon">🔮</div>
-      <p style="color:#d8b4fe;font-size:16px">카드가 말하고 있어요...</p>
-      <small style="color:#a78bfa;font-size:13px;margin-top:8px;display:block">깊이 있는 리딩을 준비 중이에요 ✨<br>약 20~30초 소요될 수 있어요</small>
-    </div>
-  </div>
+    // NEURO tip 선택
+    const tips = NEURO[qType] || NEURO.ex;
+    const tipIdx = qType === "couple" ? Math.floor(Math.random() * tips.length) : contactStatus === "연락 중" ? 1 : contactStatus === "차단/단절" ? 2 : 0;
+    const tip = tips[Math.min(tipIdx, tips.length - 1)];
 
-  <div id="screen-result" class="hidden">
-    <div class="card-box">
-      <div class="result-cards" id="result-cards"></div>
-    </div>
+    // 유형별 라벨
+    const typeLabel = {couple:"💑 커플", ex:"💔 재회", some:"💭 썸", solo:"🌸 솔로"}[qType] || "";
 
-<div class="card-box">
-  <!-- 과거 + 성향분석: 항상 공개 -->
-  <div class="section-header">
-    <div class="section-icon">過</div>
-    <span class="section-title">과거</span>
-  </div>
-  <p class="section-text mb18" id="text-past"></p>
+    // 유형별 리딩 지침
+    const typeGuide = qType === "couple"
+      ? "- 현재 사귀는 커플 관계임. 재회나 이별 관점 절대 금지. 사귀는 사이에서의 속마음과 관계 발전에 집중\n- 상대방이 나를 어떻게 생각하는지, 앞으로 관계가 어떻게 발전할지 중심으로 리딩\n- 애착 유형(불안형/회피형/안정형) 판별하여 성향분석에 반영"
+      : qType === "ex"
+      ? "- 헤어진 상대와의 재회 가능성 리딩. 재회 가능성, 상대방의 현재 감정 중심\n- 상대방의 애착 유형과 현재 뇌 상태를 카드로 분석\n- 자이가르닉 효과/간헐적 강화/손실회피 등 뇌과학 관점 적용"
+      : qType === "some"
+      ? "- 썸 타는 사이. 아직 연애 시작 전임. 상대방이 나를 어떻게 보는지, 관계가 발전할지 중심\n- 도파민 보상 시스템과 예측 불가능성 관점으로 접근\n- 상대방 애착 유형 판별하여 접근 전략 제시"
+      : "- 솔로 상태. 특정 상대방 없음. 향후 3개월 새로운 인연이 들어올 가능성 중심\n- 1개월차/2개월차/3개월차로 나눠서 구체적으로\n- 카드 본래 에너지를 그대로 해석할 것. 솔로라고 해서 카드 의미를 왜곡하지 말 것\n- 펜타클=현실/노력/축적, 컵=감정/관계, 완드=행동/추진, 소드=이성/결단. 카드 원래 의미 유지\n- 성향분석은 상대방이 아닌 내담자 자신의 연애 성향을 카드로 읽을 것\n- 상황 설명에 끌려가지 말고 반드시 카드 에너지 기반으로 해석";
 
-  <div class="personality-box" id="personality-box" style="display:none">
-    <p class="personality-label">🔍 상대방 성향 분석</p>
-    <p class="personality-text" id="text-personality"></p>
-  </div>
+    // 프롬프트 조합
+    const prompt = LUMI + "\n\n---\n상담 유형: " + typeLabel +
+      "\n내담자: " + age + "세 " + gender +
+      "\n" + (qType === "solo" ? "상황: 솔로 (새 인연 탐색 중)" : "상대방: " + (partner || "상대방")) +
+      "\n현재 연락 상태: " + (qType === "solo" ? "해당없음" : contactStatus) +
+      "\n상황: " + situation +
+      "\n뽑힌 카드: " + cardCtx +
+      "\n\n[관계 유형별 리딩 지침]\n" + typeGuide +
+      "\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 절대 금지\n- 내담자는 반드시 '당신'으로만 지칭. '여러분', '내담자' 표현 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 상대방 심리를 대화체로 구체적으로\n- 각 섹션 5~7문장으로 충분히 작성\n- 주차별 흐름으로 구체적으로\n- 카드가 부정적이면 솔직하게. 무조건 희망적으로 마무리 금지\n- 애착 유형 판별시 반드시 카드 에너지에 근거할 것. 상황 설명에 끌려가지 말 것\n- 컵/별/태양/절제 같은 긍정 카드가 나왔을 때 억지로 불안/회피 성향 넣지 말 것\n- 카드가 안정적이면 안정형으로, 부정적이면 불안/회피로 판별할 것\n- 뇌과학/심리학 용어는 전체 리딩의 20%만. 나머지 80%는 따뜻한 공감과 카드 상징\n- 방어기제는 상황에 맞을 때만 자연스럽게 1회 언급. 강의식 금지\n- 조합 또는 미래 섹션 마지막에 신경가소성 개념으로 희망적 마무리 1회\n\n정확히 아래 형식으로만 답변:\n\n[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(한 문장. 카드에서 느껴지는 에너지로 돌려말하기. 회피/불안/안정 단어 자연스럽게 포함. 단정 금지. 예시: 이 카드 조합에서 느껴지는 건, 깊이 빠져들수록 두려워서 한 발 물러서는 회피 성향이 일부 보여요. / 카드의 흐름상, 상대의 반응에 예민하게 반응하는 불안 애착 성향이 일부 느껴져요. / 이 카드에서 감지되는 건, 혼자서도 괜찮고 함께여도 편안한 안정적인 에너지예요.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름과 주차별 예측. 마지막 문장은 반드시: 2~3주 후 상황이 어떻게 바뀌었는지 다시 카드를 뽑아보세요. 지금과 어떤 카드가 달라졌는지가 중요한 신호예요.)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리)\n\n[요약]\n(10자 이내의 핵심 한 줄)";
 
-  <div class="divider"></div>
-
-  <!-- 페이월 -->
-  <div id="paywall-area">
-    <div class="paywall-wrap">
-      <div class="paywall-blur">
-        <div class="section-header">
-          <div class="section-icon">現</div>
-          <span class="section-title">현재</span>
-        </div>
-        <p class="section-text mb18" id="text-present-blur"></p>
-        <div class="divider"></div>
-        <div class="section-header">
-          <div class="section-icon">未</div>
-          <span class="section-title">미래</span>
-        </div>
-        <p class="section-text" id="text-future-blur"></p>
-      </div>
-      <div class="paywall-overlay">
-        <div class="lock">🔮</div>
-        <h3>현재 · 미래 리딩</h3>
-        <p>상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
-        <button class="btn-pay" onclick="unlock()">전체 리딩 보기 ✨</button>
-        <span class="paywall-note">카드 조합 해석 · 뇌과학 전략 포함</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 잠금 해제 후 -->
-  <div id="unlocked-area" class="hidden">
-    <div class="section-header">
-      <div class="section-icon">現</div>
-      <span class="section-title">현재</span>
-    </div>
-    <p class="section-text mb18" id="text-present"></p>
-    <div class="divider"></div>
-    <div class="section-header">
-      <div class="section-icon">未</div>
-      <span class="section-title">미래</span>
-    </div>
-    <p class="section-text mb18" id="text-future"></p>
-
-    <div class="combo-box" id="combo-box" style="display:none">
-      <p class="combo-label">🃏 카드 조합이 말하는 것</p>
-      <p class="combo-text" id="text-combo"></p>
-    </div>
-
-    <div class="summary-box hidden" id="summary-box">
-      <p class="summary-text" id="text-summary"></p>
-    </div>
-
-    <div class="neuro-wrap" id="neuro-wrap"></div>
-  </div>
-</div>
-
-<button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
-<!-- 공유 버튼 -->
-<div style="text-align:center;margin-top:14px;margin-bottom:4px;">
-  <button onclick="copyLink()" id="copy-btn"
-    style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
-    🔗 친구에게 공유하기
-  </button>
-  <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
-  <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
-</div>
-
-<!-- PDF 리딩 배너 -->
-<div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
-  <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ AI 리딩이 마음에 드셨나요?</p>
-  <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
-  <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;line-height:1.7;">카드 한 장 한 장을 루미타로가 직접 해석해드려요.<br>AI가 담지 못한 깊은 이야기를 전해드립니다.</p>
-  <a href="https://naver.me/GvWXOYp3" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:12px;padding:13px 28px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(124,58,237,.4);">📖 PDF 리딩 신청하기</a>
-  <p style="font-size:10px;color:#6d4c7e;margin-top:12px;">* 네이버 폼으로 연결됩니다</p>
-</div>
-
-<div class="disclaimer">
-  <p>본 리딩은 심리적 참고 용도이며, 최종 결정의 책임은 본인에게 있습니다.</p>
-  <small>✦ LUMI TAROT ✦</small>
-  <div style="margin-top:10px;display:flex;justify-content:center;gap:16px;">
-    <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
-    <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
-    <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
-    <a href="/column-index.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">칼럼 보기</a>
-  </div>
-</div>
-
-  </div>
-</div>
-
-<script>
-(function(){
-  const s=document.getElementById('stars');
-  for(let i=0;i<35;i++){
-    const d=document.createElement('div');
-    d.className='star';
-    const sz=i%3===0?'2px':'1px';
-    d.style.cssText=`width:${sz};height:${sz};left:${(i*2.9)%100}%;top:${(i*3.1)%100}%;opacity:${.15+(i%5)*.12};animation-delay:${(i*.2)%3}s;animation-duration:${2+(i%4)}s`;
-    s.appendChild(d);
-  }
-})();
-
-const T={major:{bg:"#0e0018",b:"#c084fc",a:"#f9a8d4",s:"✦"},wands:{bg:"#1a0800",b:"#f97316",a:"#fde68a",s:"🔥"},cups:{bg:"#000d1a",b:"#38bdf8",a:"#bae6fd",s:"🌊"},swords:{bg:"#0a0a14",b:"#94a3b8",a:"#e2e8f0",s:"⚔️"},pentacles:{bg:"#001400",b:"#84cc16",a:"#fef08a",s:"⭐"}};
-const getSuit=k=>k.includes("wands")?"wands":k.includes("cups")?"cups":k.includes("swords")?"swords":k.includes("pentacles")?"pentacles":"major";
-const RANK={ace:"A",two:"2",three:"3",four:"4",five:"5",six:"6",seven:"7",eight:"8",nine:"9",ten:"10",page:"P",knight:"N",queen:"Q",king:"K"};
-const getRank=k=>{for(const r of Object.keys(RANK))if(k.startsWith(r))return RANK[r];return null;};
-const MAJOR_NUM={fool:"0",magician:"Ⅰ",high_priestess:"Ⅱ",empress:"Ⅲ",emperor:"Ⅳ",hierophant:"Ⅴ",lovers:"Ⅵ",chariot:"Ⅶ",strength:"Ⅷ",hermit:"Ⅸ",wheel_of_fortune:"Ⅹ",justice:"Ⅺ",hanged_man:"Ⅻ",death:"ⅩⅢ",temperance:"ⅩⅣ",devil:"ⅩⅤ",tower:"ⅩⅥ",star:"ⅩⅦ",moon:"ⅩⅧ",sun:"ⅩⅨ",judgement:"ⅩⅩ",world:"ⅩⅪ"};
-const SYM_POS={1:[[60,76]],2:[[60,50],[60,102]],3:[[60,42],[40,76],[80,76]],4:[[40,48],[80,48],[40,102],[80,102]],5:[[40,42],[80,42],[60,72],[40,100],[80,100]],6:[[40,40],[80,40],[40,72],[80,72],[40,104],[80,104]],7:[[40,36],[80,36],[60,58],[40,76],[80,76],[40,100],[80,100]],8:[[40,34],[80,34],[40,58],[80,58],[40,82],[80,82],[40,106],[80,106]],9:[[35,34],[60,34],[85,34],[35,60],[60,60],[85,60],[35,86],[60,86],[85,86]],10:[[35,30],[60,30],[85,30],[35,54],[60,54],[85,54],[35,78],[60,78],[85,78],[60,102]]};
-const NUM_LABEL={ace:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
-
-const CARD_DISPLAY={fool:"광대",magician:"마법사",high_priestess:"여사제",empress:"여황제",emperor:"황제",hierophant:"교황",lovers:"연인",chariot:"전차",strength:"힘",hermit:"은둔자",wheel_of_fortune:"운명의 수레바퀴",justice:"정의",hanged_man:"매달린 사람",death:"죽음",temperance:"절제",devil:"악마",tower:"탑",star:"별",moon:"달",sun:"태양",judgement:"심판",world:"세계",ace_wands:"완즈 에이스",two_wands:"완즈 2",three_wands:"완즈 3",four_wands:"완즈 4",five_wands:"완즈 5",six_wands:"완즈 6",seven_wands:"완즈 7",eight_wands:"완즈 8",nine_wands:"완즈 9",ten_wands:"완즈 10",page_wands:"페이지완즈",knight_wands:"나이트완즈",queen_wands:"퀸완즈",king_wands:"킹완즈",ace_cups:"컵 에이스",two_cups:"컵 2",three_cups:"컵 3",four_cups:"컵 4",five_cups:"컵 5",six_cups:"컵 6",seven_cups:"컵 7",eight_cups:"컵 8",nine_cups:"컵 9",ten_cups:"컵 10",page_cups:"페이지컵스",knight_cups:"나이트컵스",queen_cups:"퀸컵스",king_cups:"킹컵스",ace_swords:"소드 에이스",two_swords:"소드 2",three_swords:"소드 3",four_swords:"소드 4",five_swords:"소드 5",six_swords:"소드 6",seven_swords:"소드 7",eight_swords:"소드 8",nine_swords:"소드 9",ten_swords:"소드 10",page_swords:"페이지소드",knight_swords:"나이트소드",queen_swords:"퀸소드",king_swords:"킹소드",ace_pentacles:"펜타클 에이스",two_pentacles:"펜타클 2",three_pentacles:"펜타클 3",four_pentacles:"펜타클 4",five_pentacles:"펜타클 5",six_pentacles:"펜타클 6",seven_pentacles:"펜타클 7",eight_pentacles:"펜타클 8",nine_pentacles:"펜타클 9",ten_pentacles:"펜타클 10",page_pentacles:"페이지펜타클",knight_pentacles:"나이트펜타클",queen_pentacles:"퀸펜타클",king_pentacles:"킹펜타클"};
-const TAROT_CARDS=Object.keys(CARD_DISPLAY);
-
-const KEYWORDS={fool:["새 시작","자유","예측불가"],magician:["자신감","창조력","양면성"],high_priestess:["직관","내면 정리","기다림"],empress:["풍요","감성","모성"],emperor:["책임감","자존심","안정"],hierophant:["신뢰","중재","전통"],lovers:["소통","투명함","유대"],chariot:["추진력","타이밍","균형"],strength:["내면의 힘","인내","절제"],hermit:["은둔","성찰","고독"],wheel_of_fortune:["전환점","순환","기회"],justice:["균형","기브앤테이크","냉철함"],hanged_man:["의도된 정체","내면 성장","인내"],death:["변환","새 챕터","정리"],temperance:["조율","균형","과정"],devil:["집착","속박","재결합"],tower:["급변","충격","재구성"],star:["희망","치유","이상향"],moon:["불확실","예민함","불안"],sun:["드러남","자신감","성공"],judgement:["소식","각성","결정"],world:["완성","자립","자기세계"]};
-
-const QUESTION_TYPES=[{id:"couple",label:"💑 커플",desc:"사귀는 사이, 속마음과 관계운"},{id:"ex",label:"💔 재회",desc:"헤어진 상대, 재회 가능성은?"},{id:"some",label:"💭 썸",desc:"썸 타는 사이, 관계가 발전할까?"},{id:"solo",label:"🌸 솔로",desc:"향후 3개월, 새 인연이 올까?"}];
-
-
-
-
-
-function makeCardSVG(k,name){
-  const suit=getSuit(k),th=T[suit],rank=getRank(k),isMajor=suit==="major",isCourt=["P","N","Q","K"].includes(rank);
-  const numKey=k.split("_")[0],count=NUM_LABEL[numKey]||0,positions=SYM_POS[count]||[];
-  const majorNum=MAJOR_NUM[k]||"",courtLabel=rank==="P"?"PAGE":rank==="N"?"KNIGHT":rank==="Q"?"QUEEN":"KING";
-  const suitLabel=suit==="wands"?"WANDS":suit==="cups"?"CUPS":suit==="swords"?"SWORDS":suit==="pentacles"?"PENTACLES":"";
-  const id=k.replace(/_/g,'');
-  let inner="";
-  if(isMajor){
-    inner=`${majorNum?`<text x="60" y="28" text-anchor="middle" fill="${th.a}" font-size="10" font-family="serif" font-style="italic" opacity=".75">${majorNum}</text>`:""}
-    <circle cx="60" cy="84" r="32" fill="url(#glow${id})"/>
-    <circle cx="60" cy="84" r="26" fill="none" stroke="${th.b}" stroke-width=".8" opacity=".4"/>
-    ${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180,x1=60+20*Math.cos(r),y1=84+20*Math.sin(r),x2=60+28*Math.cos(r),y2=84+28*Math.sin(r);return`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${th.b}" stroke-width=".7" opacity=".45"/>`;}).join("")}
-    <text x="60" y="93" text-anchor="middle" font-size="26" fill="${th.a}" opacity=".9">${th.s}</text>
-    <rect x="16" y="140" width="88" height="18" rx="3" fill="${th.b}" opacity=".12"/>
-    <text x="60" y="153" text-anchor="middle" fill="${th.a}" font-size="9" font-family="serif" font-style="italic">${name}</text>`;
-  }else if(isCourt){
-    inner=`<text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="11" font-family="serif" font-weight="bold">${rank}</text>
-    <text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text>
-    <g transform="rotate(180,60,84)"><text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="11" font-family="serif" font-weight="bold">${rank}</text><text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text></g>
-    <circle cx="60" cy="76" r="36" fill="url(#glow${id})"/>
-    <circle cx="60" cy="76" r="28" fill="none" stroke="${th.b}" stroke-width=".8" opacity=".35"/>
-    <text x="60" y="90" text-anchor="middle" font-size="34" fill="${th.a}" opacity=".85">${th.s}</text>
-    <rect x="16" y="116" width="88" height="26" rx="3" fill="${th.b}" opacity=".1"/>
-    <text x="60" y="127" text-anchor="middle" fill="${th.a}" font-size="8" font-family="serif">${courtLabel}</text>
-    <text x="60" y="138" text-anchor="middle" fill="${th.b}" font-size="7.5" font-family="serif" opacity=".8">of ${suitLabel}</text>`;
-  }else{
-    inner=`<text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="12" font-family="serif" font-weight="bold">${rank}</text>
-    <text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text>
-    <g transform="rotate(180,60,84)"><text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="12" font-family="serif" font-weight="bold">${rank}</text><text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text></g>
-    ${positions.map(([px,py])=>`<text x="${px}" y="${py}" text-anchor="middle" font-size="14" fill="${th.a}" opacity=".82">${th.s}</text>`).join("")}
-    <rect x="16" y="148" width="88" height="14" rx="3" fill="${th.b}" opacity=".1"/>
-    <text x="60" y="159" text-anchor="middle" fill="${th.b}" font-size="7.5" font-family="serif" opacity=".85">${name}</text>`;
-  }
-  return`<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="bg${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${th.bg}"/><stop offset="100%" stop-color="#000"/></linearGradient><radialGradient id="glow${id}" cx="50%" cy="50%"><stop offset="0%" stop-color="${th.b}" stop-opacity=".25"/><stop offset="100%" stop-color="${th.b}" stop-opacity="0"/></radialGradient></defs><rect width="120" height="168" rx="8" fill="url(#bg${id})"/><rect x="2.5" y="2.5" width="115" height="163" rx="6.5" fill="none" stroke="${th.b}" stroke-width="1.5" opacity=".8"/><rect x="7" y="7" width="106" height="154" rx="4" fill="none" stroke="${th.b}" stroke-width=".5" opacity=".25" stroke-dasharray="3,5"/>${[[11,11],[109,11],[11,157],[109,157]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="${th.b}" opacity=".6"/>`).join("")}${inner}</svg>`;
-}
-
-function makeBackSVG(){
-  return`<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="backG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e0035"/><stop offset="100%" stop-color="#080010"/></linearGradient></defs><rect width="120" height="168" rx="8" fill="url(#backG)"/><rect x="2.5" y="2.5" width="115" height="163" rx="6.5" fill="none" stroke="#c084fc" stroke-width="1.5" opacity=".65"/><rect x="7" y="7" width="106" height="154" rx="4" fill="none" stroke="#c084fc" stroke-width=".5" opacity=".2" stroke-dasharray="3,5"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<text x="${22+c*38}" y="${34+r*36}" text-anchor="middle" font-size="13" fill="#c084fc" opacity=".1">✦</text>`).join("")).join("")}<circle cx="60" cy="84" r="30" fill="none" stroke="#e879f9" stroke-width=".8" opacity=".4"/><text x="60" y="93" text-anchor="middle" font-size="28" fill="#e879f9" opacity=".55">🔮</text>${[[11,11],[109,11],[11,157],[109,157]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="#c084fc" opacity=".45"/>`).join("")}</svg>`;
-}
-
-let state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
-
-function initTypeBtns(){
-  document.getElementById('type-btns').innerHTML=QUESTION_TYPES.map(t=>`<button class="type-btn" onclick="selectType('${t.id}')" id="type-${t.id}"><strong>${t.label}</strong><small>${t.desc}</small></button>`).join("");
-}
-initTypeBtns();
-
-function selectType(id){
-  state.qType=id;
-  document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('type-'+id).classList.add('active');
-  var pw=document.getElementById('partner-wrap');
-  var cw=document.getElementById('contact-wrap');
-  if(id==='solo'){
-    pw.style.display='none';
-    cw.style.display='none';
-    state.partner='(솔로)';
-    state.contactStatus='해당없음';
-  } else if(id==='couple'){
-    pw.style.display='block';
-    cw.style.display='none';
-    state.contactStatus='연애 중';
-  } else {
-    pw.style.display='block';
-    cw.style.display='block';
-    if(state.contactStatus==='해당없음'||state.contactStatus==='연애 중'){
-      state.contactStatus='연락 끊김';
-      document.querySelectorAll('.contact-btn').forEach(function(b){b.classList.toggle('active',b.textContent==='연락 끊김');});
-    }
-  }
-}
-
-function selectGender(g){state.gender=g;document.querySelectorAll('.gender-btn').forEach(b=>b.classList.toggle('active',b.textContent===g));}
-function selectContact(s){state.contactStatus=s;document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent===s));}
-function show(id){document.getElementById(id).classList.remove('hidden');}
-function hide(id){document.getElementById(id).classList.add('hidden');}
-function showOnly(id){['screen-intro','screen-cards','screen-loading','screen-result'].forEach(s=>s===id?show(s):hide(s));}
-
-function startReading(){
-  state.age=document.getElementById('age').value;
-  state.partner=document.getElementById('partner').value;
-  state.situation=document.getElementById('situation').value;
-  if(!state.qType||!state.situation.trim()||!state.age.trim()||!state.gender||!state.contactStatus)return;
-  state.cards=[...TAROT_CARDS].sort(()=>Math.random()-.5).slice(0,3);
-  state.revealed=[];state.result=null;state.unlocked=false;
-  renderCards();showOnly('screen-cards');
-}
-
-function renderCards(){
-  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 오픈됨';
-  document.getElementById('cards-row').innerHTML=state.cards.map((card,i)=>{
-    const isRev=state.revealed.includes(i);
-    const kws=(KEYWORDS[card]||[]).map(kw=>`<span class="kw">${kw}</span>`).join("");
-    return`<div class="card-slot"><div class="card-img-wrap ${isRev?'revealed':''}" onclick="revealCard(${i})">${isRev?makeCardSVG(card,CARD_DISPLAY[card]):makeBackSVG()}</div><span class="card-label ${isRev?'on':''}">${["과거","현재","미래"][i]}</span>${isRev?`<span class="card-name">${CARD_DISPLAY[card]}</span><div class="kw-wrap">${kws}</div>`:''}</div>`;
-  }).join("");
-}
-
-function revealCard(i){
-  if(state.revealed.includes(i))return;
-  state.revealed.push(i);renderCards();
-  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 오픈됨';
-  if(state.revealed.length===3){document.getElementById('reading-msg').classList.remove('hidden');setTimeout(doReading,800);}
-}
-
-async function doReading(){
-  showOnly('screen-loading');
-  const cardCtx=state.cards.map((c,i)=>["과거","현재","미래"][i]+": "+CARD_DISPLAY[c]).join(", ");
-
-  try{
-    const res=await fetch("/api/reading",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        qType:state.qType,
-        age:state.age,
-        gender:state.gender,
-        partner:state.partner,
-        contactStatus:state.contactStatus,
-        situation:state.situation,
-        cardCtx,
-      })
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        max_tokens: 2000,
+        temperature: 0.7,
+        messages: [{ role: 'user', content: prompt }],
+      }),
     });
-    const data=await res.json();
-    if(data.error)throw new Error(data.error||"API error");
-    const raw=(data.text||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");
-    const ex=(text,s,e)=>{const si=text.indexOf("["+s+"]");if(si===-1)return"";const after=text.slice(si+s.length+2);const ei=e?after.indexOf("["+e+"]"):-1;return(ei===-1?after:after.slice(0,ei)).trim();};
-    const tip=data.tip||{title:"🧠 뇌과학 전략",term:"",termEn:"",mechanism:""};
-    state.result={past:ex(raw,"과거","성향분석"),personality:ex(raw,"성향분석","현재"),present:ex(raw,"현재","미래"),future:ex(raw,"미래","조합"),combo:ex(raw,"조합","요약"),summary:ex(raw,"요약",null),tip,cards:state.cards};
-  }catch(err){
-    const tip={title:"🧠 뇌과학 전략",term:"",termEn:"",mechanism:""};
-    state.result={past:"오류: "+err.message,personality:"",present:"",future:"",combo:"",summary:"",tip,cards:state.cards};
-  }
-  renderResult();showOnly('screen-result');
-}
 
-function renderResult(){
-  const r=state.result;
-  document.getElementById('result-cards').innerHTML=r.cards.map((c,i)=>{
-    const kws=(KEYWORDS[c]||[]).map(kw=>`<span class="kw">${kw}</span>`).join("");
-    return`<div class="result-card"><div class="result-card-img">${makeCardSVG(c,CARD_DISPLAY[c])}</div><span class="result-card-pos">${["과거","현재","미래"][i]}</span><span class="result-card-name">${CARD_DISPLAY[c]}</span><div class="kw-wrap">${kws}</div></div>`;
-  }).join("");
+    const data = await response.json();
+    if (data.error) throw new Error(data.error.message);
+    const text = data.choices?.[0]?.message?.content || '';
 
-  document.getElementById('text-past').textContent=r.past;
+    res.status(200).json({ text, tip });
 
-  if(r.personality){
-    document.getElementById('text-personality').textContent=r.personality;
-    document.getElementById('personality-box').style.display='block';
-  }
-
-  document.getElementById('text-present').textContent=r.present;
-  document.getElementById('text-future').textContent=r.future;
-  document.getElementById('text-present-blur').textContent=r.present;
-  document.getElementById('text-future-blur').textContent=r.future;
-
-  if(r.combo){document.getElementById('text-combo').textContent=r.combo;document.getElementById('combo-box').style.display='block';}
-  if(r.summary){document.getElementById('text-summary').textContent=r.summary;document.getElementById('summary-box').classList.remove('hidden');}
-
-  if(r.tip){
-    const neuroIcon=state.qType==="couple"?"💡":"🧠";
-    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${r.tip.title||"뇌과학 전략"}</span></div><div class="neuro-term-box"><p class="neuro-term">📌 ${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p></div><div class="neuro-mech-box"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
-  }
-
-  state.unlocked=false;show('paywall-area');hide('unlocked-area');
-}
-
-function unlock(){
-  hide('paywall-area');show('unlocked-area');state.unlocked=true;
-}
-
-function resetAll(){
-  state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
-  document.getElementById('age').value="";
-  document.getElementById('partner').value="";
-  document.getElementById('situation').value="";
-  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';
-  document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==="연락 끊김"));
-  document.getElementById('personality-box').style.display='none';
-  document.getElementById('combo-box').style.display='none';
-  document.getElementById('summary-box').classList.add('hidden');
-  showOnly('screen-intro');
-}
-</script>
-
-<script>
-function copyLink(){
-  const url = 'https://lumitarot.net';
-  const cards = state.cards && state.cards.length ? state.cards.map(c => CARD_DISPLAY[c] || c).join(' · ') : '';
-  
-  // 1. text에서 url 부분을 완전히 삭제합니다.
-  const text = '🔮 이번에 뽑은 카드\n' + cards + '\n\n해석은 링크에서 확인해 보세요!';
-
-  if(navigator.share){
-    // 2. navigator.share는 text와 url을 별도 인자로 받으므로 여기서 url을 전달합니다.
-    navigator.share({
-      title: '🔮 루미타로 타로 리딩',
-      text: text,
-      url: url
-    }).catch(()=>{});
-  } else if(navigator.clipboard){
-    // 클립보드 복사 시에는 텍스트와 URL을 합쳐서 복사해주는 것이 사용자 입장에서 편합니다.
-    const fullText = text + '\n' + url;
-    navigator.clipboard.writeText(fullText).then(()=>{
-      const msg = document.getElementById('copy-msg');
-      msg.style.display = 'block';
-      setTimeout(()=>{msg.style.display = 'none';}, 3000);
-    });
-  } else {
-    // 하위 호환성용 textarea 복사 로직
-    const fullText = text + '\n' + url;
-    const el = document.createElement('textarea');
-    el.value = fullText;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    const msg = document.getElementById('copy-msg');
-    msg.style.display = 'block';
-    setTimeout(()=>{msg.style.display = 'none';}, 3000);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 }
-</script>
-
-</body>
-</html>

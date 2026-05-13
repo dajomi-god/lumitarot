@@ -345,7 +345,18 @@ window.addEventListener('DOMContentLoaded', async function(){
     const raw=(data.text||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");
     const ex=(text,s,e)=>{const si=text.indexOf("["+s+"]");if(si===-1)return"";const after=text.slice(si+s.length+2);const ei=e?after.indexOf("["+e+"]"):-1;return(ei===-1?after:after.slice(0,ei)).trim();};
     const tip=data.tip||{title:"🧠 뇌과학 전략",term:"",termEn:"",mechanism:""};
-    const cards=data.cards||[];
+    // cards가 문자열이면 CARD_DISPLAY 역변환으로 키 배열 만들기
+    let cards=[];
+    if(Array.isArray(data.cards)){
+      cards=data.cards;
+    } else if(typeof data.cards==='string'){
+      const reverseDisplay={};
+      for(const [k,v] of Object.entries(CARD_DISPLAY)) reverseDisplay[v]=k;
+      cards=data.cards.split(', ').map(s=>{
+        const name=s.replace(/^과거: |^현재: |^미래: /,'');
+        return reverseDisplay[name]||name;
+      });
+    }
     state.result={past:ex(raw,"과거","성향분석"),personality:ex(raw,"성향분석","현재"),present:ex(raw,"현재","미래"),future:ex(raw,"미래","조합"),combo:ex(raw,"조합","요약"),summary:ex(raw,"요약",null),tip,cards};
     state.cards=cards;
     state.unlocked=false;

@@ -331,19 +331,29 @@ function unlock(){
 function show(id){const e=document.getElementById(id);if(e)e.classList.remove('hidden');}
 function hide(id){const e=document.getElementById(id);if(e)e.classList.add('hidden');}
 
-// sessionStorage에서 결과 불러오기
-window.addEventListener('DOMContentLoaded', function(){
-  const raw = sessionStorage.getItem('lumiResult');
-  const cards = sessionStorage.getItem('lumiCards');
-  if(!raw || !cards){
-    window.location.href = '/';
-    return;
+// KV에서 결과 불러오기
+window.addEventListener('DOMContentLoaded', async function(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if(!id){ window.location.href='/'; return; }
+
+  try{
+    const res = await fetch('/api/getResult?id='+id);
+    const data = await res.json();
+    if(!data || data.error){ window.location.href='/'; return; }
+
+    const raw=(data.text||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");
+    const ex=(text,s,e)=>{const si=text.indexOf("["+s+"]");if(si===-1)return"";const after=text.slice(si+s.length+2);const ei=e?after.indexOf("["+e+"]"):-1;return(ei===-1?after:after.slice(0,ei)).trim();};
+    const tip=data.tip||{title:"🧠 뇌과학 전략",term:"",termEn:"",mechanism:""};
+    const cards=data.cards||[];
+    state.result={past:ex(raw,"과거","성향분석"),personality:ex(raw,"성향분석","현재"),present:ex(raw,"현재","미래"),future:ex(raw,"미래","조합"),combo:ex(raw,"조합","요약"),summary:ex(raw,"요약",null),tip,cards};
+    state.cards=cards;
+    state.unlocked=false;
+    state.qType=tip&&tip.title&&tip.title.includes('💡')?'couple':'ex';
+    renderResult();
+  }catch(e){
+    window.location.href='/';
   }
-  state.result = JSON.parse(raw);
-  state.cards = JSON.parse(cards);
-  state.unlocked = false;
-  state.qType = state.result.tip && state.result.tip.title && state.result.tip.title.includes('💡') ? 'couple' : 'ex';
-  renderResult();
 });
 
 function copyLink(){

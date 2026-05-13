@@ -383,21 +383,5 @@ function copyLink(){
   }
 }
 </script>
-
-</body>
-</html>
-</script>
-<script>
-(function(){
-  const s=document.getElementById('stars');
-  for(let i=0;i<35;i++){
-    const d=document.createElement('div');
-    d.className='star';
-    const sz=i%3===0?'2px':'1px';
-    d.style.cssText=`width:${sz};height:${sz};left:${(i*2.9)%100}%;top:${(i*3.1)%100}%;opacity:${.15+(i%5)*.12};animation-delay:${(i*.2)%3}s;animation-duration:${2+(i%4)}s`;
-    s.appendChild(d);
-  }
-})();
-</script>
 </body>
 </html>

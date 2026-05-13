@@ -404,7 +404,7 @@ function selectGender(g){state.gender=g;document.querySelectorAll('.gender-btn')
 function selectContact(s){state.contactStatus=s;document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent===s));}
 function show(id){document.getElementById(id).classList.remove('hidden');}
 function hide(id){document.getElementById(id).classList.add('hidden');}
-function showOnly(id){['screen-intro','screen-cards','screen-loading'].forEach(s=>s===id?show(s):hide(s));}
+function showOnly(id){['screen-intro','screen-cards','screen-loading','screen-result'].forEach(s=>s===id?show(s):hide(s));}
 
 function startReading(){
   state.age=document.getElementById('age').value;
@@ -452,12 +452,15 @@ async function doReading(){
     });
     const data=await res.json();
     if(data.error)throw new Error(data.error||"API error");
-    if(!data.id)throw new Error("ID 없음");
-    window.location.href='/result.html?id='+data.id;
+    const raw=(data.text||"").replace(/\*\*/g,"").replace(/\*/g,"").replace(/#{1,6} /g,"");
+    const ex=(text,s,e)=>{const si=text.indexOf("["+s+"]");if(si===-1)return"";const after=text.slice(si+s.length+2);const ei=e?after.indexOf("["+e+"]"):-1;return(ei===-1?after:after.slice(0,ei)).trim();};
+    const tip=data.tip||{title:"🧠 뇌과학 전략",term:"",termEn:"",mechanism:""};
+    state.result={past:ex(raw,"과거","성향분석"),personality:ex(raw,"성향분석","현재"),present:ex(raw,"현재","미래"),future:ex(raw,"미래","조합"),combo:ex(raw,"조합","요약"),summary:ex(raw,"요약",null),tip,cards:state.cards};
   }catch(err){
-    alert("오류가 발생했어요. 다시 시도해주세요.");
-    showOnly('screen-intro');
+    const tip={title:"🧠 뇌과학 전략",term:"",termEn:"",mechanism:""};
+    state.result={past:"오류: "+err.message,personality:"",present:"",future:"",combo:"",summary:"",tip,cards:state.cards};
   }
+  renderResult();showOnly('screen-result');
 }
 
 function renderResult(){

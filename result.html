@@ -362,7 +362,8 @@ window.addEventListener('DOMContentLoaded', async function(){
     state.qType=tip&&tip.title&&tip.title.includes('💡')?'couple':'ex';
     renderResult();
   }catch(e){
-    window.location.href='/';
+    console.error('result.html fetch 오류:', e);
+    document.body.innerHTML += '<p style="color:red;padding:20px;">오류: '+e.message+'</p>';
   }
 });
 

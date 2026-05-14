@@ -428,6 +428,19 @@ function resetAll(){
 }
 
 
+function copyLink(){
+  const url=window.location.href;
+  if(navigator.share){
+    navigator.share({title:'🔮 루미타로 타로 리딩',text:'나도 무료로 타로 봐봐!',url:'https://lumitarot.net'}).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>{
+      const msg=document.getElementById('copy-msg');
+      msg.style.display='block';
+      setTimeout(()=>{msg.style.display='none';},3000);
+    });
+  }
+}
+
 // KV에서 결과 불러오기
 (async function(){
   const params = new URLSearchParams(window.location.search);

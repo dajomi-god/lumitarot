@@ -431,7 +431,7 @@ function resetAll(){
 function copyLink(){
   const url=window.location.href;
   if(navigator.share){
-    navigator.share({title:'🔮 루미타로 타로 리딩',text:'나도 무료로 타로 봐봐!',url:'https://lumitarot.net'}).catch(()=>{});
+    navigator.share({title:'🔮 루미타로 타로 리딩',text:'너도 무료로 타로 봐봐!',url:'https://lumitarot.net'}).catch(()=>{});
   } else if(navigator.clipboard){
     navigator.clipboard.writeText(url).then(()=>{
       const msg=document.getElementById('copy-msg');

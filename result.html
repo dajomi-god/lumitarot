@@ -292,10 +292,7 @@ function makeBackSVG(){
 
 let state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
 
-function initTypeBtns(){
-  document.getElementById('type-btns').innerHTML=QUESTION_TYPES.map(t=>`<button class="type-btn" onclick="selectType('${t.id}')" id="type-${t.id}"><strong>${t.label}</strong><small>${t.desc}</small></button>`).join("");
-}
-initTypeBtns();
+function initTypeBtns(){}
 
 function selectType(id){
   state.qType=id;

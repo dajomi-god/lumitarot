@@ -208,21 +208,21 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
 </div>
 
 <!-- 챗봇 -->
-<div style="background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:20px;padding:20px;margin-top:14px;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><p style="font-size:13px;color:#a78bfa;font-weight:600;margin:0;">🔮 루미타로에게 더 물어보기</p><span id="chat-counter" style="font-size:11px;color:#6d4c7e;">5회 남음</span></div>
+<div style="background:rgba(255,255,255,.03);border-radius:16px;padding:18px;margin-top:28px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><p style="font-size:12px;color:#a78bfa;font-weight:600;margin:0;">🔮 루미타로에게 더 물어보기</p><span id="chat-counter" style="font-size:10px;color:#6d4c7e;">5회 남음</span></div>
   <div id="chat-messages" style="max-height:240px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;"></div>
   <div style="display:flex;gap:8px;">
     <input id="chat-input" type="text" placeholder="궁금한 점을 물어보세요..." maxlength="100"
-      style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(192,132,252,.3);border-radius:10px;padding:10px 14px;color:#f0e6ff;font-size:13px;font-family:Georgia,serif;outline:none;"
+      style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(192,132,252,.2);border-radius:10px;padding:9px 12px;color:#f0e6ff;font-size:12px;font-family:Georgia,serif;outline:none;"
       onkeydown="if(event.key==='Enter')sendChat()">
     <button onclick="sendChat()" id="chat-send-btn"
-      style="background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:10px;padding:10px 16px;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;">
+      style="background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:10px;padding:9px 14px;color:white;font-size:12px;font-weight:600;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;">
       전송
     </button>
   </div>
 </div>
 
-<div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
+<div style="background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(124,58,237,.15));border:1px solid rgba(236,72,153,.6);border-radius:20px;padding:24px;margin-top:32px;text-align:center;box-shadow:0 4px 20px rgba(236,72,153,.15);">
   <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ 리딩이 마음에 드셨나요?</p>
   <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
   <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;line-height:1.7;">카드 한 장 한 장을 루미타로가 직접 해석해드려요.<br>AI가 담지 못한 깊은 이야기를 전해드립니다.</p>

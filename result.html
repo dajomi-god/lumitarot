@@ -207,6 +207,21 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
   <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
 </div>
 
+<!-- 챗봇 -->
+<div style="background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:20px;padding:20px;margin-top:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><p style="font-size:13px;color:#a78bfa;font-weight:600;margin:0;">🔮 루미타로에게 더 물어보기</p><span id="chat-counter" style="font-size:11px;color:#6d4c7e;">5회 남음</span></div>
+  <div id="chat-messages" style="max-height:240px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;"></div>
+  <div style="display:flex;gap:8px;">
+    <input id="chat-input" type="text" placeholder="궁금한 점을 물어보세요..." maxlength="100"
+      style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(192,132,252,.3);border-radius:10px;padding:10px 14px;color:#f0e6ff;font-size:13px;font-family:Georgia,serif;outline:none;"
+      onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()" id="chat-send-btn"
+      style="background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:10px;padding:10px 16px;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;">
+      전송
+    </button>
+  </div>
+</div>
+
 <div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
   <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ 리딩이 마음에 드셨나요?</p>
   <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
@@ -221,21 +236,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
       <p style="font-size:14px;color:#f0e6ff;font-weight:700;margin-bottom:2px;">왜 이별 후 자꾸 생각날까?</p>
       <p style="font-size:11px;color:#9d7cb8;">타로와 뇌과학으로 읽는 연애 심리 →</p>
     </a>
-
-<!-- 챗봇 -->
-<div style="background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:20px;padding:20px;margin-bottom:14px;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><p style="font-size:13px;color:#a78bfa;font-weight:600;margin:0;">🔮 루미타로에게 더 물어보기</p><span id="chat-counter" style="font-size:11px;color:#6d4c7e;">5회 남음</span></div>
-  <div id="chat-messages" style="max-height:240px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;"></div>
-  <div style="display:flex;gap:8px;">
-    <input id="chat-input" type="text" placeholder="궁금한 점을 물어보세요..." maxlength="100"
-      style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(192,132,252,.3);border-radius:10px;padding:10px 14px;color:#f0e6ff;font-size:13px;font-family:Georgia,serif;outline:none;"
-      onkeydown="if(event.key==='Enter')sendChat()">
-    <button onclick="sendChat()" id="chat-send-btn"
-      style="background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:10px;padding:10px 16px;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;">
-      전송
-    </button>
-  </div>
-</div>
 
 <div class="disclaimer">
   <p>본 리딩은 심리적 참고 용도이며, 최종 결정의 책임은 본인에게 있습니다.</p>
@@ -485,6 +485,14 @@ async function sendChat(){
   addChatBubble(msg, 'user');
   chatCount++;
 
+  // 로딩 버블
+  const loadingDiv = document.createElement('div');
+  loadingDiv.id = 'chat-loading';
+  loadingDiv.style.cssText = 'align-self:flex-start;background:rgba(255,255,255,.06);border-radius:12px 12px 12px 2px;padding:8px 14px;font-size:16px;color:#a78bfa;';
+  loadingDiv.textContent = '···';
+  document.getElementById('chat-messages').appendChild(loadingDiv);
+  document.getElementById('chat-messages').scrollTop = 999999;
+
   const readingContext = state.result ? 
     '[리딩 결과 요약] 과거: ' + (state.result.past||'') + ' / 현재: ' + (state.result.present||'') + ' / 미래: ' + (state.result.future||'') : '';
 
@@ -499,6 +507,8 @@ async function sendChat(){
     const data = await res.json();
     const reply = data.text || '죄송해요, 다시 시도해주세요.';
     chatHistory.push({role:'assistant', content: reply});
+    const ld = document.getElementById('chat-loading');
+    if(ld) ld.remove();
     addChatBubble(reply, 'assistant');
 
     const remaining = CHAT_LIMIT - chatCount;
@@ -513,6 +523,8 @@ async function sendChat(){
       btn.textContent = '전송';
     }
   }catch(e){
+    const ld = document.getElementById('chat-loading');
+    if(ld) ld.remove();
     addChatBubble('오류가 났어요. 다시 시도해주세요.', 'assistant');
     btn.disabled = false;
     btn.textContent = '전송';

@@ -437,7 +437,8 @@ function renderResult(){
 
   if(r.tip){
     const neuroIcon=state.qType==="couple"?"💡":"🧠";
-    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-box"><div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${r.tip.title||"뇌과학 전략"}</span></div><p class="neuro-term">${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p><hr class="neuro-divider"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
+    const neuroTitleClean=(r.tip.title||"뇌과학 전략").replace(/[\u{1F300}-\u{1FFFF}]|[\u2600-\u27FF]/gu,"").trim();
+    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-box"><div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${neuroTitleClean}</span></div><p class="neuro-term">${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p><hr class="neuro-divider"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
   }
 
   state.unlocked=false;show('paywall-area');hide('unlocked-area');

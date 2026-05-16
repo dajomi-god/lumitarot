@@ -95,15 +95,15 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
 .paywall-note { color:#6d4c7e; font-size:10px; }
 
 .neuro-wrap { margin-top:18px; }
-.neuro-header { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
-.neuro-icon { width:28px; height:28px; border-radius:50%; background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); display:flex; align-items:center; justify-content:center; font-size:13px; }
-.neuro-title { color:#86efac; font-size:12px; font-weight:700; letter-spacing:1.5px; }
-.neuro-term-box { background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(6,182,212,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-.neuro-term { font-size:13px; color:#34d399; font-weight:700; margin-bottom:3px; }
-.neuro-term-en { font-size:10px; color:rgba(52,211,153,.6); font-style:italic; }
-.neuro-mech-box { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; border-left:3px solid rgba(16,185,129,.4); }
-.neuro-mech-label { font-size:11px; color:rgba(209,250,229,.6); margin-bottom:4px; font-weight:600; }
-.neuro-mech-text { font-size:13px; line-height:1.8; color:#d1fae5; }
+.neuro-box { background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(6,182,212,.05)); border:1px solid rgba(16,185,129,.25); border-radius:14px; padding:16px 18px; }
+.neuro-header { display:flex; align-items:center; gap:8px; margin-bottom:14px; }
+.neuro-icon { width:28px; height:28px; border-radius:50%; background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.3); display:flex; align-items:center; justify-content:center; font-size:13px; }
+.neuro-title { color:#6ee7b7; font-size:12px; font-weight:700; letter-spacing:1.5px; }
+.neuro-term { font-size:14px; color:#a7f3d0; font-weight:700; margin-bottom:2px; }
+.neuro-term-en { font-size:10px; color:rgba(167,243,208,.5); font-style:italic; margin-bottom:12px; }
+.neuro-divider { border:none; border-top:1px solid rgba(16,185,129,.15); margin:12px 0; }
+.neuro-mech-label { font-size:10px; color:rgba(167,243,208,.55); margin-bottom:5px; font-weight:600; letter-spacing:.5px; }
+.neuro-mech-text { font-size:13px; line-height:1.85; color:rgba(240,230,255,.85); }
 
 .summary-box { background:rgba(244,114,182,.1); border-radius:10px; padding:12px 16px; margin-top:18px; border-left:3px solid #f472b6; }
 .summary-text { font-size:14px; color:#f9a8d4; font-weight:600; }
@@ -197,12 +197,12 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
 <div style="background:rgba(192,132,252,.08);border:1px solid rgba(192,132,252,.25);border-radius:16px;padding:18px;margin-top:28px;">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><p style="font-size:12px;color:#a78bfa;font-weight:600;margin:0;">💬 실시간으로 더 물어보기</p><span id="chat-counter" style="font-size:10px;color:#6d4c7e;">5회 남음</span></div>
   <div id="chat-messages" style="max-height:240px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;"></div>
-  <div style="display:flex;gap:8px;">
+  <div style="display:flex;gap:8px;align-items:stretch;">
     <input id="chat-input" type="text" placeholder="궁금한 점을 물어보세요..." maxlength="100"
-      style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(192,132,252,.2);border-radius:10px;padding:9px 12px;color:#f0e6ff;font-size:12px;font-family:Georgia,serif;outline:none;"
+      style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(192,132,252,.2);border-radius:10px;padding:0 12px;color:#f0e6ff;font-size:12px;font-family:Georgia,serif;outline:none;height:40px;box-sizing:border-box;"
       onkeydown="if(event.key==='Enter')sendChat()">
     <button onclick="sendChat()" id="chat-send-btn"
-      style="background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:10px;padding:9px 14px;color:white;font-size:12px;font-weight:600;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;">
+      style="background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:10px;padding:0 16px;color:white;font-size:12px;font-weight:600;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;height:40px;box-sizing:border-box;flex-shrink:0;">
       전송
     </button>
   </div>
@@ -437,7 +437,7 @@ function renderResult(){
 
   if(r.tip){
     const neuroIcon=state.qType==="couple"?"💡":"🧠";
-    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${r.tip.title||"뇌과학 전략"}</span></div><div class="neuro-term-box"><p class="neuro-term">📌 ${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p></div><div class="neuro-mech-box"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
+    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-box"><div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${r.tip.title||"뇌과학 전략"}</span></div><p class="neuro-term">${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p><hr class="neuro-divider"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
   }
 
   state.unlocked=false;show('paywall-area');hide('unlocked-area');

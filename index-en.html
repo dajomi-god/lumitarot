@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9151905973095283"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi Tarot — Free AI Tarot Reading</title>
+<meta name="description" content="Your brain knows the truth. Free neuroscience-based tarot reading — Lumi Tarot">
+<meta property="og:title" content="Free Tarot Reading 🔮 — Lumi Tarot">
+<meta property="og:description" content="What is your brain really telling you? Let the cards reveal it.">
+<meta property="og:image" content="https://lumitarot.net/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://lumitarot.net/index-en.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lumitarot.net/og-image.png">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { min-height:100vh; background:linear-gradient(160deg,#1a0020 0%,#2d0035 40%,#120018 100%); font-family:Georgia,serif; color:#f0e6ff; }
+  #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .star { position:absolute; border-radius:50%; background:white; animation:tw 3s ease-in-out infinite; }
+  @keyframes tw { 0%,100%{opacity:.15} 50%{opacity:.9} }
+  @keyframes fi { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes cr { from{transform:rotateY(90deg) scale(.85);opacity:0} to{transform:rotateY(0) scale(1);opacity:1} }
+  @keyframes sp { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+  @keyframes sh { 0%{background-position:-200% center} 100%{background-position:200% center} }
+  @keyframes bi { from{filter:blur(8px);opacity:0} to{filter:blur(0);opacity:1} }
+
+#app { position:relative; z-index:1; max-width:500px; margin:0 auto; padding:36px 18px; animation:fi .7s ease-out; }
+.header { text-align:center; margin-bottom:28px; }
+.header-icon { font-size:44px; margin-bottom:10px; filter:drop-shadow(0 0 14px rgba(236,72,153,.7)); display:block; }
+.header h1 { font-size:28px; font-weight:700; letter-spacing:4px; background:linear-gradient(135deg,#f472b6,#e879f9,#c084fc); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:sh 3s linear infinite; margin-bottom:6px; }
+.header p { color:#d8b4fe; font-size:12px; letter-spacing:1.5px; }
+.card-box { background:rgba(236,72,153,.07); border:1px solid rgba(236,72,153,.25); border-radius:20px; padding:24px; backdrop-filter:blur(12px); margin-bottom:12px; }
+label.field-label { font-size:11px; color:#fce7f3; letter-spacing:1px; display:block; margin-bottom:10px; }
+.type-btns { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+.gender-btns, .contact-btns { display:flex; gap:6px; margin-bottom:18px; }
+.type-btn { background:rgba(255,255,255,.05); border:1px solid rgba(236,72,153,.35); border-radius:11px; padding:11px 14px; color:#e9d5ff; cursor:pointer; text-align:left; transition:all .2s; font-size:14px; font-family:Georgia,serif; }
+.type-btn.active, .type-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.18); color:#f9a8d4; }
+.type-btn strong { display:block; font-weight:600; }
+.type-btn small { display:block; font-size:11px; color:#c4b5fd; margin-top:2px; }
+.gender-btn, .contact-btn { flex:1; background:rgba(255,255,255,.03); border:1px solid rgba(236,72,153,.25); border-radius:10px; padding:11px 6px; color:#c4b5fd; cursor:pointer; font-size:12px; transition:all .2s; font-family:Georgia,serif; text-align:center; }
+.gender-btn.active, .gender-btn:hover, .contact-btn.active, .contact-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.2); color:#f9a8d4; }
+input, textarea { width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(236,72,153,.35); border-radius:10px; padding:11px 14px; color:#f0e6ff; font-size:14px; font-family:Georgia,serif; transition:all .2s; margin-bottom:14px; }
+input:focus, textarea:focus { outline:none; border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,.18); }
+textarea { resize:none; line-height:1.7; margin-bottom:22px; }
+input[type=number]::-webkit-inner-spin-button { opacity:.3; }
+.row2 { display:flex; gap:10px; margin-bottom:14px; }
+.row2 input { margin-bottom:0; width:38%; }
+.btn-main { width:100%; border:none; border-radius:13px; padding:15px; background:linear-gradient(135deg,#be185d,#7c3aed); color:white; font-size:16px; font-weight:700; letter-spacing:1px; cursor:pointer; transition:all .3s; box-shadow:0 4px 20px rgba(190,24,93,.4); font-family:Georgia,serif; }
+.btn-main:hover { filter:brightness(1.1); transform:translateY(-2px); }
+.hint { text-align:center; font-size:11px; color:#6d4c7e; }
+.cards-wrap { text-align:center; }
+.cards-title { color:#f472b6; font-size:16px; font-weight:600; margin-bottom:22px; }
+.cards-count { color:#a78bfa; font-size:12px; margin-bottom:22px; }
+.cards-row { display:flex; justify-content:center; gap:14px; }
+.card-slot { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.card-img-wrap { width:100px; height:140px; border-radius:10px; overflow:hidden; border:1px solid rgba(236,72,153,.35); box-shadow:0 4px 14px rgba(236,72,153,.15); cursor:pointer; transition:all .3s; }
+.card-img-wrap.revealed { border:2px solid #f472b6; box-shadow:0 0 22px rgba(244,114,182,.5); cursor:default; animation:cr .5s ease-out; }
+.card-img-wrap:not(.revealed):hover { transform:translateY(-11px) scale(1.05); box-shadow:0 16px 30px rgba(236,72,153,.5); }
+.card-label { font-size:10px; color:#6d4c7e; }
+.card-label.on { color:#f9a8d4; }
+.card-name { font-size:9px; color:#c4b5fd; margin-top:2px; }
+.kw-wrap { display:flex; flex-wrap:wrap; gap:2px; justify-content:center; margin-top:3px; }
+.kw { font-size:8px; color:#f9a8d4; background:rgba(244,114,182,.12); border:1px solid rgba(244,114,182,.22); border-radius:10px; padding:1px 5px; }
+.reading-msg { color:#d8b4fe; font-size:13px; margin-top:22px; }
+.loading-wrap { text-align:center; padding:60px 20px; }
+.loading-icon { font-size:46px; animation:sp 2s linear infinite; display:inline-block; margin-bottom:20px; }
+.result-cards { display:flex; justify-content:center; gap:10px; }
+.result-card { flex:1; max-width:140px; display:flex; flex-direction:column; align-items:center; gap:6px; }
+.result-card-img { width:100%; aspect-ratio:5/7; border-radius:8px; overflow:hidden; border:2px solid rgba(244,114,182,.45); box-shadow:0 4px 14px rgba(244,114,182,.3); }
+.result-card-pos { font-size:10px; color:#f472b6; font-weight:600; }
+.result-card-name { font-size:9px; color:#c4b5fd; }
+.section-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.section-icon { width:28px; height:28px; border-radius:50%; background:rgba(244,114,182,.15); border:1px solid #f472b6; display:flex; align-items:center; justify-content:center; font-size:11px; color:#f472b6; flex-shrink:0; }
+.section-title { color:#f472b6; font-size:13px; font-weight:600; letter-spacing:1px; }
+.section-text { font-size:14px; line-height:2.0; color:#f3e8ff; white-space:pre-line; }
+.divider { border-top:1px solid rgba(236,72,153,.18); margin:18px 0; }
+
+/* 성향 분석 박스 */
+.personality-box { background:linear-gradient(135deg,rgba(192,132,252,.12),rgba(236,72,153,.08)); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:14px 16px; margin-top:14px; }
+.personality-label { font-size:11px; color:rgba(216,180,254,.7); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
+.personality-text { font-size:14px; color:#e9d5ff; font-weight:600; line-height:1.6; }
+
+/* 카드 조합 박스 */
+.combo-box { background:rgba(244,114,182,.06); border:1px solid rgba(244,114,182,.2); border-radius:12px; padding:14px 16px; margin-top:18px; }
+.combo-label { font-size:11px; color:rgba(249,168,212,.6); margin-bottom:6px; font-weight:600; letter-spacing:.5px; }
+.combo-text { font-size:13px; color:#fce7f3; line-height:1.85; white-space:pre-line; }
+
+.paywall-wrap { position:relative; }
+.paywall-blur { filter:blur(5px); user-select:none; pointer-events:none; }
+.paywall-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(18,0,24,.62); border-radius:12px; backdrop-filter:blur(2px); }
+.paywall-overlay .lock { font-size:28px; margin-bottom:10px; }
+.paywall-overlay h3 { color:#f9a8d4; font-size:14px; font-weight:600; margin-bottom:4px; }
+.paywall-overlay p { color:#a78bfa; font-size:12px; margin-bottom:16px; text-align:center; line-height:1.7; }
+.btn-pay { background:linear-gradient(135deg,#be185d,#7c3aed); border:none; border-radius:12px; padding:12px 28px; color:white; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 16px rgba(190,24,93,.4); letter-spacing:.5px; font-family:Georgia,serif; margin-bottom:8px; }
+.paywall-note { color:#6d4c7e; font-size:10px; }
+
+.neuro-wrap { margin-top:18px; }
+.neuro-header { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.neuro-icon { width:28px; height:28px; border-radius:50%; background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); display:flex; align-items:center; justify-content:center; font-size:13px; }
+.neuro-title { color:#86efac; font-size:12px; font-weight:700; letter-spacing:1.5px; }
+.neuro-term-box { background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(6,182,212,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+.neuro-term { font-size:13px; color:#34d399; font-weight:700; margin-bottom:3px; }
+.neuro-term-en { font-size:10px; color:rgba(52,211,153,.6); font-style:italic; }
+.neuro-mech-box { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; border-left:3px solid rgba(16,185,129,.4); }
+.neuro-mech-label { font-size:11px; color:rgba(209,250,229,.6); margin-bottom:4px; font-weight:600; }
+.neuro-mech-text { font-size:13px; line-height:1.8; color:#d1fae5; }
+
+.summary-box { background:rgba(244,114,182,.1); border-radius:10px; padding:12px 16px; margin-top:18px; border-left:3px solid #f472b6; }
+.summary-text { font-size:14px; color:#f9a8d4; font-weight:600; }
+.disclaimer { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:12px 16px; margin-top:14px; text-align:center; }
+.disclaimer p { font-size:10px; color:rgba(167,139,250,.5); line-height:1.7; }
+.disclaimer small { font-size:10px; color:rgba(167,139,250,.35); margin-top:4px; display:block; }
+.hidden { display:none; }
+.mb18 { margin-bottom:18px; }
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6V7M3HN7RW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-6V7M3HN7RW");
+</script>
+</head>
+<body>
+<div id="stars"></div>
+<div id="app">
+  <div class="header">
+    <span class="header-icon">🔮</span>
+    <h1>LUMI TAROT</h1>
+    <p>✦ Your cards reveal what your mind already knows ✦</p>
+  </div>
+
+  <div id="screen-intro">
+    <div class="card-box">
+      <label class="field-label">✦ What do you want to explore?</label>
+      <div class="type-btns" id="type-btns"></div>
+      <label class="field-label">✦ About You</label>
+      <div class="row2">
+        <input type="number" id="age" placeholder="Age (e.g. 28)">
+        <div class="gender-btns">
+          <button class="gender-btn" onclick="selectGender('Female')">Female</button>
+          <button class="gender-btn" onclick="selectGender('Male')">Male</button>
+        </div>
+      </div>
+      <div id="partner-wrap">
+      <label class="field-label">✦ Their name or nickname</label>
+      <input type="text" id="partner" placeholder="e.g. Alex...">
+      </div>
+      <div id="contact-wrap">
+      <label class="field-label">✦ Current contact status</label>
+      <div class="contact-btns">
+        <button class="contact-btn" onclick="selectContact('In contact')">In contact</button>
+        <button class="contact-btn active" onclick="selectContact('No contact')">No contact</button>
+        <button class="contact-btn" onclick="selectContact('Blocked')">Blocked</button>
+      </div>
+      </div>
+      <label class="field-label">✦ Describe your situation in detail (required)</label>
+      <textarea id="situation" rows="4" placeholder="e.g. We broke up 3 months ago. They texted me yesterday and I want to know what they're really feeling. / We've been dating for a year but lately things feel distant."></textarea>
+      <button class="btn-main" onclick="startReading()">Draw Your Cards 🃏</button>
+    </div>
+    <p class="hint">✦ Tarot is for reflection, not prediction ✦</p>
+
+<a href="/column-index.html" style="display:block;margin:20px 0 8px;background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:18px 20px;text-decoration:none;text-align:left;">
+  <p style="font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:6px;font-weight:600;">🧠 Neuroscience × Love Column</p>
+  <p style="font-size:15px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">Why can't you stop thinking about them? What your brain is really doing.</p>
+  <p style="font-size:13px;color:#9d7cb8;margin-bottom:10px;">Love psychology through tarot & neuroscience</p>
+  <span style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:8px;padding:6px 16px;color:white;font-size:12px;font-weight:700;">Read All Columns →</span>
+</a>
+
+<div style="text-align:center;margin-top:16px;display:flex;justify-content:center;gap:16px;">
+  <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Privacy Policy</a>
+  <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Terms of Use</a>
+  <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Contact</a>
+</div>
+
+  </div>
+
+  <div id="screen-cards" class="hidden">
+    <div class="card-box cards-wrap">
+      <p style="color:#d8b4fe;font-size:14px;margin-bottom:6px">Clear your mind and</p>
+      <p class="cards-title">Reveal your cards one by one ✨</p>
+      <p class="cards-count" id="reveal-count">0/3 revealed</p>
+      <div class="cards-row" id="cards-row"></div>
+      <p class="reading-msg hidden" id="reading-msg">Reading your cards... ✨</p>
+    </div>
+  </div>
+
+  <div id="screen-loading" class="hidden">
+    <div class="loading-wrap">
+      <div class="loading-icon">🔮</div>
+      <p style="color:#d8b4fe;font-size:16px">The cards are speaking...</p>
+      <small style="color:#a78bfa;font-size:13px;margin-top:8px;display:block">Preparing your deep reading ✨<br>This may take 20–30 seconds</small>
+    </div>
+  </div>
+
+  <div id="screen-result" class="hidden">
+    <div class="card-box">
+      <div class="result-cards" id="result-cards"></div>
+    </div>
+
+<div class="card-box">
+  <!-- 과거 + 성향분석: 항상 공개 -->
+  <div class="section-header">
+    <div class="section-icon">過</div>
+    <span class="section-title">과거</span>
+  </div>
+  <p class="section-text mb18" id="text-past"></p>
+
+  <div class="personality-box" id="personality-box" style="display:none">
+    <p class="personality-label">🔍 상대방 성향 분석</p>
+    <p class="personality-text" id="text-personality"></p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 페이월 -->
+  <div id="paywall-area">
+    <div class="paywall-wrap">
+      <div class="paywall-blur">
+        <div class="section-header">
+          <div class="section-icon">現</div>
+          <span class="section-title">현재</span>
+        </div>
+        <p class="section-text mb18" id="text-present-blur"></p>
+        <div class="divider"></div>
+        <div class="section-header">
+          <div class="section-icon">未</div>
+          <span class="section-title">미래</span>
+        </div>
+        <p class="section-text" id="text-future-blur"></p>
+      </div>
+      <div class="paywall-overlay">
+        <div class="lock">🔮</div>
+        <h3>현재 · 미래 리딩</h3>
+        <p>상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
+        <button class="btn-pay" onclick="unlock()">전체 리딩 보기 ✨</button>
+        <span class="paywall-note">카드 조합 해석 · 뇌과학 전략 포함</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 잠금 해제 후 -->
+  <div id="unlocked-area" class="hidden">
+    <div class="section-header">
+      <div class="section-icon">現</div>
+      <span class="section-title">현재</span>
+    </div>
+    <p class="section-text mb18" id="text-present"></p>
+    <div class="divider"></div>
+    <div class="section-header">
+      <div class="section-icon">未</div>
+      <span class="section-title">미래</span>
+    </div>
+    <p class="section-text mb18" id="text-future"></p>
+
+    <div class="combo-box" id="combo-box" style="display:none">
+      <p class="combo-label">🃏 카드 조합이 말하는 것</p>
+      <p class="combo-text" id="text-combo"></p>
+    </div>
+
+    <div class="summary-box hidden" id="summary-box">
+      <p class="summary-text" id="text-summary"></p>
+    </div>
+
+    <div class="neuro-wrap" id="neuro-wrap"></div>
+  </div>
+</div>
+
+<button class="btn-main" onclick="resetAll()" style="margin-bottom:0">다시 보기 🔮</button>
+<!-- 공유 버튼 -->
+<div style="text-align:center;margin-top:14px;margin-bottom:4px;">
+  <button onclick="copyLink()" id="copy-btn"
+    style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
+    🔗 친구에게 공유하기
+  </button>
+  <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
+  <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
+</div>
+
+<!-- PDF 리딩 배너 -->
+<div style="background:linear-gradient(135deg,rgba(192,132,252,.15),rgba(236,72,153,.1));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:22px;margin-top:14px;text-align:center;">
+  <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ AI 리딩이 마음에 드셨나요?</p>
+  <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
+  <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;line-height:1.7;">카드 한 장 한 장을 루미타로가 직접 해석해드려요.<br>AI가 담지 못한 깊은 이야기를 전해드립니다.</p>
+  <a href="https://naver.me/GvWXOYp3" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:12px;padding:13px 28px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(124,58,237,.4);">📖 PDF 리딩 신청하기</a>
+  <p style="font-size:10px;color:#6d4c7e;margin-top:12px;">* 네이버 폼으로 연결됩니다</p>
+</div>
+
+<div class="disclaimer">
+  <p>본 리딩은 심리적 참고 용도이며, 최종 결정의 책임은 본인에게 있습니다.</p>
+  <small>✦ LUMI TAROT ✦</small>
+  <div style="margin-top:10px;display:flex;justify-content:center;gap:16px;">
+    <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">개인정보처리방침</a>
+    <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">이용약관</a>
+    <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">문의하기</a>
+    <a href="/column-index.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">칼럼 보기</a>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  const s=document.getElementById('stars');
+  for(let i=0;i<35;i++){
+    const d=document.createElement('div');
+    d.className='star';
+    const sz=i%3===0?'2px':'1px';
+    d.style.cssText=`width:${sz};height:${sz};left:${(i*2.9)%100}%;top:${(i*3.1)%100}%;opacity:${.15+(i%5)*.12};animation-delay:${(i*.2)%3}s;animation-duration:${2+(i%4)}s`;
+    s.appendChild(d);
+  }
+})();
+
+const T={major:{bg:"#0e0018",b:"#c084fc",a:"#f9a8d4",s:"✦"},wands:{bg:"#1a0800",b:"#f97316",a:"#fde68a",s:"🔥"},cups:{bg:"#000d1a",b:"#38bdf8",a:"#bae6fd",s:"🌊"},swords:{bg:"#0a0a14",b:"#94a3b8",a:"#e2e8f0",s:"⚔️"},pentacles:{bg:"#001400",b:"#84cc16",a:"#fef08a",s:"⭐"}};
+const getSuit=k=>k.includes("wands")?"wands":k.includes("cups")?"cups":k.includes("swords")?"swords":k.includes("pentacles")?"pentacles":"major";
+const RANK={ace:"A",two:"2",three:"3",four:"4",five:"5",six:"6",seven:"7",eight:"8",nine:"9",ten:"10",page:"P",knight:"N",queen:"Q",king:"K"};
+const getRank=k=>{for(const r of Object.keys(RANK))if(k.startsWith(r))return RANK[r];return null;};
+const MAJOR_NUM={fool:"0",magician:"Ⅰ",high_priestess:"Ⅱ",empress:"Ⅲ",emperor:"Ⅳ",hierophant:"Ⅴ",lovers:"Ⅵ",chariot:"Ⅶ",strength:"Ⅷ",hermit:"Ⅸ",wheel_of_fortune:"Ⅹ",justice:"Ⅺ",hanged_man:"Ⅻ",death:"ⅩⅢ",temperance:"ⅩⅣ",devil:"ⅩⅤ",tower:"ⅩⅥ",star:"ⅩⅦ",moon:"ⅩⅧ",sun:"ⅩⅨ",judgement:"ⅩⅩ",world:"ⅩⅪ"};
+const SYM_POS={1:[[60,76]],2:[[60,50],[60,102]],3:[[60,42],[40,76],[80,76]],4:[[40,48],[80,48],[40,102],[80,102]],5:[[40,42],[80,42],[60,72],[40,100],[80,100]],6:[[40,40],[80,40],[40,72],[80,72],[40,104],[80,104]],7:[[40,36],[80,36],[60,58],[40,76],[80,76],[40,100],[80,100]],8:[[40,34],[80,34],[40,58],[80,58],[40,82],[80,82],[40,106],[80,106]],9:[[35,34],[60,34],[85,34],[35,60],[60,60],[85,60],[35,86],[60,86],[85,86]],10:[[35,30],[60,30],[85,30],[35,54],[60,54],[85,54],[35,78],[60,78],[85,78],[60,102]]};
+const NUM_LABEL={ace:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
+
+const CARD_DISPLAY={fool:"The Fool",magician:"The Magician",high_priestess:"The High Priestess",empress:"The Empress",emperor:"The Emperor",hierophant:"The Hierophant",lovers:"The Lovers",chariot:"The Chariot",strength:"Strength",hermit:"The Hermit",wheel_of_fortune:"Wheel of Fortune",justice:"Justice",hanged_man:"The Hanged Man",death:"Death",temperance:"Temperance",devil:"The Devil",tower:"The Tower",star:"The Star",moon:"The Moon",sun:"The Sun",judgement:"Judgement",world:"The World",ace_wands:"Ace of Wands",two_wands:"Two of Wands",three_wands:"Three of Wands",four_wands:"Four of Wands",five_wands:"Five of Wands",six_wands:"Six of Wands",seven_wands:"Seven of Wands",eight_wands:"Eight of Wands",nine_wands:"Nine of Wands",ten_wands:"Ten of Wands",page_wands:"Page of Wands",knight_wands:"Knight of Wands",queen_wands:"Queen of Wands",king_wands:"King of Wands",ace_cups:"Ace of Cups",two_cups:"Two of Cups",three_cups:"Three of Cups",four_cups:"Four of Cups",five_cups:"Five of Cups",six_cups:"Six of Cups",seven_cups:"Seven of Cups",eight_cups:"Eight of Cups",nine_cups:"Nine of Cups",ten_cups:"Ten of Cups",page_cups:"Page of Cups",knight_cups:"Knight of Cups",queen_cups:"Queen of Cups",king_cups:"King of Cups",ace_swords:"Ace of Swords",two_swords:"Two of Swords",three_swords:"Three of Swords",four_swords:"Four of Swords",five_swords:"Five of Swords",six_swords:"Six of Swords",seven_swords:"Seven of Swords",eight_swords:"Eight of Swords",nine_swords:"Nine of Swords",ten_swords:"Ten of Swords",page_swords:"Page of Swords",knight_swords:"Knight of Swords",queen_swords:"Queen of Swords",king_swords:"King of Swords",ace_pentacles:"Ace of Pentacles",two_pentacles:"Two of Pentacles",three_pentacles:"Three of Pentacles",four_pentacles:"Four of Pentacles",five_pentacles:"Five of Pentacles",six_pentacles:"Six of Pentacles",seven_pentacles:"Seven of Pentacles",eight_pentacles:"Eight of Pentacles",nine_pentacles:"Nine of Pentacles",ten_pentacles:"Ten of Pentacles",page_pentacles:"Page of Pentacles",knight_pentacles:"Knight of Pentacles",queen_pentacles:"Queen of Pentacles",king_pentacles:"King of Pentacles"};
+const TAROT_CARDS=Object.keys(CARD_DISPLAY);
+
+const KEYWORDS={fool:["new start","freedom","unpredictable"],magician:["confidence","creativity","duality"],high_priestess:["intuition","inner clarity","waiting"],empress:["abundance","emotion","nurturing"],emperor:["responsibility","pride","stability"],hierophant:["trust","tradition","guidance"],lovers:["connection","transparency","bond"],chariot:["momentum","timing","control"],strength:["inner power","patience","restraint"],hermit:["solitude","reflection","withdrawal"],wheel_of_fortune:["turning point","cycles","opportunity"],justice:["balance","reciprocity","clarity"],hanged_man:["surrender","inner growth","pause"],death:["transformation","new chapter","release"],temperance:["balance","flow","patience"],devil:["obsession","attachment","pull"],tower:["sudden change","shock","rebuild"],star:["hope","healing","vision"],moon:["uncertainty","sensitivity","anxiety"],sun:["emergence","confidence","success"],judgement:["message","awakening","decision"],world:["completion","independence","wholeness"]};
+
+const QUESTION_TYPES=[{id:"relationship",label:"💑 Relationship",desc:"Dating or married — what's really going on?"},{id:"breakup",label:"💔 Breakup & Healing",desc:"Processing a breakup, finding clarity"},{id:"new_love",label:"🌸 Single & New Love",desc:"Will someone new enter your life?"},{id:"general",label:"✨ General",desc:"Self-growth, path, energy check"}];
+
+
+
+
+
+function makeCardSVG(k,name){
+  const suit=getSuit(k),th=T[suit],rank=getRank(k),isMajor=suit==="major",isCourt=["P","N","Q","K"].includes(rank);
+  const numKey=k.split("_")[0],count=NUM_LABEL[numKey]||0,positions=SYM_POS[count]||[];
+  const majorNum=MAJOR_NUM[k]||"",courtLabel=rank==="P"?"PAGE":rank==="N"?"KNIGHT":rank==="Q"?"QUEEN":"KING";
+  const suitLabel=suit==="wands"?"WANDS":suit==="cups"?"CUPS":suit==="swords"?"SWORDS":suit==="pentacles"?"PENTACLES":"";
+  const id=k.replace(/_/g,'');
+  let inner="";
+  if(isMajor){
+    inner=`${majorNum?`<text x="60" y="28" text-anchor="middle" fill="${th.a}" font-size="10" font-family="serif" font-style="italic" opacity=".75">${majorNum}</text>`:""}
+    <circle cx="60" cy="84" r="32" fill="url(#glow${id})"/>
+    <circle cx="60" cy="84" r="26" fill="none" stroke="${th.b}" stroke-width=".8" opacity=".4"/>
+    ${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180,x1=60+20*Math.cos(r),y1=84+20*Math.sin(r),x2=60+28*Math.cos(r),y2=84+28*Math.sin(r);return`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${th.b}" stroke-width=".7" opacity=".45"/>`;}).join("")}
+    <text x="60" y="93" text-anchor="middle" font-size="26" fill="${th.a}" opacity=".9">${th.s}</text>
+    <rect x="16" y="140" width="88" height="18" rx="3" fill="${th.b}" opacity=".12"/>
+    <text x="60" y="153" text-anchor="middle" fill="${th.a}" font-size="9" font-family="serif" font-style="italic">${name}</text>`;
+  }else if(isCourt){
+    inner=`<text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="11" font-family="serif" font-weight="bold">${rank}</text>
+    <text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text>
+    <g transform="rotate(180,60,84)"><text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="11" font-family="serif" font-weight="bold">${rank}</text><text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text></g>
+    <circle cx="60" cy="76" r="36" fill="url(#glow${id})"/>
+    <circle cx="60" cy="76" r="28" fill="none" stroke="${th.b}" stroke-width=".8" opacity=".35"/>
+    <text x="60" y="90" text-anchor="middle" font-size="34" fill="${th.a}" opacity=".85">${th.s}</text>
+    <rect x="16" y="116" width="88" height="26" rx="3" fill="${th.b}" opacity=".1"/>
+    <text x="60" y="127" text-anchor="middle" fill="${th.a}" font-size="8" font-family="serif">${courtLabel}</text>
+    <text x="60" y="138" text-anchor="middle" fill="${th.b}" font-size="7.5" font-family="serif" opacity=".8">of ${suitLabel}</text>`;
+  }else{
+    inner=`<text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="12" font-family="serif" font-weight="bold">${rank}</text>
+    <text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text>
+    <g transform="rotate(180,60,84)"><text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="12" font-family="serif" font-weight="bold">${rank}</text><text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text></g>
+    ${positions.map(([px,py])=>`<text x="${px}" y="${py}" text-anchor="middle" font-size="14" fill="${th.a}" opacity=".82">${th.s}</text>`).join("")}
+    <rect x="16" y="148" width="88" height="14" rx="3" fill="${th.b}" opacity=".1"/>
+    <text x="60" y="159" text-anchor="middle" fill="${th.b}" font-size="7.5" font-family="serif" opacity=".85">${name}</text>`;
+  }
+  return`<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="bg${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${th.bg}"/><stop offset="100%" stop-color="#000"/></linearGradient><radialGradient id="glow${id}" cx="50%" cy="50%"><stop offset="0%" stop-color="${th.b}" stop-opacity=".25"/><stop offset="100%" stop-color="${th.b}" stop-opacity="0"/></radialGradient></defs><rect width="120" height="168" rx="8" fill="url(#bg${id})"/><rect x="2.5" y="2.5" width="115" height="163" rx="6.5" fill="none" stroke="${th.b}" stroke-width="1.5" opacity=".8"/><rect x="7" y="7" width="106" height="154" rx="4" fill="none" stroke="${th.b}" stroke-width=".5" opacity=".25" stroke-dasharray="3,5"/>${[[11,11],[109,11],[11,157],[109,157]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="${th.b}" opacity=".6"/>`).join("")}${inner}</svg>`;
+}
+
+function makeBackSVG(){
+  return`<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="backG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e0035"/><stop offset="100%" stop-color="#080010"/></linearGradient></defs><rect width="120" height="168" rx="8" fill="url(#backG)"/><rect x="2.5" y="2.5" width="115" height="163" rx="6.5" fill="none" stroke="#c084fc" stroke-width="1.5" opacity=".65"/><rect x="7" y="7" width="106" height="154" rx="4" fill="none" stroke="#c084fc" stroke-width=".5" opacity=".2" stroke-dasharray="3,5"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<text x="${22+c*38}" y="${34+r*36}" text-anchor="middle" font-size="13" fill="#c084fc" opacity=".1">✦</text>`).join("")).join("")}<circle cx="60" cy="84" r="30" fill="none" stroke="#e879f9" stroke-width=".8" opacity=".4"/><text x="60" y="93" text-anchor="middle" font-size="28" fill="#e879f9" opacity=".55">🔮</text>${[[11,11],[109,11],[11,157],[109,157]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="#c084fc" opacity=".45"/>`).join("")}</svg>`;
+}
+
+let state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
+
+function initTypeBtns(){
+  document.getElementById('type-btns').innerHTML=QUESTION_TYPES.map(t=>`<button class="type-btn" onclick="selectType('${t.id}')" id="type-${t.id}"><strong>${t.label}</strong><small>${t.desc}</small></button>`).join("");
+}
+initTypeBtns();
+
+function selectType(id){
+  state.qType=id;
+  document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('type-'+id).classList.add('active');
+  var pw=document.getElementById('partner-wrap');
+  var cw=document.getElementById('contact-wrap');
+  if(id==='new_love'||id==='general'){
+    pw.style.display='none';
+    cw.style.display='none';
+    state.partner='(none)';
+    state.contactStatus='N/A';
+  } else if(id==='relationship'){
+    pw.style.display='block';
+    cw.style.display='none';
+    state.contactStatus='In contact';
+  } else {
+    pw.style.display='block';
+    cw.style.display='block';
+    if(state.contactStatus==='N/A'||state.contactStatus==='In contact'){
+      state.contactStatus='No contact';
+      document.querySelectorAll('.contact-btn').forEach(function(b){b.classList.toggle('active',b.textContent==='No contact');});
+    }
+  }
+}
+
+function selectGender(g){state.gender=g;document.querySelectorAll('.gender-btn').forEach(b=>b.classList.toggle('active',b.textContent===g));}
+function selectContact(s){state.contactStatus=s;document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent===s));}
+function show(id){document.getElementById(id).classList.remove('hidden');}
+function hide(id){document.getElementById(id).classList.add('hidden');}
+function showOnly(id){['screen-intro','screen-cards','screen-loading','screen-result'].forEach(s=>s===id?show(s):hide(s));}
+
+function startReading(){
+  state.age=document.getElementById('age').value;
+  state.partner=document.getElementById('partner').value;
+  state.situation=document.getElementById('situation').value;
+  if(!state.qType||!state.situation.trim()||!state.age.trim()||!state.gender||!state.contactStatus)return;
+  state.cards=[...TAROT_CARDS].sort(()=>Math.random()-.5).slice(0,3);
+  state.revealed=[];state.result=null;state.unlocked=false;
+  renderCards();showOnly('screen-cards');
+}
+
+function renderCards(){
+  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 오픈됨';
+  document.getElementById('cards-row').innerHTML=state.cards.map((card,i)=>{
+    const isRev=state.revealed.includes(i);
+    const kws=(KEYWORDS[card]||[]).map(kw=>`<span class="kw">${kw}</span>`).join("");
+    return`<div class="card-slot"><div class="card-img-wrap ${isRev?'revealed':''}" onclick="revealCard(${i})">${isRev?makeCardSVG(card,CARD_DISPLAY[card]):makeBackSVG()}</div><span class="card-label ${isRev?'on':''}">${["Past","Present","Future"][i]}</span>${isRev?`<span class="card-name">${CARD_DISPLAY[card]}</span><div class="kw-wrap">${kws}</div>`:''}</div>`;
+  }).join("");
+}
+
+function revealCard(i){
+  if(state.revealed.includes(i))return;
+  state.revealed.push(i);renderCards();
+  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 오픈됨';
+  if(state.revealed.length===3){document.getElementById('reading-msg').classList.remove('hidden');setTimeout(doReading,800);}
+}
+
+async function doReading(){
+  showOnly('screen-loading');
+  const cardCtx=state.cards.map((c,i)=>["Past","Present","Future"][i]+": "+CARD_DISPLAY[c]).join(", ");
+
+  try{
+    const res=await fetch("/api/reading-en",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        qType:state.qType,
+        age:state.age,
+        gender:state.gender,
+        partner:state.partner,
+        contactStatus:state.contactStatus,
+        situation:state.situation,
+        cardCtx,
+      })
+    });
+    const data=await res.json();
+    if(data.error)throw new Error(data.error||"API error");
+    if(!data.id)throw new Error("ID 없음");
+    window.location.href='/result-en.html?id='+data.id;
+  }catch(err){
+    alert("오류가 발생했어요. 다시 시도해주세요.");
+    showOnly('screen-intro');
+  }
+}
+
+function renderResult(){
+  const r=state.result;
+  document.getElementById('result-cards').innerHTML=r.cards.map((c,i)=>{
+    const kws=(KEYWORDS[c]||[]).map(kw=>`<span class="kw">${kw}</span>`).join("");
+    return`<div class="result-card"><div class="result-card-img">${makeCardSVG(c,CARD_DISPLAY[c])}</div><span class="result-card-pos">${["과거","현재","미래"][i]}</span><span class="result-card-name">${CARD_DISPLAY[c]}</span><div class="kw-wrap">${kws}</div></div>`;
+  }).join("");
+
+  document.getElementById('text-past').textContent=r.past;
+
+  if(r.personality){
+    document.getElementById('text-personality').textContent=r.personality;
+    document.getElementById('personality-box').style.display='block';
+  }
+
+  document.getElementById('text-present').textContent=r.present;
+  document.getElementById('text-future').textContent=r.future;
+  document.getElementById('text-present-blur').textContent=r.present;
+  document.getElementById('text-future-blur').textContent=r.future;
+
+  if(r.combo){document.getElementById('text-combo').textContent=r.combo;document.getElementById('combo-box').style.display='block';}
+  if(r.summary){document.getElementById('text-summary').textContent=r.summary;document.getElementById('summary-box').classList.remove('hidden');}
+
+  if(r.tip){
+    const neuroIcon=state.qType==="couple"?"💡":"🧠";
+    document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${r.tip.title||"뇌과학 전략"}</span></div><div class="neuro-term-box"><p class="neuro-term">📌 ${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p></div><div class="neuro-mech-box"><p class="neuro-mech-label">뇌에서 일어나는 일</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
+  }
+
+  state.unlocked=false;show('paywall-area');hide('unlocked-area');
+}
+
+function unlock(){
+  hide('paywall-area');show('unlocked-area');state.unlocked=true;
+}
+
+function resetAll(){
+  state={qType:null,age:"",gender:"",contactStatus:"No contact",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
+  document.getElementById('age').value="";
+  document.getElementById('partner').value="";
+  document.getElementById('situation').value="";
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';
+  document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==="No contact"));
+  document.getElementById('personality-box').style.display='none';
+  document.getElementById('combo-box').style.display='none';
+  document.getElementById('summary-box').classList.add('hidden');
+  showOnly('screen-intro');
+}
+</script>
+
+<script>
+function copyLink(){
+  const url = 'https://lumitarot.net';
+  const cards = state.cards && state.cards.length ? state.cards.map(c => CARD_DISPLAY[c] || c).join(' · ') : '';
+  
+  // 1. text에서 url 부분을 완전히 삭제합니다.
+  const text = '🔮 My cards this reading\n' + cards + '\n\nSee the full reading at the link!';
+
+  if(navigator.share){
+    // 2. navigator.share는 text와 url을 별도 인자로 받으므로 여기서 url을 전달합니다.
+    navigator.share({
+      title: '🔮 Lumi Tarot Reading',
+      text: text,
+      url: url
+    }).catch(()=>{});
+  } else if(navigator.clipboard){
+    // 클립보드 복사 시에는 텍스트와 URL을 합쳐서 복사해주는 것이 사용자 입장에서 편합니다.
+    const fullText = text + '\n' + url;
+    navigator.clipboard.writeText(fullText).then(()=>{
+      const msg = document.getElementById('copy-msg');
+      msg.style.display = 'block';
+      setTimeout(()=>{msg.style.display = 'none';}, 3000);
+    });
+  } else {
+    // 하위 호환성용 textarea 복사 로직
+    const fullText = text + '\n' + url;
+    const el = document.createElement('textarea');
+    el.value = fullText;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    const msg = document.getElementById('copy-msg');
+    msg.style.display = 'block';
+    setTimeout(()=>{msg.style.display = 'none';}, 3000);
+  }
+}
+</script>
+
+</body>
+</html>

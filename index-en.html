@@ -427,7 +427,7 @@ function startReading(){
 }
 
 function renderCards(){
-  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 오픈됨';
+  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 revealed';
   document.getElementById('cards-row').innerHTML=state.cards.map((card,i)=>{
     const isRev=state.revealed.includes(i);
     const kws=(KEYWORDS[card]||[]).map(kw=>`<span class="kw">${kw}</span>`).join("");
@@ -438,7 +438,7 @@ function renderCards(){
 function revealCard(i){
   if(state.revealed.includes(i))return;
   state.revealed.push(i);renderCards();
-  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 오픈됨';
+  document.getElementById('reveal-count').textContent=state.revealed.length+'/3 revealed';
   if(state.revealed.length===3){document.getElementById('reading-msg').classList.remove('hidden');setTimeout(doReading,800);}
 }
 

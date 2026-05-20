@@ -245,7 +245,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
     <a href="/privacy.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Privacy Policy</a>
     <a href="/terms.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Terms of Use</a>
     <a href="/contact.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Contact</a>
-    <a href="/column-index.html" style="font-size:10px;color:rgba(167,139,250,.4);text-decoration:none;">Columns</a>
   </div>
 </div>
 
@@ -454,7 +453,7 @@ function resetAll(){
   document.getElementById('situation').value="";
   document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';
   document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==="연락 끊김"));
+  document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==="No contact"));
   document.getElementById('personality-box').style.display='none';
   document.getElementById('combo-box').style.display='none';
   document.getElementById('summary-box').classList.add('hidden');
@@ -473,7 +472,7 @@ async function sendChat(){
   if(!msg) return;
 
   if(chatCount >= CHAT_LIMIT){
-    addChatBubble('Want to go deeper? Try the Lumi Tarot PDF Reading for a full personal analysis 🔮', 'assistant');
+    addChatBubble('You\'ve used all 5 free messages. Pull new cards for a fresh reading ✨', 'assistant');
     document.getElementById('chat-input').disabled = true;
     document.getElementById('chat-send-btn').disabled = true;
     return;
@@ -496,7 +495,7 @@ async function sendChat(){
   document.getElementById('chat-messages').scrollTop = 999999;
 
   const readingContext = state.result ? 
-    '[리딩 결과 요약] 과거: ' + (state.result.past||'') + ' / 현재: ' + (state.result.present||'') + ' / 미래: ' + (state.result.future||'') : '';
+    '[Reading Summary] Past: ' + (state.result.past||'') + ' / Present: ' + (state.result.present||'') + ' / Future: ' + (state.result.future||'') : '';
 
   chatHistory.push({role:'user', content: msg});
 
@@ -507,7 +506,7 @@ async function sendChat(){
       body: JSON.stringify({messages: chatHistory, context: readingContext})
     });
     const data = await res.json();
-    const reply = data.text || '죄송해요, 다시 시도해주세요.';
+    const reply = data.text || 'Something went wrong. Please try again.';
     chatHistory.push({role:'assistant', content: reply});
     const ld = document.getElementById('chat-loading');
     if(ld) ld.remove();
@@ -580,7 +579,7 @@ function copyLink(){
       const reverseDisplay={};
       for(const [k,v] of Object.entries(CARD_DISPLAY)) reverseDisplay[v]=k;
       cards=data.cards.split(', ').map(s=>{
-        const name=s.replace(/^과거: |^현재: |^미래: /,'');
+        const name=s.replace(/^Past: |^Present: |^Future: |^과거: |^현재: |^미래: /,'');
         return reverseDisplay[name]||name;
       });
     }

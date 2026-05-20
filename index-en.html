@@ -391,15 +391,24 @@ function selectType(id){
   document.getElementById('type-'+id).classList.add('active');
   var pw=document.getElementById('partner-wrap');
   var cw=document.getElementById('contact-wrap');
-  if(id==='new_love'||id==='general'){
+  var sit=document.getElementById('situation');
+  if(id==='general'){
     pw.style.display='none';
     cw.style.display='none';
     state.partner='(none)';
     state.contactStatus='N/A';
+    sit.placeholder="e.g. I feel stuck in my career and unsure which direction to take. / I've been feeling disconnected from myself lately and want clarity on what energy surrounds me right now.";
+  } else if(id==='new_love'){
+    pw.style.display='none';
+    cw.style.display='none';
+    state.partner='(none)';
+    state.contactStatus='N/A';
+    sit.placeholder="e.g. I've been single for a while and feel ready for something new, but keep attracting the wrong people. / I want to know what kind of energy is entering my life in the next few months.";
   } else if(id==='relationship'){
     pw.style.display='block';
     cw.style.display='none';
     state.contactStatus='In contact';
+    sit.placeholder="e.g. We've been dating for a year but lately things feel distant. / I want to understand what my partner is really feeling right now.";
   } else {
     pw.style.display='block';
     cw.style.display='block';
@@ -407,6 +416,7 @@ function selectType(id){
       state.contactStatus='No contact';
       document.querySelectorAll('.contact-btn').forEach(function(b){b.classList.toggle('active',b.textContent==='No contact');});
     }
+    sit.placeholder="e.g. We broke up 3 months ago. They texted me yesterday and I want to know what they're really feeling. / I miss them and want to know if there's still a chance.";
   }
 }
 

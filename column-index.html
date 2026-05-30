@@ -14,24 +14,18 @@
   .star{position:absolute;border-radius:50%;background:white;animation:tw 3s ease-in-out infinite;}
   @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
   @keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
   .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:48px 20px 80px;animation:fi .7s ease-out;}
-
   .site-header{text-align:center;margin-bottom:48px;}
   .site-logo{font-size:13px;letter-spacing:3px;color:#a78bfa;text-decoration:none;display:inline-block;margin-bottom:24px;}
   .site-logo:hover{color:#f9a8d4;}
   .page-tag{display:inline-block;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:20px;padding:4px 14px;font-size:11px;color:#f9a8d4;letter-spacing:1.5px;margin-bottom:16px;}
   h1{font-size:30px;font-weight:700;color:#f0e6ff;margin-bottom:12px;line-height:1.4;}
   .page-desc{font-size:15px;color:#c4b5fd;line-height:1.8;max-width:500px;margin:0 auto;}
-
-  /* 칼럼 그리드 */
   .columns-grid{display:flex;flex-direction:column;gap:16px;margin-top:44px;}
-
   .column-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(192,132,252,.2);border-radius:18px;padding:22px 24px;text-decoration:none;display:block;transition:all .25s ease;position:relative;overflow:hidden;}
   .column-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(236,72,153,.06),rgba(124,58,237,.04));opacity:0;transition:opacity .25s;}
   .column-card:hover{border-color:rgba(236,72,153,.4);transform:translateY(-2px);box-shadow:0 8px 32px rgba(190,24,93,.15);}
   .column-card:hover::before{opacity:1;}
-
   .card-inner{position:relative;z-index:1;display:flex;align-items:flex-start;gap:16px;}
   .card-num{font-size:11px;color:#6d4c7e;letter-spacing:1px;min-width:24px;margin-top:3px;}
   .card-content{flex:1;}
@@ -40,23 +34,15 @@
   .card-desc{font-size:13px;color:#9d7cb8;line-height:1.7;}
   .card-arrow{font-size:16px;color:#6d4c7e;margin-top:2px;transition:transform .2s;}
   .column-card:hover .card-arrow{transform:translateX(4px);color:#f9a8d4;}
-
-  /* 준비중 카드 */
-  .column-card.coming{opacity:.45;pointer-events:none;}
-  .coming-badge{display:inline-block;background:rgba(109,76,126,.3);border-radius:6px;padding:3px 10px;font-size:10px;color:#9d7cb8;letter-spacing:1px;margin-bottom:8px;}
-
-  /* CTA */
   .cta-box{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(190,24,93,.15));border:1px solid rgba(192,132,252,.4);border-radius:20px;padding:28px;margin-top:48px;text-align:center;}
   .cta-box p{font-size:14px;color:#d8b4fe;margin-bottom:6px;}
   .cta-box h3{font-size:20px;color:#f0e6ff;font-weight:700;margin-bottom:16px;}
   .cta-btn{display:inline-block;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:12px;padding:13px 32px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(190,24,93,.4);}
-
   .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);}
   .footer a{font-size:11px;color:rgba(167,139,250,.4);text-decoration:none;margin:0 10px;}
   .footer a:hover{color:#a78bfa;}
   .footer p{font-size:11px;color:rgba(167,139,250,.3);margin-top:10px;}
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6V7M3HN7RW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -253,6 +239,66 @@
           <span class="card-tag">신경 회로 패턴</span>
           <p class="card-title">타로가 말하는 나의 연애 패턴</p>
           <p class="card-desc">왜 매번 비슷한 연애를 반복할까. 타로 카드는 내 뇌의 연애 회로를 거울처럼 보여주는 도구예요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-16.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#16</span>
+        <div class="card-content">
+          <span class="card-tag">코르티솔 · 스트레스 호르몬</span>
+          <p class="card-title">이별이 몸을 아프게 하는 이유</p>
+          <p class="card-desc">밥맛도 없고 잠도 못 자고 가슴이 실제로 아픈 느낌. 의지가 약해서가 아니에요. 뇌가 비상사태를 선포한 거예요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-17.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#17</span>
+        <div class="card-content">
+          <span class="card-tag">점화 효과 · 감각 기억</span>
+          <p class="card-title">노래만 들어도 그 사람이 생각나는 이유</p>
+          <p class="card-desc">잘 지내고 있었는데 노래 한 곡에 무너지는 경험. 뇌가 감각과 감정을 묶어서 저장하는 방식 때문이에요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-18.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#18</span>
+        <div class="card-content">
+          <span class="card-tag">확증 편향</span>
+          <p class="card-title">좋아하면 좋은 것만 보이는 이유</p>
+          <p class="card-desc">분명히 이상한 신호가 있었는데 왜 몰랐을까. 뇌가 보고 싶은 것만 보는 방식, 확증 편향이에요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-19.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#19</span>
+        <div class="card-content">
+          <span class="card-tag">신경가소성</span>
+          <p class="card-title">뇌를 바꾸면 연애 패턴이 바뀐다</p>
+          <p class="card-desc">왜 나는 항상 같은 유형에게 끌리고 같은 방식으로 상처받을까. 뇌 회로를 다시 쓰는 것이 가능해요.</p>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="/column-20.html" class="column-card">
+      <div class="card-inner">
+        <span class="card-num">#20</span>
+        <div class="card-content">
+          <span class="card-tag">직관 · 무의식</span>
+          <p class="card-title">타로가 무의식을 건드리는 이유</p>
+          <p class="card-desc">카드를 보는 순간 "맞아"라는 느낌이 드는 건 신비로운 현상이 아니에요. 뇌가 이미 알고 있던 것을 꺼내는 거예요.</p>
         </div>
         <span class="card-arrow">→</span>
       </div>

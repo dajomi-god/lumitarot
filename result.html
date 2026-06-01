@@ -140,7 +140,7 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
   <p class="section-text mb18" id="text-past"></p>
 
   <div class="personality-box" id="personality-box" style="display:none">
-    <p class="personality-label">🔍 상대방 성향 분석</p>
+    <p class="personality-label" id="personality-label">🔍 상대방 성향 분석</p>
     <p class="personality-text" id="text-personality"></p>
   </div>
 
@@ -164,7 +164,7 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
       <div class="paywall-overlay">
         <div class="lock">🔮</div>
         <h3>현재 · 미래 리딩</h3>
-        <p>상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
+        <p id="paywall-desc">상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요</p>
         <button class="btn-pay" onclick="unlock()">전체 리딩 보기 ✨</button>
         <span class="paywall-note">카드 조합 해석 · 뇌과학 전략 포함</span>
       </div>
@@ -421,6 +421,28 @@ function renderResult(){
   }).join("");
 
   document.getElementById('text-past').textContent=r.past;
+
+  // 카테고리별 라벨 조정
+  var fortuneTypes=['exam','job','money','social'];
+  var selfTypes=['solo','exam','job','money','social']; // 상대방이 없는 유형
+  var plabel=document.getElementById('personality-label');
+  var pdesc=document.getElementById('paywall-desc');
+  if(plabel){
+    if(selfTypes.includes(state.qType)){
+      plabel.textContent='🔍 나의 성향 분석';
+    } else {
+      plabel.textContent='🔍 상대방 성향 분석';
+    }
+  }
+  if(pdesc){
+    if(fortuneTypes.includes(state.qType)){
+      pdesc.innerHTML='지금의 흐름과<br>앞으로의 방향을 확인하세요';
+    } else if(state.qType==='solo'){
+      pdesc.innerHTML='지금 내 상태와<br>앞으로의 인연 흐름을 확인하세요';
+    } else {
+      pdesc.innerHTML='상대방의 지금 마음과<br>앞으로의 흐름을 확인하세요';
+    }
+  }
 
   if(r.personality){
     document.getElementById('text-personality').textContent=r.personality;

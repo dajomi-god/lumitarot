@@ -37,6 +37,9 @@
 .card-box { background:rgba(236,72,153,.07); border:1px solid rgba(236,72,153,.25); border-radius:20px; padding:24px; backdrop-filter:blur(12px); margin-bottom:12px; }
 label.field-label { font-size:11px; color:#fce7f3; letter-spacing:1px; display:block; margin-bottom:10px; }
 .type-btns { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+.cat-btns { display:flex; gap:8px; margin-bottom:12px; }
+.cat-btn { flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(192,132,252,.4); border-radius:12px; padding:14px; color:#e9d5ff; cursor:pointer; text-align:center; transition:all .2s; font-size:15px; font-weight:600; font-family:Georgia,serif; }
+.cat-btn.active { border-color:#c084fc; background:rgba(192,132,252,.22); color:#f0e6ff; }
 .gender-btns, .contact-btns { display:flex; gap:6px; margin-bottom:18px; }
 .type-btn { background:rgba(255,255,255,.05); border:1px solid rgba(236,72,153,.35); border-radius:11px; padding:11px 14px; color:#e9d5ff; cursor:pointer; text-align:left; transition:all .2s; font-size:14px; font-family:Georgia,serif; }
 .type-btn.active, .type-btn:hover { border-color:#ec4899; background:rgba(236,72,153,.18); color:#f9a8d4; }
@@ -140,6 +143,7 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
   <div id="screen-intro">
     <div class="card-box">
       <label class="field-label">✦ 무엇이 궁금하세요?</label>
+      <div class="cat-btns" id="cat-btns"></div>
       <div class="type-btns" id="type-btns"></div>
       <label class="field-label">✦ 내 정보</label>
       <div class="row2">
@@ -149,11 +153,11 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
           <button class="gender-btn" onclick="selectGender('남성')">남성</button>
         </div>
       </div>
-      <div id="partner-wrap">
+      <div id="partner-wrap" style="display:none;">
       <label class="field-label">✦ 상대방 이름 (또는 닉네임)</label>
       <input type="text" id="partner" placeholder="예: 그사람...">
       </div>
-      <div id="contact-wrap">
+      <div id="contact-wrap" style="display:none;">
       <label class="field-label">✦ 현재 연락 상태</label>
       <div class="contact-btns">
         <button class="contact-btn" onclick="selectContact('연락 중')">연락 중</button>
@@ -162,7 +166,7 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
       </div>
       </div>
       <label class="field-label">✦ 현재 상황을 자세히 알려주세요(필수)</label>
-      <textarea id="situation" rows="4" placeholder="예: 3개월 전 헤어짐, 어제 선톡 왔는데 속마음이 궁금해요 / 1년 정도 만났는데 최근 들어 대화가 줄어들고 소원해진 느낌이에요."></textarea>
+      <textarea id="situation" rows="4" placeholder="먼저 위에서 궁금한 주제를 선택해주세요"></textarea>
       <button class="btn-main" onclick="startReading()">카드 뽑기 🃏</button>
     </div>
     <p class="hint">✦ 타로는 참고용입니다 ✦</p>
@@ -332,7 +336,21 @@ const TAROT_CARDS=Object.keys(CARD_DISPLAY);
 
 const KEYWORDS={fool:["새 시작","자유","예측불가"],magician:["자신감","창조력","양면성"],high_priestess:["직관","내면 정리","기다림"],empress:["풍요","감성","모성"],emperor:["책임감","자존심","안정"],hierophant:["신뢰","중재","전통"],lovers:["소통","투명함","유대"],chariot:["추진력","타이밍","균형"],strength:["내면의 힘","인내","절제"],hermit:["은둔","성찰","고독"],wheel_of_fortune:["전환점","순환","기회"],justice:["균형","기브앤테이크","냉철함"],hanged_man:["의도된 정체","내면 성장","인내"],death:["변환","새 챕터","정리"],temperance:["조율","균형","과정"],devil:["집착","속박","재결합"],tower:["급변","충격","재구성"],star:["희망","치유","이상향"],moon:["불확실","예민함","불안"],sun:["드러남","자신감","성공"],judgement:["소식","각성","결정"],world:["완성","자립","자기세계"]};
 
-const QUESTION_TYPES=[{id:"couple",label:"💑 커플",desc:"사귀는 사이, 속마음과 관계운"},{id:"ex",label:"💔 재회",desc:"헤어진 상대, 재회 가능성은?"},{id:"some",label:"💭 썸",desc:"썸 타는 사이, 관계가 발전할까?"},{id:"solo",label:"🌸 솔로",desc:"향후 3개월, 새 인연이 올까?"}];
+const CATEGORIES=[{id:"love",label:"💕 연애운"},{id:"fortune",label:"✨ 일반운세"}];
+const QUESTION_TYPES={
+  love:[
+    {id:"couple",label:"💑 커플",desc:"사귀는 사이, 속마음과 관계운"},
+    {id:"ex",label:"💔 재회",desc:"헤어진 상대, 재회 가능성은?"},
+    {id:"some",label:"💭 썸",desc:"썸 타는 사이, 관계가 발전할까?"},
+    {id:"solo",label:"🌸 솔로",desc:"향후 3개월, 새 인연이 올까?"}
+  ],
+  fortune:[
+    {id:"exam",label:"📚 합격운",desc:"시험/취업, 합격할 수 있을까?"},
+    {id:"job",label:"💼 이직·직장운",desc:"이직, 직장 내 상황이 궁금하다면"},
+    {id:"money",label:"💰 금전운",desc:"재물, 돈의 흐름이 궁금하다면"},
+    {id:"social",label:"🤝 대인관계운",desc:"인간관계, 사람들과의 흐름"}
+  ]
+};
 
 
 
@@ -381,9 +399,33 @@ function makeBackSVG(){
 let state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
 
 function initTypeBtns(){
-  document.getElementById('type-btns').innerHTML=QUESTION_TYPES.map(t=>`<button class="type-btn" onclick="selectType('${t.id}')" id="type-${t.id}"><strong>${t.label}</strong><small>${t.desc}</small></button>`).join("");
+  // 대분류 버튼 렌더링
+  document.getElementById('cat-btns').innerHTML=CATEGORIES.map(c=>`<button class="cat-btn" onclick="selectCategory('${c.id}')" id="cat-${c.id}">${c.label}</button>`).join("");
+  // 소분류는 처음엔 비어있음
+  document.getElementById('type-btns').innerHTML="";
 }
 initTypeBtns();
+
+var currentCategory=null;
+
+function selectCategory(catId){
+  currentCategory=catId;
+  // 대분류 active 표시
+  document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('cat-'+catId).classList.add('active');
+  // 소분류 버튼 렌더링
+  var types=QUESTION_TYPES[catId];
+  document.getElementById('type-btns').innerHTML=types.map(t=>`<button class="type-btn" onclick="selectType('${t.id}')" id="type-${t.id}"><strong>${t.label}</strong><small>${t.desc}</small></button>`).join("");
+  // 카테고리 바꾸면 기존 선택 초기화
+  state.qType=null;
+  // 연애운이 아니면 상대방/연락 필드 숨김
+  var pw=document.getElementById('partner-wrap');
+  var cw=document.getElementById('contact-wrap');
+  if(catId==='fortune'){
+    pw.style.display='none';
+    cw.style.display='none';
+  }
+}
 
 function selectType(id){
   state.qType=id;
@@ -391,15 +433,31 @@ function selectType(id){
   document.getElementById('type-'+id).classList.add('active');
   var pw=document.getElementById('partner-wrap');
   var cw=document.getElementById('contact-wrap');
+  var sit=document.getElementById('situation');
+  // 운세 카테고리 (특정 상대 없음)
+  if(id==='exam'||id==='job'||id==='money'||id==='social'){
+    pw.style.display='none';
+    cw.style.display='none';
+    state.partner='(해당없음)';
+    state.contactStatus='해당없음';
+    if(id==='exam') sit.placeholder="예: 다음 달에 공무원 시험 봐요. 합격할 수 있을까요? / 자격증 시험 준비 중인데 결과가 궁금해요.";
+    else if(id==='job') sit.placeholder="예: 이직을 고민 중인데 지금 옮기는 게 맞을까요? / 직장 내 인간관계나 승진이 궁금해요.";
+    else if(id==='money') sit.placeholder="예: 요즘 금전 상황이 빠듯한데 흐름이 어떨까요? / 투자나 큰 지출을 앞두고 있어요.";
+    else sit.placeholder="예: 새로운 모임에 들어갔는데 잘 어울릴 수 있을까요? / 요즘 인간관계가 힘든데 흐름이 궁금해요.";
+    return;
+  }
+  // 연애운 - 솔로
   if(id==='solo'){
     pw.style.display='none';
     cw.style.display='none';
     state.partner='(솔로)';
     state.contactStatus='해당없음';
+    sit.placeholder="예: 솔로인지 오래됐는데 언제쯤 새 인연이 올까요? / 좋은 사람을 만나고 싶은데 흐름이 궁금해요.";
   } else if(id==='couple'){
     pw.style.display='block';
     cw.style.display='none';
     state.contactStatus='연애 중';
+    sit.placeholder="예: 1년 정도 만났는데 요즘 소원해진 느낌이에요. 상대 속마음이 궁금해요.";
   } else {
     pw.style.display='block';
     cw.style.display='block';
@@ -407,6 +465,8 @@ function selectType(id){
       state.contactStatus='연락 끊김';
       document.querySelectorAll('.contact-btn').forEach(function(b){b.classList.toggle('active',b.textContent==='연락 끊김');});
     }
+    if(id==='ex') sit.placeholder="예: 3개월 전 헤어졌는데 어제 연락이 왔어요. 재회 가능성이 궁금해요.";
+    else sit.placeholder="예: 썸 타는 중인데 상대 마음을 모르겠어요. 발전 가능성이 있을까요?";
   }
 }
 
@@ -418,9 +478,13 @@ function showOnly(id){['screen-intro','screen-cards','screen-loading','screen-re
 
 function startReading(){
   state.age=document.getElementById('age').value;
-  state.partner=document.getElementById('partner').value;
+  // 상대방 칸이 보이는 경우(커플/재회/썸)에만 input값 사용
+  var noPartnerTypes=['solo','exam','job','money','social'];
+  if(!noPartnerTypes.includes(state.qType)){
+    state.partner=document.getElementById('partner').value;
+  }
   state.situation=document.getElementById('situation').value;
-  if(!state.qType||!state.situation.trim()||!state.age.trim()||!state.gender||!state.contactStatus)return;
+  if(!state.qType||!state.situation.trim()||!state.age.trim()||!state.gender){return;}
   state.cards=[...TAROT_CARDS].sort(()=>Math.random()-.5).slice(0,3);
   state.revealed=[];state.result=null;state.unlocked=false;
   renderCards();showOnly('screen-cards');
@@ -510,6 +574,9 @@ function resetAll(){
   document.getElementById('partner').value="";
   document.getElementById('situation').value="";
   document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));document.getElementById('partner-wrap').style.display='block';document.getElementById('contact-wrap').style.display='block';
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('type-btns').innerHTML="";
+  currentCategory=null;
   document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.contact-btn').forEach(b=>b.classList.toggle('active',b.textContent==="연락 끊김"));
   document.getElementById('personality-box').style.display='none';

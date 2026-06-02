@@ -215,21 +215,22 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
 
 <a href="/" style="display:block;text-align:center;text-decoration:none;margin-bottom:0;border:1.5px solid rgba(192,132,252,.5);border-radius:13px;padding:14px;color:#c4b5fd;font-size:15px;font-weight:600;font-family:Georgia,serif;letter-spacing:.5px;">다시 보기 🔮</a>
 
-<div style="text-align:center;margin-top:14px;margin-bottom:4px;">
-  <button onclick="copyLink()" id="copy-btn"
-    style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
-    🔗 친구에게 공유하기
-  </button>
-  <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
-  <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
-</div>
-
-    <!-- 칼럼 박스 -->
-    <div style="background:linear-gradient(135deg,rgba(192,132,252,.08),rgba(236,72,153,.06));border:1px solid rgba(192,132,252,.25);border-radius:16px;padding:20px;margin-bottom:14px;text-align:center;">
+    <!-- 공유 + 복채 통합 박스 -->
+    <div style="background:linear-gradient(135deg,rgba(192,132,252,.08),rgba(236,72,153,.06));border:1px solid rgba(192,132,252,.25);border-radius:16px;padding:20px;margin-top:14px;margin-bottom:14px;text-align:center;">
       <p style="font-size:15px;color:#f0e6ff;line-height:1.9;margin-bottom:4px;">🔮 운을 받는 가장 빠른 방법은</p>
       <p style="font-size:15px;color:#f0e6ff;font-weight:700;margin-bottom:12px;">조금이라도 나누는 것이에요</p>
-      <p style="font-size:12px;color:#a78bfa;margin-bottom:14px;">리딩이 마음에 드셨다면 복채를 남겨주세요 ✨<br><span style="font-size:11px;color:#6d4c7e;">소액도 괜찮아요 ☕</span></p>
-      <a href="https://qr.kakaopay.com/Ej8CaayZZ" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#FEE500,#F5C800);border-radius:12px;padding:12px 28px;color:#191919;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.3px;">💛 카카오페이로 복채 내기</a>
+      <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;">리딩이 마음에 드셨다면 공유하거나 복채를 남겨주세요 ✨<br><span style="font-size:11px;color:#6d4c7e;">소액도 괜찮아요 ☕</span></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="copyLink()" id="copy-btn"
+          style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:700;color:white;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(124,58,237,.4);">
+          🔗 친구에게 공유하기
+        </button>
+        <a href="https://qr.kakaopay.com/Ej8CaayZZ" target="_blank"
+          style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FEE500,#F5C800);border-radius:12px;padding:11px 20px;color:#191919;font-size:13px;font-weight:700;text-decoration:none;">
+          💛 복채 내기
+        </a>
+      </div>
+      <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ 링크가 복사됐어요! 카톡에 붙여넣기 하세요 🔮</p>
     </div>
     <a href="/column-index.html" style="display:block;margin-bottom:14px;background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(236,72,153,.07));border:1px solid rgba(192,132,252,.3);border-radius:16px;padding:16px 20px;text-decoration:none;">
       <p style="font-size:11px;color:#a78bfa;letter-spacing:1.5px;margin-bottom:4px;font-weight:600;">🧠 뇌과학 × 연애 칼럼</p>
@@ -617,6 +618,7 @@ function copyLink(){
       cards
     };
     state.cards=cards;
+    state.qType=data.qType||null;
     state.unlocked=false;
     renderResult();
   }catch(e){

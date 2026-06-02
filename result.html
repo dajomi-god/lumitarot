@@ -567,7 +567,7 @@ function addChatBubble(text, role){
 }
 
 function copyLink(){
-  const url=window.location.href;
+  const url='https://lumitarot.net';
   if(navigator.share){
     navigator.share({title:'🔮 루미타로 타로 리딩',text:'너도 무료로 타로 봐봐!',url:'https://lumitarot.net'}).catch(()=>{});
   } else if(navigator.clipboard){

@@ -229,7 +229,7 @@ module.exports = async function handler(req, res) {
 
     // KV에 저장
     const id = require('crypto').randomUUID();
-    await kv.set(id, { text, tip, cards: cardCtx }, { ex: 3600 });
+    await kv.set(id, { text, tip, cards: cardCtx, qType }, { ex: 3600 });
     res.status(200).json({ id });
 
   } catch (err) {

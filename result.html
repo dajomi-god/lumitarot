@@ -224,14 +224,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
   <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">친구에게 공유하면 함께 타로 볼 수 있어요</p>
 </div>
 
-<div style="background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(124,58,237,.15));border:1px solid rgba(236,72,153,.6);border-radius:20px;padding:24px;margin-top:32px;text-align:center;box-shadow:0 4px 20px rgba(236,72,153,.15);">
-  <p style="font-size:13px;color:#d8b4fe;margin-bottom:6px;">✨ 리딩이 마음에 드셨나요?</p>
-  <p style="font-size:16px;color:#f0e6ff;font-weight:700;margin-bottom:4px;">루미타로의 심층 PDF 리딩</p>
-  <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;line-height:1.7;">카드 한 장 한 장을 루미타로가 직접 해석해드려요.<br>AI가 담지 못한 깊은 이야기를 전해드립니다.</p>
-  <a href="https://naver.me/GvWXOYp3" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#be185d);border-radius:12px;padding:13px 28px;color:white;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 16px rgba(124,58,237,.4);">📖 PDF 리딩 신청하기</a>
-  <p style="font-size:10px;color:#6d4c7e;margin-top:12px;">* 네이버 폼으로 연결됩니다</p>
-</div>
-
     <!-- 칼럼 박스 -->
     <div style="background:linear-gradient(135deg,rgba(192,132,252,.08),rgba(236,72,153,.06));border:1px solid rgba(192,132,252,.25);border-radius:16px;padding:20px;margin-bottom:14px;text-align:center;">
       <p style="font-size:15px;color:#f0e6ff;line-height:1.9;margin-bottom:4px;">🔮 운을 받는 가장 빠른 방법은</p>
@@ -502,7 +494,7 @@ async function sendChat(){
   if(!msg) return;
 
   if(chatCount >= CHAT_LIMIT){
-    addChatBubble('더 깊은 이야기가 궁금하신가요? 루미타로의 심층 PDF 리딩을 받아보세요 🔮', 'assistant');
+    addChatBubble('더 궁금한 점이 있으시면 다시 카드를 뽑아보세요 🔮', 'assistant');
     document.getElementById('chat-input').disabled = true;
     document.getElementById('chat-send-btn').disabled = true;
     return;
@@ -544,7 +536,7 @@ async function sendChat(){
 
     const remaining = CHAT_LIMIT - chatCount;
     if(remaining === 0){
-      addChatBubble('무료 대화 5회를 모두 사용하셨어요. 더 깊은 분석이 필요하시면 PDF 리딩을 신청해보세요 📖', 'assistant');
+      addChatBubble('무료 대화 5회를 모두 사용하셨어요. 리딩이 마음에 드셨다면 복채 한 잔 부탁드려요 ☕', 'assistant');
       input.disabled = true;
       btn.disabled = true;
     } else {

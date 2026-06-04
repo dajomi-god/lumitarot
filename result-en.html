@@ -140,7 +140,7 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
   <p class="section-text mb18" id="text-past"></p>
 
   <div class="personality-box" id="personality-box" style="display:none">
-    <p class="personality-label">🔍 Personality Analysis</p>
+    <p class="personality-label" id="personality-label">🔍 Personality Analysis</p>
     <p class="personality-text" id="text-personality"></p>
   </div>
 
@@ -164,7 +164,7 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
       <div class="paywall-overlay">
         <div class="lock">🔮</div>
         <h3>Present · Future Reading</h3>
-        <p>See what's happening right now<br>and where things are heading</p>
+        <p id="paywall-desc">See what's happening right now<br>and where things are heading</p>
         <button class="btn-pay" onclick="unlock()">Unlock Full Reading ✨</button>
         <span class="paywall-note">Includes card combination · Neuro strategy</span>
       </div>
@@ -215,13 +215,17 @@ input[type=number]::-webkit-inner-spin-button { opacity:.3; }
 
 <a href="/index-en.html" style="display:block;text-align:center;text-decoration:none;margin-bottom:0;border:1.5px solid rgba(192,132,252,.5);border-radius:13px;padding:14px;color:#c4b5fd;font-size:15px;font-weight:600;font-family:Georgia,serif;letter-spacing:.5px;">Read Again 🔮</a>
 
-<div style="text-align:center;margin-top:14px;margin-bottom:4px;">
-  <button onclick="copyLink()" id="copy-btn"
-    style="display:inline-flex;align-items:center;gap:8px;background:#FEE500;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#191919;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(254,229,0,.4);">
-    🔗 Share with a friend
-  </button>
+<div style="background:linear-gradient(135deg,rgba(192,132,252,.08),rgba(236,72,153,.06));border:1px solid rgba(192,132,252,.25);border-radius:16px;padding:20px;margin-top:14px;margin-bottom:14px;text-align:center;">
+  <p style="font-size:15px;color:#f0e6ff;line-height:1.9;margin-bottom:4px;">🔮 The fastest way to receive good energy</p>
+  <p style="font-size:15px;color:#f0e6ff;font-weight:700;margin-bottom:12px;">is to share a little of your own</p>
+  <p style="font-size:12px;color:#a78bfa;margin-bottom:16px;">If this reading resonated, share it or leave a tip ✨<br><span style="font-size:11px;color:#6d4c7e;">Even a small amount means a lot ☕</span></p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <button onclick="copyLink()" id="copy-btn"
+      style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#7c3aed,#be185d);border:none;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:700;color:white;cursor:pointer;font-family:Georgia,serif;box-shadow:0 4px 14px rgba(124,58,237,.4);">
+      🔗 Share with a friend
+    </button>
+  </div>
   <p id="copy-msg" style="font-size:11px;color:#a78bfa;margin-top:8px;display:none;">✅ Link copied! Share it anywhere 🔮</p>
-  <p style="font-size:10px;color:#6d4c7e;margin-top:4px;">Share with a friend and read together</p>
 </div>
 
 <div style="background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(124,58,237,.15));border:1px solid rgba(236,72,153,.6);border-radius:20px;padding:24px;margin-top:32px;text-align:center;box-shadow:0 4px 20px rgba(236,72,153,.15);">
@@ -420,6 +424,21 @@ function renderResult(){
 
   document.getElementById('text-past').textContent=r.past;
 
+  // Category-based label adjustment
+  var selfTypes=['new_love','general'];
+  var plabel=document.getElementById('personality-label');
+  var pdesc=document.getElementById('paywall-desc');
+  if(plabel){
+    plabel.textContent = selfTypes.includes(state.qType) ? '🔍 Your Energy Analysis' : '🔍 Personality Analysis';
+  }
+  if(pdesc){
+    if(selfTypes.includes(state.qType)){
+      pdesc.innerHTML='See what\'s happening now<br>and where your energy is heading';
+    } else {
+      pdesc.innerHTML='See what\'s really happening<br>and where this is heading';
+    }
+  }
+
   if(r.personality){
     document.getElementById('text-personality').textContent=r.personality;
     document.getElementById('personality-box').style.display='block';
@@ -435,7 +454,7 @@ function renderResult(){
 
   if(r.tip){
     const neuroIcon=state.qType==="couple"?"💡":"🧠";
-    const neuroTitleClean=(r.tip.title||"뇌과학 전략").replace(/[\u{1F300}-\u{1FFFF}]|[\u2600-\u27FF]/gu,"").trim();
+    const neuroTitleClean=(r.tip.title||"Neuro Strategy").replace(/[\u{1F300}-\u{1FFFF}]|[\u2600-\u27FF]/gu,"").trim();
     document.getElementById('neuro-wrap').innerHTML=`<div class="neuro-box"><div class="neuro-header"><div class="neuro-icon">${neuroIcon}</div><span class="neuro-title">${neuroTitleClean||"NEURO STRATEGY"}</span></div><p class="neuro-term">${r.tip.term}</p><p class="neuro-term-en">${r.tip.termEn}</p><hr class="neuro-divider"><p class="neuro-mech-label">What's happening in your brain</p><p class="neuro-mech-text">${r.tip.mechanism}</p></div>`;
   }
 
@@ -514,7 +533,7 @@ async function sendChat(){
 
     const remaining = CHAT_LIMIT - chatCount;
     if(remaining === 0){
-      addChatBubble('You\'ve used all 5 free messages. For a deeper analysis, check out the PDF Reading 📖', 'assistant');
+      addChatBubble('You\'ve used all 5 free messages. If this reading resonated, a small tip means a lot ☕', 'assistant');
       input.disabled = true;
       btn.disabled = true;
     } else {
@@ -544,7 +563,7 @@ function addChatBubble(text, role){
 }
 
 function copyLink(){
-  const url=window.location.href;
+  const url='https://lumitarot.net/index-en.html';
   if(navigator.share){
     navigator.share({title:'🔮 Lumi Tarot Reading',text:'Get your free tarot reading!',url:'https://lumitarot.net/index-en.html'}).catch(()=>{});
   } else if(navigator.clipboard){
@@ -595,6 +614,7 @@ function copyLink(){
       cards
     };
     state.cards=cards;
+    state.qType=data.qType||null;
     state.unlocked=false;
     renderResult();
   }catch(e){

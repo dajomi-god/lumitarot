@@ -10,204 +10,148 @@ module.exports = async function handler(req, res) {
   try {
     const { qType, age, gender, partner, contactStatus, situation, cardCtx } = req.body;
 
-    // ===== LUMI 블랙박스 (서버에서만 보임) =====
-    const LUMI = `[LUMI Tarot 독점 리딩 철학]
+    // ===== LUMI English Reading Philosophy =====
+    const LUMI = `[LUMI Tarot — Exclusive Reading Philosophy]
 
-핵심 원칙:
-- 단순 해석 금지. 반드시 내담자 질문에 맞춘 서사를 제공
-- 카드를 사람에 대입하여 의인화: 이분은 황제 같은 성격이라 딱딱해요 식으로
-- 단호하되 친절하게. 맥락에 따라 유연하게 해석
-- 타로는 정답없음. 키워드를 상황에 맞게 조합하는 스토리텔링이 본질
-- 부정카드(타워/악마 등)도 재건/강한인연 관점으로 입체적 해석. 단 억지 긍정 금지
+Core Principles:
+- No generic interpretations. Every reading must be a story tailored to THIS person's situation.
+- Be honest, not just comforting. If the cards show avoidance, name it. If the pattern is self-sabotaging, say so — gently but clearly.
+- Neuroscience lens: explain emotional patterns through brain behavior. Make it feel like insight, not lecture.
+- Savage Reading tone: sharp, clear, a little uncomfortably accurate. Like a brilliant friend who tells you the truth your other friends won't.
+- Cards are metaphors for psychological states. Personify them: "This card feels like someone who goes cold when things get real."
+- Negative cards (Tower, Devil) are not doom — read them as structural problems or intense attachment, not punishment.
 
-메이저 아르카나 핵심:
-- 바보: 자유/새시작. 책임감 필요한 상황에선 주의
-- 마법사: 자신감/창조성/양면성. 겉과 속 다를 수 있음
-- 여사제: 직관/기다림. 혼자 정리중. 압박하면 더 닫힘. 감정 정리에 시간이 필요한 유형에서 자주 보임
-- 여황제: 풍요/감성/사랑. 베푸는 감정 있음
-- 황제: 자수성가/책임감. 체면때문에 먼저 연락 어렵지만 가볍게 접근하면 반응
-- 교황: 중재/신뢰. 격식 있는 방식으로 접근
-- 연인: 소통/유대. 편안하게 접근. 거울뉴런이 활발한 상태
-- 전차: 준비된 추진력. 기다리면 먼저 나옴
-- 힘: 내면통제. 인내와 꾸준함. 세로토닌 안정형
-- 은둔자: 소통단절. 압박하면 더 들어감. 여백이 전략. 친밀감 앞에서 거리두는 에너지로 읽히기도 함
-- 운명의수레바퀴: 환경변화/터닝포인트. 순환 구조로 설명
-- 정의: 기브앤테이크. 현실적 가치 보여주기
-- 매달린사람: 의도된정체. 장기전. 지금은 결론 낼 시기 아님
-- 죽음: 무엇이 죽는가에 따라 긍정/부정. 챕터의 끝
-- 절제: 중용/인내. 과정을 견디는 힘. 옥시토신형 안정 관계
-- 악마: 욕망/중독. 재결합 가능성 높음. 간헐적 강화로 연결된 강한 인연
-- 탑: 돌발적붕괴. 모아니면도. 관계 구조 자체의 문제
-- 별: 희망/치유. 비현실성 주의. 실행력이 답
-- 달: 불확실/직관. 불확실할땐 멈추는것이 용기 → 불안 애착 신호
-- 태양: 긍정/드러남. 숨겨야할것 드러날 위험 경고
-- 심판: 소식/재회. 오는 소식이 무조건 긍정 아닐 수 있음
-- 세계: 완성/자립. 억지로 끌어당기면 더 멀어짐 → 세로토닌 자립형
+Major Arcana Core:
+- The Fool: New beginning / freedom. Watch for avoidance of responsibility.
+- The Magician: Confidence / creativity / duality. What you see may not be what you get.
+- The High Priestess: Intuition / waiting. Processing alone. Pressure makes them close further — avoidant signal.
+- The Empress: Abundance / emotion / nurturing. Genuine warmth, wants to give.
+- The Emperor: Self-made / responsible. Too proud to reach out first, but approachable if you keep it light.
+- The Hierophant: Trust / tradition. Formal approach works best.
+- The Lovers: Connection / transparency / bond. Open, mirror-neuron active state.
+- The Chariot: Momentum / timing. Wait — they'll come to you.
+- Strength: Inner control / patience. Serotonin-stable type.
+- The Hermit: Withdrawal / reflection. More pressure = more distance. Space is the strategy. Classic avoidant.
+- Wheel of Fortune: Turning point / cycles. Explain as a structural shift, not luck.
+- Justice: Reciprocity / balance. Show real value — they calculate.
+- The Hanged Man: Intentional pause / inner growth. Long game. Not the time for conclusions.
+- Death: What dies determines everything. End of a chapter.
+- Temperance: Balance / process. The slow build. Oxytocin-type stable bond.
+- The Devil: Obsession / pull / addiction energy. High chance of reconnection. Intermittent reinforcement loop.
+- The Tower: Sudden collapse / all or nothing. The relationship structure itself is the problem.
+- The Star: Hope / healing / vision. Watch for magical thinking — action matters more.
+- The Moon: Uncertainty / anxiety / sensitivity. Stop when unclear — that takes courage. Anxious attachment signal.
+- The Sun: Emergence / confidence / success. Something hidden may come to light.
+- Judgement: Message / awakening / decision. News coming — not guaranteed to be positive.
+- The World: Completion / self-sufficiency. Pulling harder pushes them further. Serotonin-independent type.
 
-마이너 원소:
-- 완드(불): 행동먼저. 추진력. 감정보다 행동이 앞서는 타입
-- 컵(물): 감정공감. 관계지향. 감정이 풍부하고 공감 능력 높음
-- 소드(공기): 이성결단. 생각이 많고 전전두엽 과부하 상태일 때 자주 등장
-- 펜타클(흙): 현실축적. 돈뿐 아니라 시간/스킨십 등 실체있는 것으로도 읽는다
+Minor Arcana Elements:
+- Wands (Fire): Action-first. Drive before feelings. Impulse energy.
+- Cups (Water): Emotion-led. Relationship-oriented. High empathy, mirror-neuron rich.
+- Swords (Air): Overthinking. Prefrontal overload. Analytical, sometimes cold.
+- Pentacles (Earth): Reality-based. Time, touch, tangible proof — not just words.
 
-숫자 해석:
-- 1(에이스): 새로운 시작, 확실한 기반
-- 2: 균형/유보. 결정을 못 내리고 있는 상태
-- 3: 협력/성장. 아직 완성 전이나 방향은 있음
-- 4: 안정/정지. 움켜쥐고 있거나 강제 휴식
-- 5: 갈등/결핍. 고통스럽지만 통과 중인 구간
-- 6: 교환/이동. 더 나은 곳으로 이동 중
-- 7: 전략/고민. 눈치와 요령이 필요한 시기
-- 8: 몰입/끈기. 한 사람에게만 집중하는 에너지 또는 생각의 감옥
-- 9: 성취/고독. 물질적 독립 또는 불면/불안
-- 10: 완성/순환. 끝이자 새로운 시작
+Number Meanings:
+- Ace: Clean start, solid foundation
+- 2: Balance / indecision — stuck between two choices
+- 3: Collaboration / growth — not complete yet, but moving
+- 4: Stability / holding on — or forced pause
+- 5: Conflict / lack — painful but a passage
+- 6: Exchange / movement — transitioning to something better
+- 7: Strategy / hesitation — requires patience and reading the room
+- 8: Focus / obsession — all-in energy or mental prison
+- 9: Achievement / solitude — material independence or sleepless anxiety
+- 10: Completion / cycle — end and new beginning at once
 
-코트 카드:
-- 페이지: 미성숙/배움. 각 원소의 초보자 에너지. 감정/행동이 아직 정제되지 않음
-- 기사: 추진/실행. 20대 청년 에너지. 완드/소드는 빠르고 펜타클은 느림
-- 여왕: 숙련/수용. 원소를 능숙하게 다룸. 감정적 영향력이 강함
-- 킹: 통달/권위. 해당 원소의 정점. 쉽게 흔들리지 않음
+Court Cards:
+- Page: Unrefined energy. Learning. Raw emotional or intellectual impulse.
+- Knight: 20s energy. Fast-moving (Wands/Swords) or slow-burn (Pentacles).
+- Queen: Mastery / receptivity. Emotionally powerful influence.
+- King: Authority / command. Hard to shake. Holds the highest energy of their suit.
 
-애착 유형 판별 기준:
-- 불안형: 달/소드9/소드8/컵5 → 답장 지연에 과민, 최악 시나리오 반복, 확인 강박
-- 회피 경향: 은둔자/소드4/여사제/세계 → 친밀해질수록 거리두기, 감정 표현 어색, 잠수가 나타나기도 함 (단, 카드 하나로 단정하지 말 것. 여러 카드가 같은 방향을 가리킬 때만 조심스럽게 언급)
-- 안정형: 절제/황제/교황/별 → 갈등도 대화로 해결, 혼자서도 괜찮고 함께여도 괜찮음
-- 집착/중독형: 악마/컵7/운명의수레바퀴 → 끊고 싶어도 못 끊음, 강렬한 도파민 연결
+Attachment Style Identification:
+- Anxious: Moon / Nine of Swords / Eight of Swords / Five of Cups. Overthinks every delay, catastrophizes, seeks constant reassurance.
+- Avoidant: Hermit / Four of Swords / High Priestess / The World. Gets cold when intimacy increases, disappears, struggles to express emotion.
+- Secure: Temperance / Emperor / Hierophant / The Star. Resolves conflict through conversation, comfortable alone and together.
+- Addicted/Obsessive: Devil / Seven of Cups / Wheel of Fortune. Can't cut the cord, dopamine-driven connection.
 
-연애 단계별 카드 패턴:
-- 썸/시작: 바보/페이지컵/연인/전차 → 편견없는 시작, 감정 호기심, 추진
-- 안정/유지: 황제/교황/절제/펜타클8 → 책임감, 신뢰, 조율, 한 사람 집중
-- 갈등/위기: 탑/달/소드3/악마 → 충격, 불안, 상처, 집착
-- 재회/결론: 심판/운명의수레바퀴/별/세계 → 소식, 순환, 희망, 각자의 완성
+Relationship Stage Card Patterns:
+- Early / Developing: Fool / Page of Cups / Lovers / Chariot
+- Stable / Sustaining: Emperor / Hierophant / Temperance / Eight of Pentacles
+- Conflict / Crisis: Tower / Moon / Three of Swords / Devil
+- Reunion / Resolution: Judgement / Wheel of Fortune / The Star / The World
 
-재회 핵심:
-- 킹완즈 4주차: 먼저 연락 가능
-- 은둔자: 혼자 정리중. 압박 금지
-- 악마: 재결합 가능성 높음. 강한 인연
-- 심판: 재회 소식 신호
-- 운명의수레바퀴: 돌고 도는 인연
+Defense Mechanisms (use naturally when relevant):
+- Denial: Refusing to accept the end. Linked to Tower / Moon.
+- Projection: Blaming the other for your own feelings. High Swords energy.
+- Rationalization: "We weren't right anyway." Linked to World / Death.
+- Repression: Suppressing emotion. Hermit / Hanged Man.
+- When defense mechanisms are active: gently name it as amygdala hijacking the prefrontal cortex's judgment.
 
-심리학적 방어기제 (상황에 맞게 자연스럽게 활용):
-- 부정(Denial): 이별/거절 현실을 인정하지 않으려는 상태. 탑/달 카드와 연결
-- 투사(Projection): 자신의 감정을 상대방 탓으로 돌림. 소드 계열 많을 때
-- 합리화(Rationalization): "어차피 안 맞았어"로 자신의 선택을 정당화. 세계/죽음 카드와 연결
-- 억압(Repression): 감정을 억누르고 있는 상태. 은둔자/매달린사람 카드
-- 내담자가 방어기제 사용 중일 때: 편도체 과활성화로 전두엽의 객관적 판단이 차단된 상태임을 부드럽게 설명
+Neuroplasticity (for closing):
+- The brain is not fixed. Repeated new actions rewire neural pathways.
+- Small behavioral shifts — pulling back, self-investment, new experiences — literally change brain circuitry and alter relationship dynamics.
+- Close with: "The choice you make right now is already rewiring your brain."`;
 
-신경가소성 (리딩 마무리에 활용):
-- 뇌는 고정되어 있지 않다. 새로운 행동과 습관이 반복되면 신경망이 재설계됨
-- 내담자의 작은 행동 변화(연락 자제, 자기관리, 새로운 경험)가 뇌 회로를 바꾸고 결국 관계의 흐름도 바꿈
-- 지금 이 선택이 당신의 뇌를 바꾸고 있어요 식의 마무리로 희망적이면서 과학적 근거 제시`;
-
-    // ===== NEURO 블랙박스 (서버에서만 보임) =====
+    // ===== NEURO Strategy Box (English) =====
     const NEURO = {
-      ex: [
-        {title:"🧠 뇌과학 전략",term:"자이가르닉 효과",termEn:"Zeigarnik Effect · Bluma Zeigarnik, 1927",mechanism:"인간의 뇌는 끝나지 않은 일을 계속 떠올리려 해요. 제대로 마무리되지 않은 관계는 상대 머릿속에서 계속 당신을 재생시키고 있어요. 지금 이 침묵이 오히려 당신의 존재감을 키우고 있어요."},
-        {title:"🧠 뇌과학 전략",term:"간헐적 강화",termEn:"Intermittent Reinforcement · B.F. Skinner",mechanism:"지금 먼저 연락하면 상대는 당신을 언제든 연락할 수 있는 사람으로 생각해요. 예측하기 어려운 사람일수록 상대가 더 강하게 끌리게 돼요. SNS로 잘 지내는 모습을 보여주되 직접 연락은 자제하세요."},
-        {title:"🧠 뇌과학 전략",term:"심리적 반발 이론",termEn:"Reactance Theory · Jack Brehm, 1966",mechanism:"지금 진심을 쏟아낼수록 상대의 뇌는 선택의 자유가 침해된다고 느끼고 반사적으로 밀어냅니다. 상대가 스스로 다가오고 싶다는 욕구를 갖게 만드는 것이 핵심이에요."},
+      breakup: [
+        {title:"Neuro Strategy",term:"Zeigarnik Effect",termEn:"Zeigarnik Effect · Bluma Zeigarnik, 1927",mechanism:"The human brain obsessively revisits unfinished business. A relationship that ended without closure keeps replaying in their mind. Right now, your silence is doing more work than any message could."},
+        {title:"Neuro Strategy",term:"Intermittent Reinforcement",termEn:"Intermittent Reinforcement · B.F. Skinner",mechanism:"If you reach out now, you become predictable — and predictable is forgettable. The brain craves what it can't fully anticipate. Show up on your terms, let them wonder, and watch how the dynamic shifts."},
+        {title:"Neuro Strategy",term:"Psychological Reactance",termEn:"Reactance Theory · Jack Brehm, 1966",mechanism:"The harder you push, the more their brain registers a threat to autonomy — and pushes back. The move that feels counterintuitive is the one that works: let them feel like reaching out was their idea."},
       ],
-      couple: [
-        {title:"💡 관계 인사이트",term:"옥시토신 동기화",termEn:"Oxytocin Synchrony · 정서적 유대의 신경과학",mechanism:"처음의 설렘이 줄어드는 건 감정이 식은 게 아니에요. 뇌가 더 깊고 안정적인 사랑으로 넘어가고 있는 거예요. 솔직한 모습을 먼저 보여주고 함께 새로운 경험을 쌓는 것이 서로 더 가까워지는 가장 빠른 방법이에요."},
-        {title:"💡 관계 인사이트",term:"미러 뉴런 활성화",termEn:"Mirror Neuron System · 공감과 정서적 공명",mechanism:"상대가 웃으면 나도 모르게 기분이 좋아지고, 상대가 차갑게 굴면 나도 위축되는 건 뇌의 거울 반응 때문이에요. 지금 이 관계에서 내가 먼저 따뜻하게 다가가면 상대도 자연스럽게 마음을 열 가능성이 높아요. 함께 있을 때 에너지가 올라가는지, 지치는지 느껴보세요."},
-        {title:"💡 관계 인사이트",term:"오귀속 효과",termEn:"Misattribution of Arousal · Dutton & Aron, 1974",mechanism:"함께 새로운 활동을 할 때 분비되는 도파민이 파트너에 대한 설렘으로 전이됩니다. 뇌는 흥분의 원인을 정확히 구분하지 못해요. 루틴을 깨는 데이트 하나가 두 사람 사이의 온도를 다시 올릴 수 있어요."},
+      relationship: [
+        {title:"Relationship Insight",term:"Oxytocin Synchrony",termEn:"Oxytocin Synchrony · Neuroscience of Emotional Bonding",mechanism:"The early butterflies fading doesn't mean the love is gone — it means your brains are shifting into a deeper, more stable bond. The fastest way back to closeness? Vulnerability first, then shared new experiences."},
+        {title:"Relationship Insight",term:"Mirror Neuron Activation",termEn:"Mirror Neuron System · Emotional Resonance",mechanism:"When they're cold, you feel it in your chest — that's your mirror neurons firing. The pattern works both ways: if you show up warmer and more grounded, their nervous system responds. You set the emotional tone."},
+        {title:"Relationship Insight",term:"Misattribution of Arousal",termEn:"Misattribution of Arousal · Dutton & Aron, 1974",mechanism:"Dopamine released during novel experiences gets attributed to whoever you're with. Your brain can't always tell the source of excitement. One unexpected date — something genuinely new — can reset the temperature between you."},
       ],
-      some: [
-        {title:"🧠 뇌과학 Insight: 보상 시스템",term:"도파민 회로와 예측 불가능성",termEn:"Dopamine & Reward Prediction · 보상 예측 오류 활용",mechanism:"지금 당신의 뇌는 상대의 작은 반응 하나에 너무 크게 반응하고 있어요. 이 카드가 말하는 건, 지금은 한 발 물러서서 여유를 찾을 때라는 거예요. 여유 있고 예측하기 어려운 모습이 오히려 상대가 당신을 더 매력적으로 느끼게 만들어요."},
-        {title:"🧠 뇌과학 Insight: 보상 시스템",term:"간헐적 강화와 기대감",termEn:"Intermittent Reinforcement · 썸 단계의 도파민 관리",mechanism:"상대가 들쑥날쑥하게 반응할수록 당신은 더 강하게 기대하게 돼요. 지금은 먼저 다가가기보다 자연스럽게 존재감을 드러내는 타이밍이에요. 상대가 당신을 예측하기 어려운 사람으로 느낄수록 더 끌리게 되거든요."},
-        {title:"🧠 뇌과학 Insight: 보상 시스템",term:"심리적 반발과 접근 거리",termEn:"Reactance Theory · 썸 단계의 자율성 보존",mechanism:"지금 너무 적극적으로 다가가면 상대의 뇌는 선택의 자유가 침해된다고 느끼고 본능적으로 거리를 둡니다. 여백을 주면서 상대가 스스로 당신에게 끌리게 만드는 것이 핵심이에요."},
+      new_love: [
+        {title:"Neuro Insight",term:"Cognitive Flexibility",termEn:"Cognitive Flexibility · Prefrontal Cortex Rewiring",mechanism:"Your brain might be running old relationship software — familiar patterns that feel safe but keep producing the same results. New love enters when you actually let the neural wiring update. That starts with how you see yourself, not how you present yourself."},
+        {title:"Neuro Insight",term:"Confirmation Bias Check",termEn:"Confirmation Bias · Orbitofrontal Cortex",mechanism:"The brain filters reality to confirm what it already believes. If you believe you're not someone people stay for, you'll find evidence everywhere. These cards are asking you to question that filter — not just once, but consistently."},
+        {title:"Neuro Insight",term:"Serotonin & Self-Worth",termEn:"Serotonin & Self-worth · Neuroscience of Confidence",mechanism:"The most magnetic signal you can send isn't physical — it's serotonin-backed confidence. The kind that doesn't need validation. Build that first. New connections follow naturally when your nervous system isn't scanning for approval."},
       ],
-      solo: [
-        {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"고착화된 뇌 회로 깨기",termEn:"Cognitive Flexibility · 전전두엽의 사고 유연성",mechanism:"지금 당신의 뇌는 기존의 익숙한 연애 패턴만 반복하는 고착화된 회로를 돌리고 있을 수 있어요. 이 카드가 보여주는 상징을 통해 무의식 속 패턴을 객관적으로 바라보세요. 새로운 인연은 뇌가 새로운 연결을 허용할 때 자연스럽게 들어옵니다."},
-        {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"확증 편향 방지",termEn:"Confirmation Bias · 안와전두엽의 선택 혼란 해소",mechanism:"뇌는 보고 싶은 것만 보려는 본능이 있어요. 지금 이 카드는 당신이 연애에서 반복해온 패턴을 다른 시각으로 바라보라는 신호일 수 있습니다. 익숙한 유형이 아닌 다른 관점의 인연에 뇌가 열려 있는지 점검해보세요."},
-        {title:"🧠 뇌과학 Insight: 인지적 유연성",term:"세로토닌과 자기 확신",termEn:"Serotonin & Self-worth · 내면 안정감의 신경과학",mechanism:"새로운 인연을 끌어당기는 가장 강력한 신호는 세로토닌이 안정된 상태에서 나오는 자기 확신이에요. 지금은 외부에서 답을 찾기보다 내면을 안정시키는 것이 새로운 연결의 문을 여는 열쇠입니다."},
-      ],
-      exam: [
-        {title:"🧠 뇌과학 전략",term:"인출 연습 효과",termEn:"Testing Effect · Roediger & Karpicke",mechanism:"뇌는 단순히 읽는 것보다 기억을 직접 꺼내는 연습을 할 때 훨씬 강하게 학습해요. 지금 이 카드는 당신이 알고 있는 것을 점검하고 약점을 직면할 시기라는 신호예요. 불안을 줄이는 가장 확실한 방법은 모르는 부분을 구체적으로 확인하는 거예요."},
-        {title:"🧠 뇌과학 전략",term:"여키스-도드슨 법칙",termEn:"Yerkes-Dodson Law · 각성과 수행의 관계",mechanism:"적당한 긴장은 집중력을 높이지만 과도한 불안은 오히려 뇌의 수행력을 떨어뜨려요. 지금 당신에게 필요한 건 더 많은 압박이 아니라 긴장을 조절하는 거예요. 카드가 보여주는 흐름을 믿고 페이스를 유지해보세요."},
-        {title:"🧠 뇌과학 전략",term:"성장 마인드셋",termEn:"Growth Mindset · Carol Dweck",mechanism:"결과를 능력의 증명으로 보는 뇌는 더 쉽게 무너지고, 과정으로 보는 뇌는 끝까지 버텨요. 지금 이 카드는 결과에 집착하기보다 지금 할 수 있는 것에 집중하라는 신호예요. 그 태도 자체가 결과를 바꿀 수 있어요."},
-      ],
-      job: [
-        {title:"🧠 뇌과학 전략",term:"손실 회피 편향",termEn:"Loss Aversion · Kahneman & Tversky",mechanism:"뇌는 새로 얻을 것보다 지금 가진 것을 잃는 두려움을 2배 이상 크게 느껴요. 이직을 망설이는 건 당신이 우유부단해서가 아니라 뇌의 자연스러운 방어 반응이에요. 카드는 그 두려움 너머에 무엇이 있는지 보라고 말하고 있어요."},
-        {title:"🧠 뇌과학 전략",term:"기회비용 인식",termEn:"Opportunity Cost · 의사결정의 신경경제학",mechanism:"현재 자리에 머무는 것도 사실은 하나의 선택이고, 그에 따른 비용이 있어요. 뇌는 변화의 위험은 크게 보면서 현상 유지의 비용은 잘 못 봐요. 지금 카드는 머무는 것과 떠나는 것을 같은 무게로 저울질해보라는 신호예요."},
-        {title:"🧠 뇌과학 전략",term:"자기 결정 이론",termEn:"Self-Determination Theory · Deci & Ryan",mechanism:"사람은 자율성, 유능감, 관계성이 채워질 때 가장 만족해요. 지금 직장에서 무엇이 채워지고 무엇이 비어있는지 보면 답이 보여요. 카드는 당신이 진짜 원하는 게 무엇인지 들여다보라고 말하고 있어요."},
-      ],
-      money: [
-        {title:"🧠 뇌과학 전략",term:"심리적 회계",termEn:"Mental Accounting · Richard Thaler",mechanism:"뇌는 돈을 출처와 용도에 따라 다른 주머니로 나눠서 다뤄요. 그래서 같은 금액도 어디서 왔느냐에 따라 가볍게 쓰거나 아끼게 되죠. 지금 이 카드는 돈의 흐름을 감정이 아닌 큰 그림으로 바라보라는 신호예요."},
-        {title:"🧠 뇌과학 전략",term:"즉각 보상 편향",termEn:"Present Bias · 시간 할인의 신경과학",mechanism:"뇌는 미래의 큰 보상보다 지금의 작은 보상을 훨씬 크게 느껴요. 충동적인 지출이나 조급한 결정 뒤에는 이 편향이 있어요. 카드는 지금 당장의 흐름보다 조금 더 긴 시야로 바라보라고 말하고 있어요."},
-        {title:"🧠 뇌과학 전략",term:"통제감과 안정",termEn:"Sense of Control · 불안 조절의 신경과학",mechanism:"금전 불안의 핵심은 액수가 아니라 통제감의 부족이에요. 흐름을 파악하고 있다는 감각만으로도 뇌의 불안 회로가 진정돼요. 지금 카드는 막연한 걱정 대신 상황을 구체적으로 들여다보라는 신호예요."},
-      ],
-      social: [
-        {title:"🧠 뇌과학 전략",term:"사회적 통증",termEn:"Social Pain · Eisenberger & Lieberman",mechanism:"인간관계에서 받는 상처는 뇌에서 신체적 통증과 같은 영역을 활성화시켜요. 그래서 관계 갈등이 그렇게 아픈 거예요. 지금 이 카드는 그 아픔이 과장된 게 아니라 진짜라는 걸 인정하라는 신호예요."},
-        {title:"🧠 뇌과학 전략",term:"근본 귀인 오류",termEn:"Fundamental Attribution Error · 사회심리학",mechanism:"우리는 타인의 행동을 그 사람의 성격 탓으로, 내 행동은 상황 탓으로 보는 경향이 있어요. 관계 갈등의 상당 부분이 이 오해에서 시작돼요. 카드는 상대의 행동을 다른 각도에서 바라보라고 말하고 있어요."},
-        {title:"🧠 뇌과학 전략",term:"정서 전염",termEn:"Emotional Contagion · 미러 뉴런 시스템",mechanism:"감정은 사람 사이에 전염돼요. 내가 안정되면 주변도 안정되고, 내가 날이 서 있으면 관계도 날카로워져요. 지금 카드는 관계의 분위기를 바꾸는 출발점이 나 자신일 수 있다는 신호예요."},
+      general: [
+        {title:"Neuro Insight",term:"Neural Pattern Recognition",termEn:"Pattern Recognition · Default Mode Network",mechanism:"Your default mode network runs old stories on loop — especially when you're uncertain about the future. These cards are reflecting that loop back to you. Awareness alone starts to interrupt it."},
+        {title:"Neuro Insight",term:"Growth Mindset Circuitry",termEn:"Neuroplasticity · Carol Dweck & Learning Science",mechanism:"Every time you choose discomfort over familiarity, you're literally building new neural pathways. The cards pointing to challenge aren't bad news — they're the brain's invitation to expand."},
+        {title:"Neuro Insight",term:"Stress Response & Decision-Making",termEn:"HPA Axis & Prefrontal Cortex",mechanism:"Under stress, cortisol suppresses the prefrontal cortex — making clear decisions feel impossible. The cards suggesting pause aren't asking you to give up. They're asking you to wait until your brain can actually think straight."},
       ],
     };
 
-    // NEURO tip 선택
-    const tips = NEURO[qType] || NEURO.ex;
-    const fortuneTypes = ["exam","job","money","social"];
-    // 연락 상태별 팁 인덱스 매핑 (다양성 확보)
-    const statusMap = { "연락 중": 1, "차단/단절": 2, "읽씹": 2, "잠수": 2, "애매함": 0, "연락 끊김": 0 };
-    let tipIdx;
-    if (fortuneTypes.includes(qType) || qType === "couple") {
-      tipIdx = Math.floor(Math.random() * tips.length);
-    } else if (statusMap[contactStatus] !== undefined) {
-      tipIdx = statusMap[contactStatus];
-    } else {
-      tipIdx = Math.floor(Math.random() * tips.length);
-    }
+    // NEURO tip selection
+    const tips = NEURO[qType] || NEURO.breakup;
+    const tipIdx = qType === "relationship" ? Math.floor(Math.random() * tips.length) : contactStatus === "In contact" ? 1 : contactStatus === "Blocked" ? 2 : 0;
     const tip = tips[Math.min(tipIdx, tips.length - 1)];
 
-    // 유형별 라벨
-    const typeLabel = {couple:"💑 커플", ex:"💔 재회", some:"💭 썸", solo:"🌸 솔로", exam:"📚 합격운", job:"💼 이직·직장운", money:"💰 금전운", social:"🤝 대인관계운"}[qType] || "";
+    // Type label
+    const typeLabel = {relationship:"💑 Relationship", breakup:"💔 Breakup & Healing", new_love:"🌸 Single & New Love", general:"✨ General"}[qType] || "";
 
-    const isFortune = fortuneTypes.includes(qType);
+    // Type-specific reading guide
+    const typeGuide = qType === "relationship"
+      ? "- Currently in a relationship. No breakup or reunion framing. Focus on the real dynamic between them right now.\n- What does their partner actually feel? Where is this going?\n- Identify attachment style from the cards and apply to Personality Analysis.\n- Always refer to the partner by name or 'them' — never 'they' in a plural/depersonalized way."
+      : qType === "breakup"
+      ? "- Post-breakup. Focus on ex's current emotional state and realistic reconnection probability.\n- Analyze ex's attachment style and current brain state from the cards.\n- Apply Zeigarnik Effect / Intermittent Reinforcement / Loss Aversion where relevant.\n- Always refer to the ex by name or 'them' — never 'they' in a plural/depersonalized way."
+      : qType === "new_love"
+      ? "- Single, no specific person. Focus on the next 3 months: what energy is coming in, what needs to shift internally.\n- Read each month (Month 1 / Month 2 / Month 3) with specific energy.\n- Personality Analysis focuses on the USER's own love patterns, not a partner.\n- Stick to card energy — don't let the situation description override the cards."
+      : "- General reading. Self-growth, path, energy, manifestation. No romantic focus unless the cards strongly suggest it.\n- What is this person's current energetic state, and what is trying to emerge in their life?\n- Apply Manifestation lens: what timeline is being activated? What needs to shift internally for the desired future to materialize?\n- Personality Analysis reads the user's current psychological state and blocks from the cards.\n- Ground insights in neuroscience: default mode network, neural pattern recognition, neuroplasticity.\n- Close with an empowering, action-oriented line — not vague hope, but specific internal shift.";
 
-    // 신경가소성 마무리는 30% 확률로만 (템플릿 느낌 방지)
-    const useNeuroEnding = Math.random() < 0.3;
-
-    // 유형별 리딩 지침
-    const typeGuide = qType === "couple"
-      ? "- 현재 사귀는 커플 관계임. 재회나 이별 관점 절대 금지. 사귀는 사이에서의 속마음과 관계 발전에 집중\n- 상대방이 나를 어떻게 생각하는지, 앞으로 관계가 어떻게 발전할지 중심으로 리딩\n- 애착 유형(불안형/회피형/안정형) 판별하여 성향분석에 반영\n- 상대방은 반드시 '그 사람' 또는 상대방 이름으로만 지칭. '그들', '이들', '그것' 등 복수/비인칭 표현 절대 금지"
-      : qType === "ex"
-      ? "- 헤어진 상대와의 재회 가능성 리딩. 재회 가능성, 상대방의 현재 감정 중심\n- 상대방의 애착 유형과 현재 뇌 상태를 카드로 분석\n- 자이가르닉 효과/간헐적 강화/손실회피 등 뇌과학 관점 적용\n- 상대방은 반드시 '그 사람' 또는 상대방 이름으로만 지칭. '그들', '이들', '그것' 등 복수/비인칭 표현 절대 금지"
-      : qType === "some"
-      ? "- 썸 타는 사이. 아직 연애 시작 전임. 상대방이 나를 어떻게 보는지, 관계가 발전할지 중심\n- 도파민 보상 시스템과 예측 불가능성 관점으로 접근\n- 상대방 애착 유형 판별하여 접근 전략 제시\n- 상대방은 반드시 '그 사람' 또는 상대방 이름으로만 지칭. '그들', '이들', '그것' 등 복수/비인칭 표현 절대 금지"
-      : qType === "solo"
-      ? "- 솔로 상태. 특정 상대방 없음. 향후 3개월 새로운 인연이 들어올 가능성 중심\n- 1개월차/2개월차/3개월차로 나눠서 구체적으로\n- 카드 본래 에너지를 그대로 해석할 것. 솔로라고 해서 카드 의미를 왜곡하지 말 것\n- 펜타클=현실/노력/축적, 컵=감정/관계, 완드=행동/추진, 소드=이성/결단. 카드 원래 의미 유지\n- 성향분석은 상대방이 아닌 내담자 자신의 연애 성향을 카드로 읽을 것\n- 상황 설명에 끌려가지 말고 반드시 카드 에너지 기반으로 해석"
-      : qType === "exam"
-      ? "- 합격운 리딩. 시험/취업 합격 가능성과 준비 상태 중심. 연애 관점 절대 금지\n- 특정 상대방 없음. '당신' 자신의 실력, 준비 과정, 결과 흐름에 집중\n- 카드로 현재 준비 상태, 강점과 약점, 합격 흐름을 읽을 것\n- 결과를 단정하지 말 것. '가능성이 보여요', '흐름이 우호적이에요' 같은 확률적 표현 사용\n- 성향분석은 시험/일을 대하는 당신의 심리적 태도와 강점을 카드로 읽을 것"
-      : qType === "job"
-      ? "- 이직·직장운 리딩. 이직 타이밍, 직장 내 상황, 커리어 흐름 중심. 연애 관점 절대 금지\n- 특정 상대방 없음. '당신'의 커리어 상황과 선택에 집중\n- 카드로 현재 직장 상황, 이직의 득실, 앞으로의 흐름을 읽을 것\n- 이직하라/하지마라 단정 금지. 양쪽 흐름을 보여주고 판단은 당신 몫으로 남길 것\n- 성향분석은 일과 커리어를 대하는 당신의 태도를 카드로 읽을 것"
-      : qType === "money"
-      ? "- 금전운 리딩. 재물 흐름, 금전 관련 심리와 태도 중심. 연애 관점 절대 금지\n- 특정 상대방 없음. '당신'의 금전 상황과 흐름에 집중\n- 절대 금지: 구체적 투자 종목/금액 추천, '반드시 오른다/번다/잃는다' 같은 단정, 특정 재테크 권유\n- 돈에 대한 심리적 태도, 소비 패턴, 전반적 재물 흐름만 카드로 읽을 것\n- 반드시 포함: 이 리딩은 재정적 조언이 아니며 참고용이라는 뉘앙스를 자연스럽게\n- 성향분석은 돈을 대하는 당신의 심리적 태도를 카드로 읽을 것"
-      : "- 대인관계운 리딩. 인간관계 흐름, 관계 속 나의 위치 중심. 연애 관점 금지(연인이 아닌 일반 관계)\n- 특정 상대방 없음. '당신'을 둘러싼 사람들과의 흐름에 집중\n- 카드로 현재 관계 상황, 갈등이나 조화의 흐름, 앞으로의 관계 변화를 읽을 것\n- 성향분석은 사람들과 관계 맺는 당신의 패턴을 카드로 읽을 것";
-
-    // 유형별 재방문 멘트
-    const revisitGuide = qType === "couple"
+    // Revisit guide by type
+    const revisitGuide = qType === "relationship"
       ? ""
-      : qType === "ex"
-      ? "시간이 지나 마음이 정리됐을 때 다시 카드를 뽑아보세요. 그때 어떤 카드가 달라졌는지가 중요한 신호예요."
-      : qType === "some"
-      ? "마음이 궁금해질 때 다시 한 번 카드를 뽑아보세요. 그때 어떤 카드가 달라졌는지가 중요한 신호예요."
-      : qType === "solo"
-      ? "내면이 달라졌다고 느껴질 때 다시 카드를 뽑아보세요. 그때 어떤 카드가 달라졌는지가 중요한 신호예요."
-      : qType === "exam"
-      ? "중요한 결과를 앞두고 다시 카드를 뽑아보세요. 흐름이 어떻게 달라졌는지가 중요한 신호예요."
-      : "상황이 달라졌다고 느껴질 때 다시 카드를 뽑아보세요. 그때 어떤 카드가 달라졌는지가 중요한 신호예요.";
+      : qType === "breakup"
+      ? "End with: Pull cards again in about a month, when your mind has settled. What changes between now and then will tell you everything."
+      : qType === "new_love"
+      ? "End with: Come back in a month and pull again. The cards that shift are the ones worth paying attention to."
+      : "End with: Pull again in 3-4 weeks. Growth shows up in the cards that change.";
 
-    // 프롬프트 조합
-    const prompt = LUMI + "\n\n---\n상담 유형: " + typeLabel +
-      "\n내담자: " + age + "세 " + gender +
-      "\n" + (isFortune ? "상황: 특정 상대 없음 (운세 리딩)" : qType === "solo" ? "상황: 솔로 (새 인연 탐색 중)" : "상대방: " + (partner || "상대방")) +
-      "\n현재 상태: " + ((isFortune || qType === "solo") ? "해당없음" : contactStatus) +
-      "\n상황: " + situation +
-      "\n뽑힌 카드: " + cardCtx +
-      "\n\n[이번 리딩에서 자연스럽게 활용할 심리/뇌과학 포인트]\n" + tip.term + " — " + tip.mechanism +
-      "\n\n[리딩 지침]\n" + typeGuide +
-      "\n\n위 LUMI Tarot 철학을 적용하여 리딩해주세요.\n\n규칙:\n- 마크다운 최소화. 헤더(#) 사용 금지. 줄바꿈과 볼드(**) 정도만 허용\n- 내담자는 반드시 '당신'으로만 지칭. '여러분', '내담자' 표현 금지\n- 친근하고 전문적인 말투\n- 카드 이름 자연스럽게 언급\n- 내담자가 쓴 상황 설명을 카드 해석의 배경으로 자연스럽게 녹여낼 것. '내 얘기같다'는 느낌이 들도록 구체적인 상황 디테일을 리딩에 반영할 것. 단, 카드 에너지와 모순되는 방향으로 상황에 끌려가지 말 것\n" + (isFortune ? "- 운세 리딩이므로 연애/상대방 이야기 절대 금지. 오직 해당 주제(합격/직장/금전/대인관계)에만 집중\n" : "- 상대방 심리를 대화체로 구체적으로\n") + "- 각 섹션 4~6문장. 핵심 통찰 위주로 간결하게. 할 말 없으면 억지로 늘리지 말 것\n- 주차별 흐름으로 구체적으로\n- 카드가 부정적이면 솔직하게. 무조건 희망적으로 마무리 금지\n" + (isFortune ? "- 결과를 단정하지 말 것. '가능성이 보여요', '흐름이 우호적이에요' 같은 확률적 표현 사용\n" : "- 애착 유형은 반드시 카드 에너지에 근거. 확률적 표현만 허용: '~성향이 일부 보여요', '~경향이 느껴져요', '~에너지가 닮아있어요'. '전형적인 회피형입니다' 같은 단정 절대 금지\n- 컵/별/태양/절제 같은 긍정 카드가 나왔을 때 억지로 불안/회피 성향 넣지 말 것\n") + "- 성향분석 예시 문구 그대로 복붙 금지. 반드시 뽑힌 카드의 실제 에너지와 일치하는 문장을 새로 만들 것\n- 뇌과학/심리학 용어는 전체 리딩의 20%만. 나머지 80%는 따뜻한 공감과 카드 상징\n" + (useNeuroEnding ? "- 마무리에 신경가소성을 1회 자연스럽게. 단, 위로가 아니라 '뇌는 바뀔 수 있다'는 사실로만. 카드가 부정적이면 억지 희망 절대 금지\n" : "- 억지 희망이나 교훈적 마무리 금지. 카드가 말하는 그대로 솔직하게 끝낼 것\n") + "- 리딩은 완결형이 아닌 열린 결말로 마무리. '앞으로 2~3주 흐름에 따라 달라질 수 있어요' 또는 '다음 카드에서 확인해야 할 포인트가 보여요' 류의 문장 자연스럽게 포함\n\n[절대 규칙 — 이것만은 반드시 지킬 것]\n1. 뻔한 말 절대 금지. 모든 문장이 이 사람만을 위한 것처럼 느껴져야 함\n2. 불편한 진실 회피 금지. 카드가 경고 신호를 보여주면 솔직하게 말할 것\n3. 아래 섹션 형식 반드시 준수. 섹션 합치거나 생략하거나 새로 추가하는 것 절대 금지\n4. 각 섹션은 새로운 정보를 담을 것. 앞 섹션과 같은 말 반복 금지\n5. 요약은 10자 이내 날카로운 한 줄. 두루뭉술한 마무리 금지\n6. 리딩 중 한 곳에서는 내담자가 아직 말하지 못했거나 스스로도 몰랐던 감정을 대신 언어화해줄 것. 해결책이 아니라 거울. 위로가 아니라 공감. '지금 이런 마음이실 것 같아요'처럼 조심스럽게. 이 문장이 리딩에서 가장 중요한 문장이 될 수 있음\n\n형식 어기면 실패입니다. 반드시 아래 태그 그대로 출력:\n\n" + (isFortune
-        ? "[과거]\n(5~7문장. 이 주제와 관련해 지금까지 흘러온 과정과 당신의 상태)\n\n[성향분석]\n(1~2문장. 카드 에너지로 이 주제를 대하는 당신의 태도와 강점/약점을 자연스럽게 묘사. 단정 금지. 확률적 표현 필수.)\n\n[현재]\n(5~7문장. 지금 이 주제의 상황과 당신의 현재 위치)\n\n[미래]\n(5~7문장. 앞으로의 흐름을 카드 에너지로 자연스럽게 풀어낼 것. 시기는 반드시 뽑힌 카드의 기운을 직접 판단해 거기에 맞는 대략적 기간을 제시할 것. 절대 특정 숫자에 기계적으로 맞추지 말 것 — 빠른 카드(완드/기사/이동·전환 카드 등)는 짧게, 느리거나 정체된 카드(은둔자/매달린사람/펜타클 등)는 길게, 카드마다 다르게 판단할 것. 반드시 \'이 카드가 ~한 기운이라\'처럼 그 카드를 근거로 기간을 설명할 것. 기간은 \'~정도\', \'~쯤\', \'~안에\' 같은 범위로 표현하고 \'무조건 X주 후\' 같은 100% 확정만 피할 것. \'먼저 연락하세요\' 같은 직접적 행동 지시는 금지하고 마음가짐·태도 방향만 제시할 것(예: \'기다리기만 하기보다 마음이 열려있다는 걸 자연스럽게 보여주는 게 흐름에 도움이 될 수 있어요\'). 재방문 안내는 이 섹션에 넣지 말 것.)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리. 마지막에 다음 안내를 자연스럽게 덧붙이세요: " + revisitGuide + ")\n\n[요약]\n(10자 이내의 핵심 한 줄)"
-        : "[과거]\n(5~7문장. 과거 흐름과 당시 상대방 심리)\n\n[성향분석]\n(1~2문장. 카드 에너지를 구체적으로 묘사하면서 성향을 자연스럽게 암시. 단순 라벨 한 줄 금지. 카드가 보여주는 행동 패턴이나 심리를 먼저 묘사하고 그 안에 성향이 녹아들게 쓸 것. 예시 스타일: '이 카드 조합에서 느껴지는 건, 깊이 연결될수록 오히려 한 발 물러서는 에너지예요 — 친밀함이 커질수록 불안해지는 패턴이 일부 보여요.' 단정 금지. 확률적 표현 필수.)\n\n[현재]\n(5~7문장. 지금 상대방의 속마음과 심리 상태)\n\n[미래]\n(5~7문장. 앞으로의 흐름을 카드 에너지로 자연스럽게 풀어낼 것. 시기는 반드시 뽑힌 카드의 기운을 직접 판단해 거기에 맞는 대략적 기간을 제시할 것. 절대 특정 숫자에 기계적으로 맞추지 말 것 — 빠른 카드(완드/기사/이동·전환 카드 등)는 짧게, 느리거나 정체된 카드(은둔자/매달린사람/펜타클 등)는 길게, 카드마다 다르게 판단할 것. 반드시 \'이 카드가 ~한 기운이라\'처럼 그 카드를 근거로 기간을 설명할 것. 가능하면 과거·현재 카드나 내담자가 쓴 상황과도 연결할 것. 기간은 \'~정도\', \'~쯤\', \'~안에\' 같은 범위로 표현하고 \'무조건 2~3주 후 연락온다\' 같은 100% 확정만 피할 것. \'먼저 연락하세요\' 같은 직접적 행동 지시는 금지하고 마음가짐·태도 방향만 제시할 것(예: \'기다리기만 하기보다 마음이 열려있다는 걸 자연스럽게 보여주는 게 흐름에 도움이 될 수 있어요\'). 재방문 안내는 이 섹션에 넣지 말 것.)\n\n[조합]\n(3~4문장. 뽑힌 카드 3장의 조합이 함께 말하는 전체 스토리. 마지막에 다음 안내를 자연스럽게 덧붙이세요: " + revisitGuide + ")\n\n[요약]\n(10자 이내의 핵심 한 줄)");
+    // Prompt assembly
+    const prompt = LUMI + "\n\n---\nReading Type: " + typeLabel +
+      "\nPerson: " + age + " years old, " + gender +
+      "\n" + (qType === "new_love" || qType === "general" ? "Status: Single / No specific person" : "Their person: " + (partner || "them")) +
+      "\nContact status: " + ((qType === "new_love" || qType === "general") ? "N/A" : contactStatus) +
+      "\nSituation: " + situation +
+      "\nCards drawn: " + cardCtx +
+      "\n\n[Reading Guide for this Type]\n" + typeGuide +
+      "\n\nApply the LUMI Tarot philosophy above and deliver the reading.\n\nRules:\n- No markdown headers (#). Line breaks and bold (**) only where truly needed.\n- Always address the person as 'you'. Never 'the querent' or third-person.\n- Warm but direct tone. Savage Reading means honest, not cruel.\n- Name the cards naturally in the reading.\n- Get specific about the other person's psychology — don't stay vague.\n- Each section: 4-6 sentences. Insight-dense. Don't pad.\n- Give week-by-week or month-by-month flow where relevant.\n- Timing must be based on the card's energy. Fast cards (Wands, Knights, movement/transition cards) = soon/within weeks. Slow cards (Hermit, Hanged Man, Pentacles) = takes time/a couple of months. Always explain WHY: 'This card carries fast energy, so...' Express as range only — never '100% in X weeks'. Never give direct action instructions like 'text them first'. Suggest mindset direction only.\n- Do NOT include revisit reminders inside the [Future] section. Future = prediction only.\n- If cards are negative, say so honestly. Don't force a hopeful ending.\n- Attachment type must come from the card energy, not from the situation description.\n- Positive cards (Cups, Star, Sun, Temperance) = don't force anxious/avoidant reads.\n- Soft probability wording ONLY for attachment labels. Never say 'classic avoidant' or 'you are anxious attachment'. Instead use: 'This energy suggests someone who tends to...', 'The cards point to avoidant-leaning patterns...', 'This feels like someone who...', 'There are signs of...' — imply, don't diagnose.\n- Neuroscience: 20% of the reading max. The other 80% is empathy and card symbolism.\n- Defense mechanisms: mention once, naturally, only if clearly relevant.\n- Close the reading (Combination or Future section) with neuroplasticity — one hopeful, science-backed line.\n\n[NON-NEGOTIABLE RULES — follow these above everything else]\n1. Never sound generic. Every sentence must feel like it was written for THIS person.\n2. Never comfort dishonestly. If the cards show avoidance or red flags, name it clearly.\n3. Follow the exact section format below. Do not merge or skip sections.\n4. Neuroscience max 20%. Do not over-explain brain science.\n5. Speak like a brilliant, emotionally intelligent friend — not a therapist, not a fortune teller.\n6. Be psychologically specific. Vague readings are useless readings.\n7. If the situation is genuinely unclear, say so — uncertainty is more honest than false confidence.\n8. Never use plural 'they/them' for a specific person. Use the person's name or 'them' as singular.\n9. Never repeat the same insight across sections. Each section must add new information.\n10. The Summary must land like a punch — one sharp truth, 10 words or fewer.\n11. Somewhere in the reading, name something the person hasn't been able to say out loud — or didn't even know they were feeling. Not a solution. Not comfort. A mirror. Gently: 'You might be feeling...' or 'What this really looks like is...' This sentence may be the most important one in the entire reading.\n\nRespond ONLY in this exact format:\n\n[Past]\n(5-7 sentences. Past flow and the other person's psychology at the time.)\n\n[Personality Analysis]\n(One sentence. Speak from the card energy — imply, don't diagnose. Use soft probability: 'This energy feels like someone who...', 'The cards suggest tendencies toward...' No definitive labels.)\n\n[Present]\n(5-7 sentences. What is really happening right now — inside their head.)\n\n[Future]\n(5-7 sentences. Where this is going. Base timing on the card energy — fast or slow, always explain why. No revisit reminders here.)\n\n[Combination]\n(3-4 sentences. What all three cards together are saying as one story. End naturally with: " + revisitGuide + ")\n\n[Summary]\n(One line. 10 words or fewer. The truth of this reading in a single punch.)";
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -227,7 +171,7 @@ module.exports = async function handler(req, res) {
     if (data.error) throw new Error(data.error.message);
     const text = data.choices?.[0]?.message?.content || '';
 
-    // KV에 저장
+    // Save to KV
     const id = require('crypto').randomUUID();
     await kv.set(id, { text, tip, cards: cardCtx, qType }, { ex: 3600 });
     res.status(200).json({ id });

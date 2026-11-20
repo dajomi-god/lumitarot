@@ -205,6 +205,10 @@ a[href*='kmong.com'] p:nth-child(3){color:#766675!important}
 a[href*='kmong.com'] span{color:#FFF!important}
 #screen-intro > div[style*='text-align:center'] a{color:#786778!important;font-size:11px!important}
 
+/* Art Nouveau cards: parchment and antique-gold edging */
+.card-img-wrap,.result-card-img {border-color:#b79a68!important;box-shadow:0 5px 18px rgba(74,47,52,.17)!important;background:#f3e6d1;}
+.card-img-wrap.revealed {border-color:#a9844c!important;box-shadow:0 6px 20px rgba(74,47,52,.23)!important;}
+.card-img-wrap:not(.revealed):hover {box-shadow:0 13px 24px rgba(74,47,52,.2)!important;}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -448,44 +452,43 @@ const QUESTION_TYPES={
 
 
 
-function makeCardSVG(k,name){
-  const suit=getSuit(k),th=T[suit],rank=getRank(k),isMajor=suit==="major",isCourt=["P","N","Q","K"].includes(rank);
-  const numKey=k.split("_")[0],count=NUM_LABEL[numKey]||0,positions=SYM_POS[count]||[];
-  const majorNum=MAJOR_NUM[k]||"",courtLabel=rank==="P"?"PAGE":rank==="N"?"KNIGHT":rank==="Q"?"QUEEN":"KING";
-  const suitLabel=suit==="wands"?"WANDS":suit==="cups"?"CUPS":suit==="swords"?"SWORDS":suit==="pentacles"?"PENTACLES":"";
-  const id=k.replace(/_/g,'');
-  let inner="";
-  if(isMajor){
-    inner=`${majorNum?`<text x="60" y="28" text-anchor="middle" fill="${th.a}" font-size="10" font-family="serif" font-style="italic" opacity=".75">${majorNum}</text>`:""}
-    <circle cx="60" cy="84" r="32" fill="url(#glow${id})"/>
-    <circle cx="60" cy="84" r="26" fill="none" stroke="${th.b}" stroke-width=".8" opacity=".4"/>
-    ${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180,x1=60+20*Math.cos(r),y1=84+20*Math.sin(r),x2=60+28*Math.cos(r),y2=84+28*Math.sin(r);return`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${th.b}" stroke-width=".7" opacity=".45"/>`;}).join("")}
-    <text x="60" y="93" text-anchor="middle" font-size="26" fill="${th.a}" opacity=".9">${th.s}</text>
-    <rect x="16" y="140" width="88" height="18" rx="3" fill="${th.b}" opacity=".12"/>
-    <text x="60" y="153" text-anchor="middle" fill="${th.a}" font-size="9" font-family="serif" font-style="italic">${name}</text>`;
-  }else if(isCourt){
-    inner=`<text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="11" font-family="serif" font-weight="bold">${rank}</text>
-    <text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text>
-    <g transform="rotate(180,60,84)"><text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="11" font-family="serif" font-weight="bold">${rank}</text><text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text></g>
-    <circle cx="60" cy="76" r="36" fill="url(#glow${id})"/>
-    <circle cx="60" cy="76" r="28" fill="none" stroke="${th.b}" stroke-width=".8" opacity=".35"/>
-    <text x="60" y="90" text-anchor="middle" font-size="34" fill="${th.a}" opacity=".85">${th.s}</text>
-    <rect x="16" y="116" width="88" height="26" rx="3" fill="${th.b}" opacity=".1"/>
-    <text x="60" y="127" text-anchor="middle" fill="${th.a}" font-size="8" font-family="serif">${courtLabel}</text>
-    <text x="60" y="138" text-anchor="middle" fill="${th.b}" font-size="7.5" font-family="serif" opacity=".8">of ${suitLabel}</text>`;
-  }else{
-    inner=`<text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="12" font-family="serif" font-weight="bold">${rank}</text>
-    <text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text>
-    <g transform="rotate(180,60,84)"><text x="13" y="24" text-anchor="middle" fill="${th.a}" font-size="12" font-family="serif" font-weight="bold">${rank}</text><text x="13" y="34" text-anchor="middle" fill="${th.b}" font-size="8">${th.s}</text></g>
-    ${positions.map(([px,py])=>`<text x="${px}" y="${py}" text-anchor="middle" font-size="14" fill="${th.a}" opacity=".82">${th.s}</text>`).join("")}
-    <rect x="16" y="148" width="88" height="14" rx="3" fill="${th.b}" opacity=".1"/>
-    <text x="60" y="159" text-anchor="middle" fill="${th.b}" font-size="7.5" font-family="serif" opacity=".85">${name}</text>`;
-  }
-  return`<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="bg${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${th.bg}"/><stop offset="100%" stop-color="#000"/></linearGradient><radialGradient id="glow${id}" cx="50%" cy="50%"><stop offset="0%" stop-color="${th.b}" stop-opacity=".25"/><stop offset="100%" stop-color="${th.b}" stop-opacity="0"/></radialGradient></defs><rect width="120" height="168" rx="8" fill="url(#bg${id})"/><rect x="2.5" y="2.5" width="115" height="163" rx="6.5" fill="none" stroke="${th.b}" stroke-width="1.5" opacity=".8"/><rect x="7" y="7" width="106" height="154" rx="4" fill="none" stroke="${th.b}" stroke-width=".5" opacity=".25" stroke-dasharray="3,5"/>${[[11,11],[109,11],[11,157],[109,157]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="${th.b}" opacity=".6"/>`).join("")}${inner}</svg>`;
+// LUMI TAROT — vintage Art Nouveau illustrated SVG deck.
+// Pure presentation: original card IDs, drawing, reveal and API flows are unchanged.
+const NOUVEAU_MAJOR={
+ fool:['☼','새로운 길'],magician:['✧','의지'],high_priestess:['☾','직관'],empress:['❀','풍요'],emperor:['♜','질서'],hierophant:['✥','지혜'],lovers:['♡','선택'],chariot:['♞','전진'],strength:['♌','용기'],hermit:['✦','탐색'],wheel_of_fortune:['☸','전환'],justice:['⚖','균형'],hanged_man:['⌛','관점'],death:['✝','변화'],temperance:['⚗','조화'],devil:['♄','속박'],tower:['♜','격변'],star:['✶','희망'],moon:['☽','꿈'],sun:['☀','생명'],judgement:['♬','각성'],world:['◉','완성']
+};
+const NOUVEAU_PALETTE={major:'#76576c',wands:'#a46c48',cups:'#557c86',swords:'#65738b',pentacles:'#77865d'};
+function nouveauEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function nouveauPetals(cx,cy,color){return Array.from({length:8},(_,i)=>`<ellipse cx="${cx}" cy="${cy-12}" rx="4.2" ry="11" fill="${color}" opacity=".23" transform="rotate(${i*45} ${cx} ${cy})"/>`).join('')+`<circle cx="${cx}" cy="${cy}" r="5" fill="#c19b5d"/>`;}
+function nouveauSuitSymbol(suit,x,y,scale=1){
+ const ink=NOUVEAU_PALETTE[suit]||'#76576c';
+ let shape='';
+ if(suit==='wands')shape=`<path d="M0 16 L0 -16 M-3 8 Q-17 0 -10 -8 M3 -2 Q17 -10 10 -17" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M-10 -8 Q-17 -16 -4 -15 M10 -17 Q2 -22 3 -10" fill="#a8a77a"/>`;
+ if(suit==='cups')shape=`<path d="M-14 -13 Q-14 6 0 7 Q14 6 14 -13 Z M0 7 V17 M-10 18 H10" fill="#d3e2df" stroke="${ink}" stroke-width="2.4"/><path d="M-11 -7 Q0 -13 11 -7" fill="none" stroke="#c19b5d" stroke-width="2"/>`;
+ if(suit==='swords')shape=`<path d="M0 -21 L5 -12 L2 9 L-2 9 L-5 -12 Z" fill="#e4e5dd" stroke="${ink}" stroke-width="1.7"/><path d="M-13 9 H13 M0 9 V20" stroke="${ink}" stroke-width="3" stroke-linecap="round"/><circle cy="20" r="2.6" fill="#c19b5d"/>`;
+ if(suit==='pentacles')shape=`<circle r="18" fill="#f4e8c8" stroke="${ink}" stroke-width="2.5"/><circle r="14" fill="none" stroke="#c19b5d" stroke-width="1"/><path d="${Array.from({length:5},(_,i)=>{let a=(-90+i*144)*Math.PI/180;return `${i?'L':'M'}${(11*Math.cos(a)).toFixed(2)} ${(11*Math.sin(a)).toFixed(2)}`}).join(' ')} Z" fill="none" stroke="${ink}" stroke-width="1.8"/>`;
+ return `<g transform="translate(${x} ${y}) scale(${scale})">${shape}</g>`;
 }
-
+function nouveauFrame(ink){return `<rect x="3" y="3" width="114" height="162" rx="10" fill="none" stroke="#a9844c" stroke-width="2"/><rect x="8" y="8" width="104" height="152" rx="7" fill="none" stroke="${ink}" stroke-width=".8"/><path d="M13 45 Q13 15 43 14 M107 45 Q107 15 77 14 M13 123 Q13 153 43 154 M107 123 Q107 153 77 154" fill="none" stroke="#b38b57" stroke-width="1.2"/><path d="M15 38 Q27 30 21 19 Q36 24 35 13 M105 38 Q93 30 99 19 Q84 24 85 13 M15 130 Q27 138 21 149 Q36 144 35 155 M105 130 Q93 138 99 149 Q84 144 85 155" fill="none" stroke="${ink}" stroke-width=".8" opacity=".7"/>${nouveauPetals(15,84,ink)}${nouveauPetals(105,84,ink)}`;}
+function makeCardSVG(k,name){
+ const suit=getSuit(k),ink=NOUVEAU_PALETTE[suit]||'#76576c',rank=getRank(k),major=suit==='major',court=['P','N','Q','K'].includes(rank),id='nv'+k.replace(/[^a-z0-9]/gi,'');
+ const majorInfo=NOUVEAU_MAJOR[k]||['✦','타로'],num=MAJOR_NUM[k]||'',label=nouveauEsc(name||k);
+ let centerpiece='';
+ if(major){
+   centerpiece=`<circle cx="60" cy="78" r="35" fill="#f8eddb" stroke="#c19b5d" stroke-width="1.2"/><circle cx="60" cy="78" r="30" fill="none" stroke="${ink}" stroke-width=".7" opacity=".65"/><path d="M60 40 L63 47 L70 49 L63 52 L60 59 L57 52 L50 49 L57 47Z" fill="#c19b5d" opacity=".75"/><text x="60" y="94" text-anchor="middle" font-size="44" fill="${ink}" font-family="Georgia,serif">${majorInfo[0]}</text><text x="60" y="121" text-anchor="middle" font-size="8" fill="${ink}" letter-spacing="1">${nouveauEsc(majorInfo[1])}</text>`;
+ }else if(court){
+   const courtNames={P:'PAGE',N:'KNIGHT',Q:'QUEEN',K:'KING'};
+   centerpiece=`<path d="M38 109 Q34 80 46 67 Q42 51 60 49 Q78 51 74 67 Q86 80 82 109 Z" fill="#e4d5b8" stroke="${ink}" stroke-width="1.7"/><path d="M46 67 Q60 75 74 67" fill="none" stroke="#b89560" stroke-width="1.5"/><circle cx="60" cy="58" r="12" fill="#f3e5ca" stroke="${ink}" stroke-width="1.5"/><path d="M49 56 Q48 39 60 42 Q73 39 71 56 M53 48 L60 39 L67 48" fill="${ink}" opacity=".85"/><path d="M39 111 Q60 96 81 111" fill="none" stroke="#b89560" stroke-width="2"/>${nouveauSuitSymbol(suit,60,89,.54)}<text x="60" y="129" text-anchor="middle" fill="${ink}" font-size="9" letter-spacing="1.2" font-family="Georgia,serif">${courtNames[rank]}</text>`;
+ }else{
+   const count=NUM_LABEL[k.split('_')[0]]||1;
+   const coords=SYM_POS[count]||[[60,78]];
+   centerpiece=coords.map(([x,y])=>nouveauSuitSymbol(suit,x,y,.48)).join('');
+ }
+ return `<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${label}" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff9e9"/><stop offset=".52" stop-color="#f3e6d1"/><stop offset="1" stop-color="#e8d7bc"/></linearGradient><radialGradient id="${id}wash"><stop stop-color="#fffdf6" stop-opacity=".7"/><stop offset="1" stop-color="${ink}" stop-opacity=".06"/></radialGradient></defs><rect width="120" height="168" rx="11" fill="url(#${id}paper)"/><rect x="10" y="11" width="100" height="146" rx="6" fill="url(#${id}wash)"/>${nouveauFrame(ink)}<path d="M42 32 Q60 24 78 32 M42 136 Q60 144 78 136" fill="none" stroke="#b38b57" stroke-width=".9"/>${major?`<text x="60" y="26" text-anchor="middle" font-size="10" fill="${ink}" font-family="Georgia,serif">${num}</text>`:`<text x="60" y="27" text-anchor="middle" font-size="11" fill="${ink}" font-family="Georgia,serif">${rank||''}</text>`}${centerpiece}<rect x="18" y="140" width="84" height="15" rx="3" fill="#f8f0df" stroke="#c19b5d" stroke-width=".7"/><text x="60" y="150.5" text-anchor="middle" fill="#4b3547" font-size="${label.length>8?'7':'8.6'}" font-family="Georgia,'Noto Serif KR',serif">${label}</text></svg>`;
+}
 function makeBackSVG(){
-  return`<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><defs><linearGradient id="backG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e0035"/><stop offset="100%" stop-color="#080010"/></linearGradient></defs><rect width="120" height="168" rx="8" fill="url(#backG)"/><rect x="2.5" y="2.5" width="115" height="163" rx="6.5" fill="none" stroke="#c084fc" stroke-width="1.5" opacity=".65"/><rect x="7" y="7" width="106" height="154" rx="4" fill="none" stroke="#c084fc" stroke-width=".5" opacity=".2" stroke-dasharray="3,5"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<text x="${22+c*38}" y="${34+r*36}" text-anchor="middle" font-size="13" fill="#c084fc" opacity=".1">✦</text>`).join("")).join("")}<circle cx="60" cy="84" r="30" fill="none" stroke="#e879f9" stroke-width=".8" opacity=".4"/><text x="60" y="93" text-anchor="middle" font-size="28" fill="#e879f9" opacity=".55">🔮</text>${[[11,11],[109,11],[11,157],[109,157]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="#c084fc" opacity=".45"/>`).join("")}</svg>`;
+ const ink='#71566c';
+ return `<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="루미타로 카드 뒷면" style="width:100%;height:100%;display:block"><rect width="120" height="168" rx="11" fill="#5c4158"/>${nouveauFrame('#d7b97c')}<rect x="11" y="11" width="98" height="146" rx="6" fill="none" stroke="#d7b97c" stroke-width=".8"/><path d="M60 23 Q22 52 60 84 Q98 52 60 23 M60 145 Q22 116 60 84 Q98 116 60 145" fill="none" stroke="#d7b97c" stroke-width="1" opacity=".55"/><circle cx="60" cy="84" r="29" fill="#6d4e64" stroke="#e4c990" stroke-width="1.4"/><circle cx="60" cy="84" r="23" fill="none" stroke="#e4c990" stroke-width=".6"/><path d="M65 61 A24 24 0 1 0 65 107 A18 18 0 1 1 65 61Z" fill="#e6c991"/><path d="M83 61 L85 68 L92 70 L85 72 L83 79 L81 72 L74 70 L81 68Z M39 96 L41 100 L45 102 L41 104 L39 108 L37 104 L33 102 L37 100Z" fill="#e6c991"/><text x="60" y="136" text-anchor="middle" fill="#f1dfbb" font-size="7" letter-spacing="2" font-family="Georgia,serif">LUMI TAROT</text></svg>`;
 }
 
 let state={qType:null,age:"",gender:"",contactStatus:"연락 끊김",partner:"",situation:"",cards:[],revealed:[],result:null,unlocked:false};
